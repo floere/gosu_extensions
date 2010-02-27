@@ -1,3 +1,5 @@
+h1. GOSU Extensions
+
 GOSU is a great Ruby game framework.
 
 This gem sets out to already provide basic objects and capabilities for use with gosu.
