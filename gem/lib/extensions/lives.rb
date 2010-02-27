@@ -21,6 +21,8 @@ module Lives
   
   module IncludeMethods
     
+    # Define the amount of lives in the class.
+    #
     def lives amount
       include InstanceMethods
       class_inheritable_accessor :prototype_lives
