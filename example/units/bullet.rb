@@ -5,6 +5,7 @@ class Bullet < ShortLived
   livetime { 200 + rand(100) } # TODO
   image 'media/bullet.png'
   shape :circle
+  radius 1.0
   weight 0.1, 0.1
   collision_type :projectile
   friction 0.0001
