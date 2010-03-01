@@ -97,6 +97,12 @@ class GameWindow < Gosu::Window
         self.full_screen = true
       end
     end
+    def collisions &block
+      raise "collisions are defined in a block" unless block_given?
+      InitializerHooks.register self do
+        @collision_definitions = block
+      end
+    end
   end
   
   def setup_window
@@ -129,29 +135,33 @@ class GameWindow < Gosu::Window
     @environment.damping = self.damping
   end
   
+  # Override.
+  #
+  def setup_players; end
+  def setup_enemies; end
+  
   #
   #
-  def setup_players
-    
-  end
-  def setup_enemies
-    # wave 10, Enemy,  100
-    # wave 10, Enemy,  400
-    # wave 10, Enemy,  700
-    # wave 10, Enemy, 1000
-  end
+  # Example:
+  #   collisions do
+  #     add_collision_func ...
+  #
   def setup_collisions
-    #
-    # Should call self.class.collisions[@environment]
-    #
-    
-    # @space.add_collision_func :projectile, :projectile, &nil
-    # @space.add_collision_func :projectile, :enemy do |projectile_shape, enemy_shape|
-    #   @moveables.each { |projectile| projectile.shape == projectile_shape && projectile.destroy }
-    # end
+    @environment.instance_eval &@collision_definitions
   end
   
-  
+  # Add controls for a player.
+  #
+  # Example:
+  #   add_controls_for @player1, Gosu::Button::KbA => :left,
+  #                              Gosu::Button::KbD => :right,
+  #                              Gosu::Button::KbW => :full_speed_ahead,
+  #                              Gosu::Button::KbS => :reverse,
+  #                              Gosu::Button::Kb1 => :revive
+  #
+  def add_controls_for object, mapping = {}
+    @controls << Controls.new(self, object, mapping)
+  end
   
   
   # Core methods used by the extensions "framework"
@@ -342,6 +352,7 @@ class GameWindow < Gosu::Window
   def button_down id
     close if exit?(id)
   end
+  
   # Override exit? if you want to define another exit rule.
   #
   def exit? id = nil
