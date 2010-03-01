@@ -2,14 +2,14 @@ require 'rubygems'
 require 'active_support'
 # require 'texplay'
 require 'gosu'
-# require 'chipmunk' # A physics framework.
+require 'chipmunk' # A physics framework.
 
 $:.unshift File.join(File.dirname(__FILE__), '/lib')
 require 'controls'
 require 'game_window'
 require 'scheduling'
 require 'waves'
-require 'z_order'
+require 'layer'
 
 $:.unshift File.join(File.dirname(__FILE__), '/lib/extensions')
 require 'numeric'
@@ -28,4 +28,5 @@ require 'turnable'
 
 $:.unshift File.join(File.dirname(__FILE__), '/lib/units')
 require 'thing'
+require 'moveable'
 require 'short_lived'

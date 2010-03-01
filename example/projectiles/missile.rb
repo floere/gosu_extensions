@@ -3,18 +3,19 @@ class Missile < ShortLived
   
   it_is_a Shot
   it_is_a Generator
-  generates Puff, 0
+  # generates Puff, 0
   
   lifetime { 600 + rand(100) }
   image 'media/missile.png'
   shape :circle
   radius 1.0
-  weight 0.1, 0.1
+  mass 0.1
+  moment 0.1
   collision_type :projectile
   friction 0.0001
   velocity { 4 + rand(1) }
-  sound 'media/sounds/cannon-02.wav'
-  layer ZOrder::Player
+  plays 'media/sounds/cannon-02.wav'
+  layer Layer::Players
   
   def initialize window
     # self.lifetime = 600 + rand(100)

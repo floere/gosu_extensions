@@ -18,9 +18,17 @@ module InitializerHooks
   
   # Registers a hook for a class.
   #
-  def self.register klass, hook
+  def self.register klass, &hook
     self.hooks[klass] ||= []
     self.hooks[klass] << hook
+  end
+  
+  def self.prepend klass, &hook
+    self.hooks[klass] ||= []
+    self.hooks[klass].unshift hook
+  end
+  def self.append klass, &hook
+    self.register klass, &hook
   end
   
 end

@@ -6,6 +6,6 @@
 # * Ambient (Moveable Background)
 # * Background (Fixed, true Background)
 #
-module ZOrder
+module Layer
   Background, Ambient, Players, UI = 0, 1, 2, 3
 end

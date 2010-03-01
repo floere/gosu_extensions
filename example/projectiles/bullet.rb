@@ -6,11 +6,12 @@ class Bullet < ShortLived
   image 'media/bullet.png'
   shape :circle
   radius 1.0
-  weight 0.1, 0.1
+  mass 0.1
+  moment 0.1
   collision_type :projectile
   friction 0.0001
   velocity { 6 + rand(2) }
-  layer ZOrder::Player
+  layer Layer::Players
   plays 'media/sounds/cannon-02.wav'
   
   # def initialize window

@@ -29,7 +29,7 @@ module Lives
       self.prototype_lives = amount
       
       hook = lambda { self.lives = self.class.prototype_lives }
-      InitializerHooks.register self, hook
+      InitializerHooks.register self, &hook
     end
     
   end

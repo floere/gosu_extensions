@@ -9,10 +9,11 @@ class Enemy < Moveable
   image 'media/spaceship.png', 22, 22
   shape :circle
   radius 11.0
-  weight 1.0, 1.0
+  mass 1.0
+  moment 1.0
   collision_type :enemy
   rotation -Math::PI/2
-  layer ZOrder::Player
+  layer Layer::Players
   
   draw_image { Gosu::milliseconds / 100 % @image.size }
   

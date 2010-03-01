@@ -1,4 +1,4 @@
-class ShortLived < Thing
+class ShortLived < Moveable
   
   class_inheritable_accessor :lifetime
   
