@@ -1,6 +1,6 @@
 # This game will have multiple Players in the form of a ship.
 #
-class Cannon < Moveable
+class MissileLauncher < Moveable
   
   it_is Targeting
   it_is_a Shooter
@@ -14,7 +14,7 @@ class Cannon < Moveable
   
   range 600
   frequency 120
-  shoots Projectile
+  shoots Missile
   muzzle_position { self.position }
   muzzle_velocity { |target| (target.position - self.muzzle_position[] + self.random_vector(1 + rand(20))).normalize }
   muzzle_rotation { |target| (target.position - self.muzzle_position[]).to_angle }

@@ -2,7 +2,7 @@
 class Bullet < ShortLived
   
   it_is_a Shot
-  livetime { 200 + rand(100) } # TODO
+  lifetime { 200 + rand(100) } # TODO
   image 'media/bullet.png'
   shape :circle
   radius 1.0
