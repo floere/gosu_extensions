@@ -178,7 +178,7 @@ class GameWindow < Gosu::Window
     SUBSTEPS.times do
       remove_collided
       reset_forces
-      validate
+      move_all
       targeting
       handle_input
       step_once
@@ -222,7 +222,7 @@ class GameWindow < Gosu::Window
     @remove_shapes << shape
   end
   
-  # Run some code at relative time time.
+  # Run some code at relative time <time>.
   #
   # Example:
   #   # Will destroy the object that calls this method
@@ -238,8 +238,8 @@ class GameWindow < Gosu::Window
   
   # Moves each moveable.
   #
-  def validate
-    @moveables.each &:validate_position
+  def move_all
+    @moveables.each &:move
   end
   
   # Handles the targeting process.

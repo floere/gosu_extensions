@@ -15,10 +15,10 @@ class SpaceBattle < GameWindow
     add_collision_func :projectile, :enemy do |projectile_shape, enemy_shape|
       # TODO
       #
-      # destroy! projectile_shape
+      # projectile_shape.destroy!
       #
-      # def destroy! shape
-      #   @moveables.each { |thing| thing.shape == shape && thing.destroy! }
+      # def destroy!
+      #   window.destroy! self # @moveables.each { |thing| thing.shape == shape && thing.destroy! }
       # end
       #
       @moveables.each { |projectile| projectile.shape == projectile_shape && projectile.destroy! }

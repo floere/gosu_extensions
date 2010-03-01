@@ -139,7 +139,7 @@ class Moveable < Thing
   
   # Wrap to the other side of the screen when we fly off the edge.
   #
-  def validate_position
+  def move
     
   end
   

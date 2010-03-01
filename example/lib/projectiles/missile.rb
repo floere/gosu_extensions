@@ -49,7 +49,7 @@ class Missile < ShortLived
     super
   end
   
-  def validate_position
+  def move
     
   end
   

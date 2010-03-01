@@ -40,7 +40,7 @@ class Bullet < ShortLived
   #   super
   # end
   
-  # def validate_position
+  # def move
   #   
   # end
   
