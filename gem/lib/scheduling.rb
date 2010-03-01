@@ -18,13 +18,24 @@ class Scheduling
   # 1. Move one step in time.
   # 2. Execute all blocks with time 0.
   #
+  # TODO Rewrite to be faster.
+  #
   def step
     new_threads = {}
+    
+    # Go over all threads.
+    #
     @threads.each_pair do |time, codes|
+      # Set time 1 lower.
+      #
       time = time - 1
       if time <= 0
+        # Execute all if time is 0.
+        #
         execute codes
       else
+        # Else use in new scheduling hash.
+        #
         new_threads[time] = codes
       end
     end
