@@ -1,13 +1,3 @@
-require File.join(File.dirname(__FILE__), '/../gem/init')
-
-$:.unshift File.dirname(__FILE__)
-
-require 'projectiles/bullet'
-require 'projectiles/missile'
-
-require 'units/enemy'
-require 'units/missile_launcher'
-
 class SpaceBattle < GameWindow
   
   width  1200

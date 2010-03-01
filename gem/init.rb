@@ -30,3 +30,7 @@ require 'game_window'
 require 'scheduling'
 require 'waves'
 require 'layer'
+
+DEFAULT_SCREEN_WIDTH  = 1200
+DEFAULT_SCREEN_HEIGHT =  700
+SUBSTEPS              =   10

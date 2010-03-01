@@ -7,15 +7,21 @@ class GameWindow < Gosu::Window
   
   include InitializerHooks
   
-  attr_writer :full_screen
-  attr_reader :space, :font
+  attr_writer :full_screen,
+              :font_name,
+              :font_size,
+              :damping,
+              :caption,
+              :screen_width,
+              :screen_height
+  attr_reader :environment
+  attr_accessor :background_path,
+                :background_repeat
   
   def initialize
     after_initialize
     
-    required_attributes_set?
-    
-    super self.class.width, self.class.height, self.class.full_screen, 16
+    super self.screen_width, self.screen_height, self.full_screen, 16
     
     setup_window
     setup_background
@@ -25,7 +31,7 @@ class GameWindow < Gosu::Window
     setup_scheduling
     setup_font
     
-    setup_battlefield
+    setup_environment
     setup_enemies
     setup_players
     setup_collisions
@@ -34,59 +40,62 @@ class GameWindow < Gosu::Window
   def full_screen
     @full_screen || false
   end
+  def font_name
+    @font_name || Gosu::default_font_name
+  end
+  def font_size
+    @font_size || 20
+  end
+  def damping
+    @damping || 1.0
+  end
+  def caption
+    @caption || ""
+  end
+  def screen_width
+    @screen_width || DEFAULT_SCREEN_WIDTH
+  end
+  def screen_height
+    @screen_height || DEFAULT_SCREEN_HEIGHT
+  end
   
   class << self
-    def self.attr_reader_or_writer name, default
-      class_eval <<-BODY
-        def #{name} #{name} = #{default}
-          @#{name} ||= #{name}
-        end
-      BODY
+    def width value = DEFAULT_SCREEN_WIDTH
+      InitializerHooks.register self do
+        self.screen_width = value
+      end
     end
-    
-    #
-    #
-    attr_reader_or_writer :width, 1200
-    #
-    #
-    attr_reader_or_writer :height, 700
-    #
-    #
-    attr_reader_or_writer :caption, ""
-    #
-    #
-    attr_reader_or_writer :damping, 1.0
-    #
-    #
+    def height value = DEFAULT_SCREEN_HEIGHT
+      InitializerHooks.register self do
+        self.screen_height = value
+      end
+    end
+    def caption text = ""
+      InitializerHooks.register self do
+        self.caption = text
+      end
+    end
+    def damping amount = 1.0
+      InitializerHooks.register self do
+        self.damping = amount
+      end
+    end
     def font name = Gosu::default_font_name, size = 20
-      {
-        :name => @font_name ||= name,
-        :size => @font_size ||= size
-      }
+      InitializerHooks.register self do
+        self.font_name = name
+        self.font_size = size
+      end
     end
-    def background path = nil, options = {}
-      {
-        :path => @background_path ||= path,
-        :repeat => @background_repeating ||= (options[:repeating] || false)
-      }
+    def background path, options = {}
+      InitializerHooks.register self do
+        self.background_path = path
+        self.background_repeat = options[:repeating] || false
+      end
     end
     def full_screen
       InitializerHooks.register self do
         self.full_screen = true
       end
-    end
-    
-    #
-    #
-    def required_attributes
-      [:width, :height]
-    end
-  end
-  def required_attributes_set?
-    required_attributes.inject(true) do |ok, attribute|
-      result = self.class.send attribute
-      raise "Required attribute #{attribute} not set" unless result
-      ok && result
     end
   end
   
@@ -94,9 +103,7 @@ class GameWindow < Gosu::Window
     self.caption = self.class.caption || ""
   end
   def setup_background
-    if background_path = self.class.background[:path]
-      @background_image = Gosu::Image.new self, background_path, true
-    end
+    # @background_image = Gosu::Image.new self, self.background_path, true
   end
   def setup_containers
     @moveables = []
@@ -114,14 +121,12 @@ class GameWindow < Gosu::Window
   def setup_scheduling
     @scheduling = Scheduling.new
   end
-  def setup_fonts
-    if font_name = self.class.font[:name]
-      @font = Gosu::Font.new self, font_name, (self.class.font[:size] || 20)
-    end
+  def setup_font
+    @font = Gosu::Font.new self, self.font_name, self.font_size
   end
   def setup_environment
     @environment = CP::Space.new
-    @environment.damping = self.class.damping if self.class.damping
+    @environment.damping = self.damping
   end
   
   #
@@ -130,10 +135,10 @@ class GameWindow < Gosu::Window
     
   end
   def setup_enemies
-    wave 10, Enemy,  100
-    wave 10, Enemy,  400
-    wave 10, Enemy,  700
-    wave 10, Enemy, 1000
+    # wave 10, Enemy,  100
+    # wave 10, Enemy,  400
+    # wave 10, Enemy,  700
+    # wave 10, Enemy, 1000
   end
   def setup_collisions
     #
@@ -320,7 +325,7 @@ class GameWindow < Gosu::Window
     draw_ui
   end
   def draw_background
-    @background_image.draw 0, 0, ZOrder::Background, 1.5, 1.2
+    @background_image.draw 0, 0, Layer::Background, 1.5, 1.2 if @background_image
   end
   def draw_ambient
     
