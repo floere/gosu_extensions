@@ -5,9 +5,14 @@
 #
 class GameWindow < Gosu::Window
   
+  include InitializerHooks
+  
+  attr_writer :full_screen
   attr_reader :space, :font
   
   def initialize
+    after_initialize
+    
     required_attributes_set?
     
     super self.class.width, self.class.height, self.class.full_screen, 16
@@ -24,6 +29,10 @@ class GameWindow < Gosu::Window
     setup_enemies
     setup_players
     setup_collisions
+  end
+  
+  def full_screen
+    @full_screen || false
   end
   
   class << self
@@ -60,6 +69,11 @@ class GameWindow < Gosu::Window
         :path => @background_path ||= path,
         :repeat => @background_repeating ||= (options[:repeating] || false)
       }
+    end
+    def full_screen
+      InitializerHooks.register self do
+        self.full_screen = true
+      end
     end
     
     #

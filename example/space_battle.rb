@@ -12,7 +12,7 @@ class SpaceBattle < GameWindow
   
   width  1200
   height  700
-  full_screen true
+  full_screen
   caption "Incredible Space Battles!"
   
   font Gosu::default_font_name, 20

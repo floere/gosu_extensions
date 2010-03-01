@@ -8,13 +8,15 @@ class MissileLauncher < Moveable
   image 'media/gun.png'
   shape :circle
   radius 3.0
-  weight 1000.0, 75.0
-  layer ZOrder::Player
+  mass 1000.0
+  moment 75.0
+  layer Layer::Players
   collision_type :gun
   
   range 600
   frequency 120
   shoots Missile
+  
   muzzle_position { self.position }
   muzzle_velocity { |target| (target.position - self.muzzle_position[] + self.random_vector(1 + rand(20))).normalize }
   muzzle_rotation { |target| (target.position - self.muzzle_position[]).to_angle }

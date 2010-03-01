@@ -70,10 +70,17 @@ class Thing
       end
     end
     
-    def draw_image
-      
+    def sequenced_image &block
+      to_execute = block_given? ? block : lambda { Gosu::milliseconds / 100 }
+      define_method :image do
+        @image[to_execute[]]
+      end
     end
     
+  end
+  
+  def image
+    @image
   end
   
   # Do something threaded.
@@ -131,15 +138,8 @@ class Thing
     alias it_is_a it_is
   end
   
-  if sequenced_drawing
-    def draw
-      @image.draw_rot position.x, position.y, @layer, drawing_rotation
-    end
-  else
-    def draw
-      image = @image[Gosu::milliseconds / 100 % @image.size];
-      image.draw_rot self.position.x, self.position.y, @layer, drawing_rotation
-    end
+  def draw
+    self.image.draw_rot position.x, position.y, @layer, drawing_rotation
   end
   
 end

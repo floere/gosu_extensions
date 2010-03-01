@@ -7,6 +7,7 @@ class Enemy < Moveable
   
   lives 10
   image 'media/spaceship.png', 22, 22
+  sequenced_image
   shape :circle
   radius 11.0
   mass 1.0
@@ -15,7 +16,7 @@ class Enemy < Moveable
   rotation -Math::PI/2
   layer Layer::Players
   
-  draw_image { Gosu::milliseconds / 100 % @image.size }
+  # draw_image { Gosu::milliseconds / 100 % @image.size }
   
   def initialize window
     super window

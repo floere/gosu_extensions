@@ -4,13 +4,6 @@ require 'active_support'
 require 'gosu'
 require 'chipmunk' # A physics framework.
 
-$:.unshift File.join(File.dirname(__FILE__), '/lib')
-require 'controls'
-require 'game_window'
-require 'scheduling'
-require 'waves'
-require 'layer'
-
 $:.unshift File.join(File.dirname(__FILE__), '/lib/extensions')
 require 'numeric'
 
@@ -30,3 +23,10 @@ $:.unshift File.join(File.dirname(__FILE__), '/lib/units')
 require 'thing'
 require 'moveable'
 require 'short_lived'
+
+$:.unshift File.join(File.dirname(__FILE__), '/lib')
+require 'controls'
+require 'game_window'
+require 'scheduling'
+require 'waves'
+require 'layer'
