@@ -43,7 +43,7 @@ module Lives
     # * Check to see if the amount is 0.
     # * Calls #destroy if yes.
     #
-    def hit!
+    def kill!
       self.lives -= 1
       destroy if self.lives == 0
     end
