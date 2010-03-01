@@ -2,7 +2,7 @@
 #
 class MissileLauncher < Moveable
   
-  it_is Targeting
+  it_is Targeting::Closest
   it_is_a Shooter
   
   image 'media/gun.png'

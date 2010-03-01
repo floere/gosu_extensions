@@ -32,7 +32,7 @@ module Shooter
     end
   end
   
-  if self.kind_of?(Targeting)
+  if self.kind_of?(::Targeting)
     def target *targets
       return if targets.empty?
       target = acquire *targets

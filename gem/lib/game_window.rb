@@ -27,7 +27,7 @@ class GameWindow < Gosu::Window
   end
   
   class << self
-    def attr_reader_or_writer name, default
+    def self.attr_reader_or_writer name, default
       class_eval <<-BODY
         def #{name} #{name} = #{default}
           @#{name} ||= #{name}

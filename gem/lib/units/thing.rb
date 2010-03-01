@@ -56,7 +56,7 @@ class Thing
   #
   # Examples:
   # * it_is_a Targetable, Accelerateable
-  # * it_is Targeting
+  # * it_is Targeting::Closest
   #
   class << self
     def it_is *traits
