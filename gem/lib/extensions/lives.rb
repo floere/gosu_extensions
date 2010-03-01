@@ -41,11 +41,11 @@ module Lives
     # Does three things:
     # * Deduct 1 live.
     # * Check to see if the amount is 0.
-    # * Calls #destroy if yes.
+    # * Calls #destroy! if yes.
     #
     def kill!
       self.lives -= 1
-      destroy if self.lives == 0
+      destroy! if self.lives == 0
     end
     
   end
