@@ -4,6 +4,9 @@ require 'active_support'
 require 'gosu'
 require 'chipmunk' # A physics framework.
 
+$:.unshift File.join(File.dirname(__FILE__), '/lib')
+require 'resources'
+
 $:.unshift File.join(File.dirname(__FILE__), '/lib/extensions')
 require 'numeric'
 
@@ -24,7 +27,6 @@ require 'thing'
 require 'moveable'
 require 'short_lived'
 
-$:.unshift File.join(File.dirname(__FILE__), '/lib')
 require 'controls'
 require 'game_window'
 require 'scheduling'

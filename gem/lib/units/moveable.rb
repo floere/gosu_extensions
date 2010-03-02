@@ -2,8 +2,8 @@
 #
 class Moveable < Thing
   
-  def initialize
-    super
+  def initialize window
+    super window
     after_initialize
   end
   

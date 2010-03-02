@@ -6,7 +6,7 @@ class Enemy < Moveable
   it_is Targetable
   
   lives 10
-  image 'media/spaceship.png', 22, 22
+  image 'enemy.png', 22, 22
   sequenced_image
   shape :circle
   radius 11.0

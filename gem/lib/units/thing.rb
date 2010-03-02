@@ -2,6 +2,7 @@ class Thing
   
   include InitializerHooks
   
+  attr_writer :layer
   attr_reader :window, :shape
   
   # Every thing knows the window it is attached to.
@@ -11,19 +12,26 @@ class Thing
     after_initialize
   end
   
+  # Default layer is Layer::Players.
+  #
+  def layer
+    @layer || Layer::Players
+  end
+  
   class << self
     
     def image path, *args
       InitializerHooks.register self do
-        @image = Gosu::Image.new self.window, path, *args
+        @image = Gosu::Image.new self.window, File.join(Resources.root, path), *args
       end
     end
-    @form_shape_class_mapping = {
+    @@form_shape_class_mapping = {
       :circle => CP::Shape::Circle
     }
     def shape form
+      form_shape_class_mapping = @@form_shape_class_mapping
       InitializerHooks.append self do
-        shape_class = @form_shape_class_mapping[form]
+        shape_class = form_shape_class_mapping[form]
         if shape_class
           @shape = shape_class.new(CP::Body.new(@mass, @moment), @radius, CP::Vec2.new(0.0, 0.0))
         end
@@ -46,20 +54,20 @@ class Thing
     end
     
     def collision_type type
-      to_execute = lambda do
-        @shape.collision_type = type
+      to_execute = lambda do |shape|
+        shape.collision_type = type
       end
       InitializerHooks.append self do
         # Ensure @shape exists
         #
         InitializerHooks.append self.class, &to_execute unless @shape
-        to_execute.call
+        to_execute[@shape]
       end
     end
     
     def layer layer
       InitializerHooks.register self do
-        @layer = layer
+        self.layer = layer
       end
     end
     
@@ -138,8 +146,10 @@ class Thing
     alias it_is_a it_is
   end
   
+  # TODO
+  #
   def draw
-    self.image.draw_rot position.x, position.y, @layer, drawing_rotation
+    self.image.draw_rot position.x, position.y, self.layer, self.drawing_rotation
   end
   
 end

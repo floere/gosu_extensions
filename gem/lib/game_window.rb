@@ -7,8 +7,7 @@ class GameWindow < Gosu::Window
   
   include InitializerHooks
   
-  attr_writer :media_path,
-              :full_screen,
+  attr_writer :full_screen,
               :font_name,
               :font_size,
               :damping,
@@ -64,11 +63,6 @@ class GameWindow < Gosu::Window
   end
   
   class << self
-    def media_path path
-      InitializerHooks.register self do
-        self.media_path = path
-      end
-    end
     def width value = DEFAULT_SCREEN_WIDTH
       InitializerHooks.register self do
         self.screen_width = value
@@ -118,7 +112,7 @@ class GameWindow < Gosu::Window
     self.caption = self.class.caption || ""
   end
   def setup_background
-    @background_image = Gosu::Image.new self, File.join(self.media_path, self.background_path), self.background_hard_borders
+    @background_image = Gosu::Image.new self, File.join(Resources.root, self.background_path), self.background_hard_borders
   end
   def setup_containers
     @moveables = []

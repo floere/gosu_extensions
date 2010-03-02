@@ -1,7 +1,5 @@
 class SpaceBattle < GameWindow
   
-  media_path MEDIA_PATH
-  
   width  1022
   height  595
   # full_screen # comment if you want a windowed app.
@@ -25,6 +23,24 @@ class SpaceBattle < GameWindow
       #
       @moveables.each { |projectile| projectile.shape == projectile_shape && projectile.destroy! }
     end
+  end
+  
+  # Overridden, called in the setup.
+  #
+  def setup_players
+    @player1 = Player.new self
+    @player1.warp_to 400, 320
+    
+    add_controls_for @player1,
+                     Gosu::Button::KbA => :left,
+                     Gosu::Button::KbD => :right,
+                     Gosu::Button::KbW => :full_speed_ahead,
+                     Gosu::Button::KbS => :reverse,
+                     Gosu::Button::Kb1 => :revive
+                     
+    @players << @player1
+    
+    register @player1
   end
   
 end

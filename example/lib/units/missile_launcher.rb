@@ -13,7 +13,8 @@ class MissileLauncher < Moveable
   layer Layer::Players
   collision_type :gun
   
-  range 600
+  range 600 # TODO move to Targeting
+  
   frequency 120
   shoots Missile
   
