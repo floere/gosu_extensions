@@ -7,7 +7,8 @@ class GameWindow < Gosu::Window
   
   include InitializerHooks
   
-  attr_writer :full_screen,
+  attr_writer :media_path,
+              :full_screen,
               :font_name,
               :font_size,
               :damping,
@@ -16,7 +17,7 @@ class GameWindow < Gosu::Window
               :screen_height
   attr_reader :environment
   attr_accessor :background_path,
-                :background_repeat
+                :background_hard_borders
   
   def initialize
     after_initialize
@@ -37,6 +38,9 @@ class GameWindow < Gosu::Window
     setup_collisions
   end
   
+  def media_path
+    @media_path || 'media'
+  end
   def full_screen
     @full_screen || false
   end
@@ -60,6 +64,11 @@ class GameWindow < Gosu::Window
   end
   
   class << self
+    def media_path path
+      InitializerHooks.register self do
+        self.media_path = path
+      end
+    end
     def width value = DEFAULT_SCREEN_WIDTH
       InitializerHooks.register self do
         self.screen_width = value
@@ -89,7 +98,7 @@ class GameWindow < Gosu::Window
     def background path, options = {}
       InitializerHooks.register self do
         self.background_path = path
-        self.background_repeat = options[:repeating] || false
+        self.background_hard_borders = options[:hard_borders] || false
       end
     end
     def full_screen
@@ -109,7 +118,7 @@ class GameWindow < Gosu::Window
     self.caption = self.class.caption || ""
   end
   def setup_background
-    # @background_image = Gosu::Image.new self, self.background_path, true
+    @background_image = Gosu::Image.new self, File.join(self.media_path, self.background_path), self.background_hard_borders
   end
   def setup_containers
     @moveables = []
@@ -335,7 +344,7 @@ class GameWindow < Gosu::Window
     draw_ui
   end
   def draw_background
-    @background_image.draw 0, 0, Layer::Background, 1.5, 1.2 if @background_image
+    @background_image.draw 0, 0, Layer::Background, 1.0, 1.0 if @background_image
   end
   def draw_ambient
     
