@@ -25,9 +25,11 @@ class Player < Moveable
   shoots Bullet
   
   muzzle_position { self.position }
-  muzzle_velocity { self.position.normalize } #(self.position - self.muzzle_position[]).normalize } # TODO
-  muzzle_rotation { self.rotation }
+  muzzle_velocity { |_| self.position.normalize } #(self.position - self.muzzle_position[]).normalize } # TODO
+  muzzle_rotation { |_| self.rotation }
   
+  # Move to moveable.
+  #
   def accelerate
     self.speed = self.rotation_vector * 5
   end

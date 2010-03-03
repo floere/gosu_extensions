@@ -37,13 +37,22 @@ module Shooter
     end
   end
   
-  attr_reader :muzzle_position, :muzzle_velocity, :muzzle_rotation
+  # attr_reader :muzzle_position, :muzzle_velocity, :muzzle_rotation
   attr_accessor :shot_type, :range, :frequency
   
   def shot
     self.shot_type.new @window
   end
   
+  def muzzle_position
+    instance_eval &@muzzle_position
+  end
+  def muzzle_velocity target = nil
+    instance_eval &@muzzle_velocity
+  end
+  def muzzle_rotation target = nil
+    instance_eval &@muzzle_rotation
+  end
   def muzzle_position_func &position
     @muzzle_position = position
   end
@@ -60,8 +69,8 @@ module Shooter
     return unless shoot? target
     sometimes :loading, self.frequency do
       projectile = self.shot.shoot_from self
-      projectile.rotation = self.muzzle_rotation[target]
-      projectile.speed = self.muzzle_velocity[target] * projectile.velocity
+      projectile.rotation = self.muzzle_rotation
+      projectile.speed = self.muzzle_velocity * projectile.velocity
     end
   end
   

@@ -1,7 +1,5 @@
 class ShortLived < Moveable
   
-  class_inheritable_accessor :lifetime
-  
   def initialize window
     super window
     
@@ -10,11 +8,14 @@ class ShortLived < Moveable
     end
   end
   
-  def lifetime= duration
-    @lifetime = duration
-  end
-  def lifetime
-    @lifetime
+  class << self
+    def lifetime lifetime = nil, &block
+      if block_given?
+        define_method :lifetime, &block
+      else
+        define_method :lifetime do lifetime end
+      end
+    end
   end
   
 end
