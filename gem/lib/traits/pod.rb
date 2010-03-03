@@ -58,7 +58,7 @@ module Pod
     #
     def attach attachment, x, y
       self.attachments ||= []
-      attachment.extend Attachable
+      attachment.extend Attachable # This is where Ruby shines.
       window.register attachment
       attachment.rotation = self.rotation
       attachment.relative_position = CP::Vec2.new x, y

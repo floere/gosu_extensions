@@ -35,7 +35,7 @@ class Bullet < ShortLived
   #   # @sound.play
   # end
   
-  # def destroy
+  # def destroy!
   #   explosion = SmallExplosion.new window
   #   explosion.warp position
   #   window.register explosion
