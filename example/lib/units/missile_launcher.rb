@@ -1,4 +1,4 @@
-# This game will have multiple Players in the form of a ship.
+#
 #
 class MissileLauncher < Moveable
   

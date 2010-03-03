@@ -1,5 +1,7 @@
 # A moveable has a shape, speed etc.
 #
+# TODO moveable should only have active components, like accelerate etc. Positioning etc. should go to Thing.
+#
 class Moveable < Thing
   
   def initialize window
