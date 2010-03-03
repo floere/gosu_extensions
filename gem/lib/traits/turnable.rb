@@ -1,3 +1,5 @@
+#
+#
 module Turnable
   
   Left  = :turn_left
@@ -12,14 +14,16 @@ module Turnable
   module ClassMethods
     def turn_speed amount
       define_method :turn_speed do
-        amount || 0.5
+        amount
       end
     end
   end
   
-  # 
   #
-  attr_accessor :turn_speed
+  #
+  def turn_speed
+    0.5 # Default turn speed
+  end
   
   # Turns the thing left, depending on turn speed.
   #

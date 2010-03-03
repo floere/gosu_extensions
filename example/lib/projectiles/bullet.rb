@@ -1,4 +1,5 @@
 #
+#
 class Bullet < ShortLived
   
   it_is_a Shot
