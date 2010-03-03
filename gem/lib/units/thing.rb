@@ -32,24 +32,23 @@ class Thing
       form_shape_class_mapping = @@form_shape_class_mapping
       InitializerHooks.append self do
         shape_class = form_shape_class_mapping[form]
-        if shape_class
-          @shape = shape_class.new(CP::Body.new(@mass, @moment), @radius, CP::Vec2.new(0.0, 0.0))
-        end
+        raise "Shape #{form} does not exist." unless shape_class
+        @shape = shape_class.new(CP::Body.new(self.mass, self.moment), self.radius, CP::Vec2.new(0.0, 0.0))
       end
     end
     def mass amount
-      InitializerHooks.prepend self do
-        @mass = amount || 1.0
+      define_method :mass do
+        amount || 1.0
       end
     end
     def moment amount
-      InitializerHooks.prepend self do
-        @moment = amount || 1.0
+      define_method :moment do
+        amount || 1.0
       end
     end
     def radius amount
-      InitializerHooks.prepend self do
-        @radius = amount || 1.0
+      define_method :radius do
+        amount || 10.0
       end
     end
     

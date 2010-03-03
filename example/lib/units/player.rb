@@ -24,8 +24,8 @@ class Player < Moveable
   frequency 20
   shoots Bullet
   
-  muzzle_position { self.position }
-  muzzle_velocity { |_| self.position.normalize } #(self.position - self.muzzle_position[]).normalize } # TODO
+  muzzle_position { self.position + self.rotation_vector.normalize*self.radius }
+  muzzle_velocity { |_| self.rotation_vector.normalize } #(self.position - self.muzzle_position[]).normalize } # TODO
   muzzle_rotation { |_| self.rotation }
   
   # Move to moveable.
