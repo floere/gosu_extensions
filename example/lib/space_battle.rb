@@ -34,9 +34,10 @@ class SpaceBattle < GameWindow
     add_controls_for @player1,
                      Gosu::Button::KbA => Turnable::Left,
                      Gosu::Button::KbD => Turnable::Right,
-                     Gosu::Button::KbW => :full_speed_ahead,
-                     Gosu::Button::KbS => :reverse,
-                     Gosu::Button::Kb1 => :revive
+                     Gosu::Button::KbW => :accelerate,
+                     # Gosu::Button::KbS => :reverse,
+                     # Gosu::Button::Kb1 => :revive
+                     Gosu::Button::KbSpace => :shoot
                      
     @players << @player1
     

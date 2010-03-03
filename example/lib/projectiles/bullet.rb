@@ -3,8 +3,9 @@
 class Bullet < ShortLived
   
   it_is_a Shot
+  
   lifetime { 200 + rand(100) } # TODO
-  image 'media/bullet.png'
+  image 'bullet.png'
   shape :circle
   radius 1.0
   mass 0.1
@@ -13,7 +14,7 @@ class Bullet < ShortLived
   friction 0.0001
   velocity { 6 + rand(2) }
   layer Layer::Players
-  plays 'media/sounds/cannon-02.wav'
+  # plays 'sounds/cannon-02.wav'
   
   # def initialize window
   #   self.lifetime = 200 + rand(100)

@@ -54,7 +54,7 @@ module Shooter
     @muzzle_rotation = rotation
   end
   def shoot? target = nil
-    target.distance_from(self) < self.range unless target.nil?
+    target.nil? ? true : target.distance_from(self) < self.range
   end
   def shoot target = nil
     return unless shoot? target

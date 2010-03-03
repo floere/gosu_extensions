@@ -17,7 +17,7 @@ class Player < Moveable
   moment 0.1
   friction 1.0
   rotation -Math::PI
-  turn_speed 0.5 # turns per second
+  # turn_speed 0.5 # turns per second
   
   collision_type :player
   
@@ -25,8 +25,12 @@ class Player < Moveable
   shoots Bullet
   
   muzzle_position { self.position }
-  muzzle_velocity { (self.position - self.muzzle_position[]).normalize } # TODO
+  muzzle_velocity { self.position.normalize } #(self.position - self.muzzle_position[]).normalize } # TODO
   muzzle_rotation { self.rotation }
+  
+  def accelerate
+    self.speed = self.rotation_vector * 5
+  end
   
   # controls do
   #
