@@ -32,8 +32,8 @@ class SpaceBattle < GameWindow
     @player1.warp_to 400, 320
     
     add_controls_for @player1,
-                     Gosu::Button::KbA => :left,
-                     Gosu::Button::KbD => :right,
+                     Gosu::Button::KbA => Turnable::Left,
+                     Gosu::Button::KbD => Turnable::Right,
                      Gosu::Button::KbW => :full_speed_ahead,
                      Gosu::Button::KbS => :reverse,
                      Gosu::Button::Kb1 => :revive

@@ -1,7 +1,21 @@
 module Turnable
   
-  # TODO expose a class method which exposes the prototypical turn speed.
+  Left  = :turn_left
+  Right = :turn_right
+  
+  def self.included base
+    base.extend ClassMethods
+  end
+  
+  # TODO meta
   #
+  module ClassMethods
+    def turn_speed amount
+      define_method :turn_speed do
+        amount || 0.5
+      end
+    end
+  end
   
   # 
   #
@@ -10,13 +24,13 @@ module Turnable
   # Turns the thing left, depending on turn speed.
   #
   def turn_left
-    self.rotation -= self.turn_speed / SUBSTEPS
+    self.rotation -= self.turn_speed / (SUBSTEPS**2)
   end
   
   # Turns the thing right, depending on turn speed.
   #
   def turn_right
-    self.rotation += self.turn_speed / SUBSTEPS
+    self.rotation += self.turn_speed / (SUBSTEPS**2)
   end
   
 end

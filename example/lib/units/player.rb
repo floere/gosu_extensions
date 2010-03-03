@@ -2,8 +2,8 @@
 #
 class Player < Moveable
   
-  include Targetable
-  include Shooter
+  it_is_a Turnable, Shooter
+  it_is Targetable
   include Lives
   
   # attr_accessor :score
@@ -17,6 +17,7 @@ class Player < Moveable
   moment 0.1
   friction 1.0
   rotation -Math::PI
+  turn_speed 0.5 # turns per second
   
   collision_type :player
   
@@ -26,6 +27,12 @@ class Player < Moveable
   muzzle_position { self.position }
   muzzle_velocity { (self.position - self.muzzle_position[]).normalize } # TODO
   muzzle_rotation { self.rotation }
+  
+  # controls do
+  #
+  
+  # alternative_controls do
+  #
   
   # def initialize window, color = 0x99ff0000
   #   super window
