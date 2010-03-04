@@ -304,9 +304,9 @@ class GameWindow < Gosu::Window
     # of the Stars that were gathered by the Player
     #
     @remove_shapes.each do |shape|
-      @space.remove_body shape.body
-      @space.remove_shape shape
-      @moveables.delete_if { |moveable| moveable.shape == shape && moveable.destroy }
+      @environment.remove_body shape.body
+      @environment.remove_shape shape
+      @moveables.delete_if { |moveable| moveable.shape == shape && moveable.destroy! }
     end
     @remove_shapes.clear
   end
