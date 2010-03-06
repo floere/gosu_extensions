@@ -70,7 +70,7 @@ module Shooter
     sometimes :loading, self.frequency do
       projectile = self.shot.shoot_from self
       projectile.rotation = self.muzzle_rotation
-      projectile.speed = self.muzzle_velocity * projectile.velocity
+      projectile.speed = self.muzzle_velocity * projectile.velocity + self.speed
     end
   end
   

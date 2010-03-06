@@ -8,11 +8,11 @@ class Bullet < ShortLived
   image 'bullet.png'
   shape :circle
   radius 1.0
-  mass 0.1
+  mass 0.05
   moment 0.1
   collision_type :projectile
-  friction 0.0001
-  velocity { 6 + rand(2) }
+  friction 0
+  velocity { 20 + rand }
   layer Layer::Players
   # plays 'sounds/cannon-02.wav'
   

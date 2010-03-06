@@ -11,43 +11,20 @@ class Moveable < Thing
   
   class << self
     
-    # def register value, block = nil, &block
-    #   to_execute = if block_given?
-    #     block
-    #   else
-    #     lambda { amount }
-    #   end
-    #   InitializerHooks.register self do
-    #     self.friction = to_execute[]
-    #   end
-    # end
-    
     def friction amount = nil, &block
-      to_execute = if block_given?
-        block
-      else
-        lambda { amount }
-      end
+      to_execute = block_given? ? block : lambda { amount }
       InitializerHooks.register self do
         self.friction = to_execute[]
       end
     end
     def velocity amount = nil, &block
-      to_execute = if block_given?
-        block
-      else
-        lambda { amount }
-      end
+      to_execute = block_given? ? block : lambda { amount }
       InitializerHooks.register self do
         self.velocity = to_execute[]
       end
     end
     def rotation amount = nil, &block
-      to_execute = if block_given?
-        block
-      else
-        lambda { amount }
-      end
+      to_execute = block_given? ? block : lambda { amount }
       InitializerHooks.register self do
         self.rotation = to_execute[]
       end
@@ -55,7 +32,9 @@ class Moveable < Thing
     
   end
   
-  def random_vector strength = 1
+  # Return a random vector with a given strength.
+  #
+  def random_vector strength = 1.0
     CP::Vec2.new(rand-0.5, rand-0.5).normalize! * strength
   end
   
@@ -97,7 +76,6 @@ class Moveable < Thing
   def speed
     @shape.body.v
   end
-  
   def current_speed
     Math.sqrt(speed.x**2 + speed.y**2)
   end
@@ -110,7 +88,6 @@ class Moveable < Thing
   def rotation
     @shape.body.a
   end
-  
   def drawing_rotation
     self.rotation.radians_to_gosu
   end
@@ -121,7 +98,6 @@ class Moveable < Thing
   def friction
     @shape.u
   end
-  
   def rotation_vector
     @shape.body.a.radians_to_vec2
   end
@@ -145,8 +121,38 @@ class Moveable < Thing
     
   end
   
-  def velocity
-    @shape.body.v
+  # Methods for controls.
+  #
+  def accelerate strength = 1
+    self.speed += self.rotation_vector * strength/SUBSTEPS
+  end
+  
+  # Movement rules
+  #
+  # Note: Call in method move.
+  #
+  def bounce_off_border elasticity = 1.0
+    if position.x > window.screen_width || position.x < 0
+      shape.body.v.x = -shape.body.v.x.to_f*elasticity
+    end
+    if position.y > window.screen_height || position.y < 0
+      shape.body.v.y = -shape.body.v.y.to_f*elasticity
+    end
+  end
+  def wrap_around_border
+    if position.x > window.screen_width
+      position.x -= window.screen_width
+    elsif position.x < 0
+      position.x += window.screen_width
+    end
+    if position.y > window.screen_height
+      position.y -= window.screen_height
+    elsif position.y < 0
+      position.y += window.screen_height
+    end
+  end
+  def obey_gravity
+    self.speed += window.gravity_vector
   end
   
 end

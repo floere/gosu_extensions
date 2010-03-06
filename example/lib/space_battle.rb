@@ -8,10 +8,10 @@ class SpaceBattle < GameWindow
   # font Gosu::default_font_name, 20
   
   background 'space.png', :hard_borders => false
-  # damping 1.0
+  damping 0.1
   
   collisions do
-    add_collision_func :projectile, :projectile, &nil
+    add_collision_func :projectile, :player, &nil
     add_collision_func :projectile, :enemy do |projectile_shape, enemy_shape|
       # TODO
       #

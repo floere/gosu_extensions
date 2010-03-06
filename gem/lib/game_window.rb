@@ -50,7 +50,7 @@ class GameWindow < Gosu::Window
     @font_size || 20
   end
   def damping
-    @damping || 1.0
+    @damping || 0.001
   end
   def caption
     @caption || ""
@@ -61,8 +61,14 @@ class GameWindow < Gosu::Window
   def screen_height
     @screen_height || DEFAULT_SCREEN_HEIGHT
   end
+  def gravity_vector
+    @gravity || @gravity = CP::Vec2.new(0, 0.98/SUBSTEPS)
+  end
   
   class << self
+    def gravity amount = 0.98
+      @gravity = CP::Vec2.new 0, amount.to_f/SUBSTEPS
+    end
     def width value = DEFAULT_SCREEN_WIDTH
       InitializerHooks.register self do
         self.screen_width = value
@@ -78,7 +84,7 @@ class GameWindow < Gosu::Window
         self.caption = text
       end
     end
-    def damping amount = 1.0
+    def damping amount = 0.0
       InitializerHooks.register self do
         self.damping = amount
       end
@@ -135,7 +141,7 @@ class GameWindow < Gosu::Window
   end
   def setup_environment
     @environment = CP::Space.new
-    @environment.damping = self.damping
+    @environment.damping = -self.damping + 1 # recalculate the damping such that 0.0 has no damping.
   end
   
   # Override.

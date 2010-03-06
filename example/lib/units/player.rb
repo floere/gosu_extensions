@@ -15,7 +15,7 @@ class Player < Moveable
   radius 5.0
   mass 0.1
   moment 0.1
-  friction 1.0
+  friction 100.0
   rotation -Math::PI
   # turn_speed 0.5 # turns per second
   
@@ -25,14 +25,8 @@ class Player < Moveable
   shoots Bullet
   
   muzzle_position { self.position + self.rotation_vector.normalize*self.radius }
-  muzzle_velocity { |_| self.rotation_vector.normalize } #(self.position - self.muzzle_position[]).normalize } # TODO
+  muzzle_velocity { |_| self.rotation_vector.normalize }
   muzzle_rotation { |_| self.rotation }
-  
-  # Move to moveable.
-  #
-  def accelerate
-    self.speed = self.rotation_vector * 5
-  end
   
   # controls do
   #
@@ -74,15 +68,12 @@ class Player < Moveable
   #   @color.blue = blue
   # end
   
-  # Wrap to the other side of the screen when we fly off the edge.
+  #
   #
   def move
-    if position.x > window.screen_width || position.x < 0
-      @shape.body.v.x = -@shape.body.v.x
-    end
-    if position.y > window.screen_height || position.y < 0
-      @shape.body.v.y = -@shape.body.v.y
-    end
+    bounce_off_border # a helper method that makes the player bounce off the walls 100% elastically
+    # wrap_around_border # a helper method that makes the player wrap around the border
+    # obey_gravity
   end
   
   # def draw
