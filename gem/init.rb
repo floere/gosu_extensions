@@ -21,6 +21,7 @@ require 'shooter'
 require 'shot'
 require 'targetable'
 require 'turnable'
+require 'controllable'
 
 $:.unshift File.join(File.dirname(__FILE__), '/lib/units')
 require 'thing'

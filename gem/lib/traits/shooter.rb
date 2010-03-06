@@ -1,5 +1,27 @@
 module Shooter
   
+  def self.manual!
+    puts <<-MANUAL
+      MANUAL FOR #{self}
+      Defines:
+        range <some range> # This is only needed for targeted shooting, e.g. automatic cannons
+        frequency <some shooting frequency> # TODO block
+        shoots <class:thing>
+        muzzle_position { position calculation } || frontal # a block
+        muzzle_velocity { velocity calculation }
+        muzzle_rotation { rotation calculation }
+      
+      Example:
+        frequency 20
+        shoots Bullet
+        muzzle_position { self.position + self.rotation_vector.normalize*self.radius }
+        muzzle_velocity { |_| self.rotation_vector.normalize }
+        muzzle_rotation { |_| self.rotation }
+      Change Shooter.manual! -> Shooter, to not show the manual anymore.
+    MANUAL
+    self
+  end
+  
   def self.included base
     base.extend ClassMethods
   end
@@ -7,12 +29,12 @@ module Shooter
   module ClassMethods
     def range amount
       InitializerHooks.register self do
-        self.range = amount
+        self.shooting_range = amount
       end
     end
     def frequency amount
       InitializerHooks.register self do
-        self.frequency = amount
+        self.shooting_rate = ((SUBSTEPS**2).to_f/amount)/2
       end
     end
     def shoots type
@@ -38,7 +60,7 @@ module Shooter
   end
   
   # attr_reader :muzzle_position, :muzzle_velocity, :muzzle_rotation
-  attr_accessor :shot_type, :range, :frequency
+  attr_accessor :shot_type, :shooting_range, :shooting_rate
   
   def shot
     self.shot_type.new @window
@@ -67,7 +89,8 @@ module Shooter
   end
   def shoot target = nil
     return unless shoot? target
-    sometimes :loading, self.frequency do
+    
+    sometimes :loading, self.shooting_rate do
       projectile = self.shot.shoot_from self
       projectile.rotation = self.muzzle_rotation
       projectile.speed = self.muzzle_velocity * projectile.velocity + self.speed

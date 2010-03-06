@@ -4,7 +4,7 @@ class Bullet < ShortLived
   
   it_is_a Shot
   
-  lifetime { 200 + rand(100) }
+  lifetime { 100 + rand(50) }
   image 'bullet.png'
   shape :circle
   radius 1.0

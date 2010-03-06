@@ -13,6 +13,7 @@ class SpaceBattle < GameWindow
   gravity
   
   collisions do
+    add_collision_func :projectile, :projectile, &nil
     add_collision_func :projectile, :player, &nil
     add_collision_func :projectile, :enemy do |projectile_shape, enemy_shape|
       # TODO
@@ -32,14 +33,6 @@ class SpaceBattle < GameWindow
   def setup_players
     @player1 = Player.new self
     @player1.warp_to 400, 320
-    
-    add_controls_for @player1,
-                     Gosu::Button::KbA => Turnable::Left,
-                     Gosu::Button::KbD => Turnable::Right,
-                     Gosu::Button::KbW => :accelerate,
-                     # Gosu::Button::KbS => :reverse,
-                     # Gosu::Button::Kb1 => :revive
-                     Gosu::Button::KbSpace => :shoot
                      
     @players << @player1
     

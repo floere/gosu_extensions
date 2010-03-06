@@ -168,8 +168,8 @@ class GameWindow < Gosu::Window
   #                              Gosu::Button::KbS => :reverse,
   #                              Gosu::Button::Kb1 => :revive
   #
-  def add_controls_for object, mapping = {}
-    @controls << Controls.new(self, object, mapping)
+  def add_controls_for object
+    @controls << Controls.new(self, object)
   end
   
   

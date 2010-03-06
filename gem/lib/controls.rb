@@ -17,17 +17,10 @@ class Controls
   
   #
   #
-  def initialize window, controllable, mapping = {}
+  def initialize window, controllable
     @window = window
     @controllable = controllable
-    @mapping = mapping
-  end
-  
-  # Example:
-  # * Gosu::Button::KbLeft => :turn_left
-  #
-  def configure mapping
-    @mapping = mapping
+    @mapping = controllable.controls_mapping
   end
   
   # Checks if 

@@ -2,34 +2,56 @@
 #
 class Player < Moveable
   
-  it_is_a Turnable, Shooter
+  it_is_a Turnable, Shooter.manual!, Controllable
   it_is Targetable
   include Lives
   
-  # attr_accessor :score
-  
-  lives 10
+  # Thing
+  #
   image 'player.png'
   
+  # Lives
+  #
+  lives 10
+  
+  #
+  #
   shape :circle
   radius 5.0
   mass 0.1
   moment 0.1
   friction 100.0
   rotation -Math::PI
-  # turn_speed 0.5 # turns per second
+  
+  #
+  #
+  # acceleration
+  # top_speed
+  #
+  
+  # Turnable
+  #
+  turn_speed 0.5 # turns per second
   
   collision_type :player
   
-  frequency 20
+  # Shooter
+  #
+  range 10
+  frequency 2
   shoots Bullet
-  
   muzzle_position { self.position + self.rotation_vector.normalize*self.radius }
-  muzzle_velocity { |_| self.rotation_vector.normalize }
+  muzzle_velocity { |_| self.rotation_vector.normalize*10 + self.random_vector*rand/10 }
   muzzle_rotation { |_| self.rotation }
   
-  # controls do
+  # Controllable
   #
+  controls Gosu::Button::KbA => Turnable::Left,
+           Gosu::Button::KbD => Turnable::Right,
+           Gosu::Button::KbW => :accelerate,
+           # Gosu::Button::KbS => :reverse,
+           # Gosu::Button::Kb1 => :revive
+           Gosu::Button::KbSpace => :shoot
   
   # alternative_controls do
   #

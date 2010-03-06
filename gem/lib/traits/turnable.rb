@@ -13,6 +13,7 @@ module Turnable
   #
   module ClassMethods
     def turn_speed amount
+      amount = amount.to_f / 2
       define_method :turn_speed do
         amount
       end
