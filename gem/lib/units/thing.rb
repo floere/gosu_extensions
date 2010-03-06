@@ -70,11 +70,11 @@ class Thing
       end
     end
     
-    # Plays the given sound.
+    # Plays a random sound of the given sounds.
     #
-    def plays path
+    def plays *paths
       InitializerHooks.register self do
-        sound = Gosu::Sample.new self.window, File.join(Resources.root, path)
+        sound = Gosu::Sample.new self.window, File.join(Resources.root, paths[rand(paths.size)])
         sound.play
       end
     end
