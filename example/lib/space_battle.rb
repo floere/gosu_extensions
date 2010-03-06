@@ -31,6 +31,10 @@ class SpaceBattle < GameWindow
   # Overridden, called in the setup.
   #
   def setup_players
+    missile = Missile.new self
+    missile.warp_to 100, 100
+    register missile
+    
     @player1 = Player.new self
     @player1.warp_to 400, 320
                      

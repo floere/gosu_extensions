@@ -2,13 +2,17 @@
 #
 class Player < Moveable
   
-  it_is_a Turnable, Shooter.manual!, Controllable
+  it_is_a Turnable, Shooter, Controllable #, Pod.manual!
   it_is Targetable
   include Lives
   
   # Thing
   #
   image 'player.png'
+  
+  # Pod
+  #
+  # attach Missile, 30, 30
   
   # Lives
   #
@@ -39,7 +43,7 @@ class Player < Moveable
   #
   range 10
   frequency 2
-  shoots Bullet
+  shoots Missile # Bullet
   muzzle_position { self.position + self.rotation_vector.normalize*self.radius }
   muzzle_velocity { |_| self.rotation_vector.normalize*10 + self.random_vector*rand/10 }
   muzzle_rotation { |_| self.rotation }

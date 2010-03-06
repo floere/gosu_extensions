@@ -11,6 +11,8 @@ $:.unshift File.join(File.dirname(__FILE__), '/lib/extensions')
 require 'numeric'
 
 $:.unshift File.join(File.dirname(__FILE__), '/lib/traits')
+require 'pod'
+require 'attachable'
 require 'damaging'
 require 'generator'
 require 'initializer_hooks'

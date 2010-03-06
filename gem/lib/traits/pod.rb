@@ -5,8 +5,23 @@
 #
 module Pod
   
+  def self.manual!
+    puts <<-MANUAL
+      MANUAL FOR #{self}
+      Defines:
+        attach <class>, x_pos, y_pos
+      
+      Example:
+        class Battleship
+          attach Cannon, 10, 20
+      Change #{self}.manual! -> #{self}, to not show the manual anymore.
+    MANUAL
+    self
+  end
+  
   def self.included target_class
     target_class.extend IncludeMethods
+    target_class.holds_attachments
   end
   
   # TODO is_a Rack
@@ -26,10 +41,10 @@ module Pod
       extend ClassMethods
       hook = lambda do
         self.class.prototype_attachments.each do |type, x, y|
-          attach type.new(window), x, y
+          attach type.new(self.window), x, y
         end
       end
-      InitializerHooks.register self, hook
+      InitializerHooks.append self, &hook
     end
     
   end
@@ -60,7 +75,7 @@ module Pod
       self.attachments ||= []
       attachment.extend Attachable # This is where Ruby shines.
       window.register attachment
-      attachment.rotation = self.rotation
+      # attachment.rotation = self.rotation
       attachment.relative_position = CP::Vec2.new x, y
       self.attachments << attachment
     end

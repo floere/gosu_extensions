@@ -24,6 +24,18 @@ class Thing
       InitializerHooks.register self do
         @image = Gosu::Image.new self.window, File.join(Resources.root, path), *args
       end
+      define_method :image do
+        @image
+      end
+    end
+    def sequenced_image path, width, height, frequency = 10, &block
+      InitializerHooks.register self do
+        @image = Gosu::Image::load_tiles self.window, File.join(Resources.root, path), width, height, false
+      end
+      divider = 1000 / frequency
+      define_method :image do
+        @image[(block ? block : lambda { Gosu::milliseconds / divider % @image.size })[]]
+      end
     end
     @@form_shape_class_mapping = {
       :circle => CP::Shape::Circle
@@ -79,17 +91,6 @@ class Thing
       end
     end
     
-    def sequenced_image &block
-      to_execute = block_given? ? block : lambda { Gosu::milliseconds / 100 }
-      define_method :image do
-        @image[to_execute[]]
-      end
-    end
-    
-  end
-  
-  def image
-    @image
   end
   
   # Do something threaded.

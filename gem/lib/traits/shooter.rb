@@ -17,7 +17,7 @@ module Shooter
         muzzle_position { self.position + self.rotation_vector.normalize*self.radius }
         muzzle_velocity { |_| self.rotation_vector.normalize }
         muzzle_rotation { |_| self.rotation }
-      Change Shooter.manual! -> Shooter, to not show the manual anymore.
+      Change #{self}.manual! -> #{self}, to not show the manual anymore.
     MANUAL
     self
   end

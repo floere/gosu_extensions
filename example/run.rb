@@ -1,6 +1,8 @@
 require File.join(File.dirname(__FILE__), '/../gem/init')
 $:.unshift File.dirname(__FILE__)
 
+require 'lib/ambient/smoke'
+
 require 'lib/projectiles/bullet'
 require 'lib/projectiles/missile'
 
