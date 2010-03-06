@@ -70,10 +70,12 @@ class Thing
       end
     end
     
-    def plays sound_path
+    # Plays the given sound.
+    #
+    def plays path
       InitializerHooks.register self do
-        @sound = Gosu::Sample.new self.window, sound_path
-        @sound.play
+        sound = Gosu::Sample.new self.window, File.join(Resources.root, path)
+        sound.play
       end
     end
     

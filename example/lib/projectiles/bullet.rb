@@ -14,7 +14,7 @@ class Bullet < ShortLived
   friction 0
   velocity { 20 + rand }
   layer Layer::Players
-  # plays 'sounds/cannon-02.wav'
+  plays 'bullet.wav'
   
   # def initialize window
   #   self.lifetime = 200 + rand(100)
