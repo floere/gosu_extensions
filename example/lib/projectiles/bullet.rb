@@ -42,9 +42,11 @@ class Bullet < ShortLived
   #   super
   # end
   
-  # def move
-  #   
-  # end
+  def move
+    obey_gravity
+    bounce_off_border_y # a helper method that makes the player bounce off the walls 100% elastically
+    wrap_around_border_x # a helper method that makes the player wrap around the border
+  end
   
   # def draw
   #   @image.draw_rot position.x, position.y, ZOrder::Player, drawing_rotation

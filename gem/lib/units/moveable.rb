@@ -131,25 +131,37 @@ class Moveable < Thing
   #
   # Note: Call in method move.
   #
-  def bounce_off_border elasticity = 1.0
+  def bounce_off_border_x elasticity = 1.0
     if position.x > window.screen_width || position.x < 0
       shape.body.v.x = -shape.body.v.x.to_f*elasticity
     end
+  end
+  def bounce_off_border_y elasticity = 1.0
     if position.y > window.screen_height || position.y < 0
       shape.body.v.y = -shape.body.v.y.to_f*elasticity
     end
   end
-  def wrap_around_border
+  def bounce_off_border elasticity = 1.0
+    bounce_off_border_x elasticity
+    bounce_off_border_y elasticity
+  end
+  def wrap_around_border_x
     if position.x > window.screen_width
       position.x -= window.screen_width
     elsif position.x < 0
       position.x += window.screen_width
     end
+  end
+  def wrap_around_border_y
     if position.y > window.screen_height
       position.y -= window.screen_height
     elsif position.y < 0
       position.y += window.screen_height
     end
+  end
+  def wrap_around_border
+    wrap_around_border_x
+    wrap_around_border_y
   end
   def obey_gravity
     self.speed += window.gravity_vector
