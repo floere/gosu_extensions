@@ -166,5 +166,11 @@ class Moveable < Thing
   def obey_gravity
     self.speed += window.gravity_vector
   end
+  def destroy_on_hitting_x
+    destroy! if position.x > window.screen_height || position.x < 0
+  end
+  def destroy_on_hitting_y
+    destroy! if position.y > window.screen_height || position.y < 0
+  end
   
 end

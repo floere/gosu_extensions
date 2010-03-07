@@ -20,6 +20,8 @@ class Thing
   
   class << self
     
+    # TODO Move to module.
+    #
     def image path, *args
       InitializerHooks.register self do
         @image = Gosu::Image.new self.window, File.join(Resources.root, path), *args
@@ -30,11 +32,12 @@ class Thing
     end
     def sequenced_image path, width, height, frequency = 10, &block
       InitializerHooks.register self do
+        @image_sequence_started = Time.now
         @image = Gosu::Image::load_tiles self.window, File.join(Resources.root, path), width, height, false
       end
-      divider = 1000 / frequency
+      # divider = 1000 / frequency
       define_method :image do
-        @image[(block ? block : lambda { Gosu::milliseconds / divider % @image.size })[]]
+        @image[(block ? block : lambda { (Time.now - @image_sequence_started)*frequency % @image.size })[]]
       end
     end
     @@form_shape_class_mapping = {
