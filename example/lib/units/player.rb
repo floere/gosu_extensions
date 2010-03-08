@@ -25,7 +25,7 @@ class Player < Moveable
   mass 0.1
   moment 0.1
   friction 100.0
-  rotation -Math::PI
+  rotation -Math::PI/2
   
   # TODO
   #
@@ -60,7 +60,7 @@ class Player < Moveable
   #
   #
   def move
-    # obey_gravity
+    obey_gravity
     bounce_off_border_y # a helper method that makes the player bounce off the walls 100% elastically
     wrap_around_border_x # a helper method that makes the player wrap around the border
   end
