@@ -6,8 +6,12 @@ module Generator
   
   module ClassMethods
     
-    def generates klass, rate, til = 100, offset = 0
+    def generates klass, options = {}
       self.send :include, InstanceMethods
+      
+      rate   = options[:every]
+      til    = options[:until] || 100
+      offset = options[:starting_at] || 0
       
       InitializerHooks.register self do
         start_generating klass, rate, til, offset

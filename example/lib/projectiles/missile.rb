@@ -3,7 +3,7 @@ class Missile < ShortLived
   
   it_is_a Shot
   it_is_a Generator
-  generates Smoke, 10, 50, 5
+  generates Smoke, :every => 10, :until => 50, :starting_at => 5
   
   lifetime { 100 + rand(100) }
   image 'missile.png'
@@ -21,7 +21,7 @@ class Missile < ShortLived
   #
   def destroy!
     explosion = SmallExplosion.new window
-    explosion.warp position + random_vector(rand(25))
+    explosion.warp position + random_vector(rand(10))
     window.register explosion
     super
   end
