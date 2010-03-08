@@ -98,8 +98,10 @@ class Thing
   
   # Do something threaded.
   #
-  def threaded time, &code
-    self.window.threaded time, code
+  # Default is: Instantly, in the next step.
+  #
+  def threaded time = 1, &code
+    self.window.threaded time, &code
   end
   
   # Destroy this thing.

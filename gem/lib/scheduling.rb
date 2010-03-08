@@ -14,6 +14,17 @@ class Scheduling
     @threads = {}
   end
   
+  # Adds a code block at time time.
+  #
+  # TODO Reverse: code, time = 1
+  #      To add next step block.
+  #
+  def add time, &code
+    p [:added, code]
+    @threads[time] ||= []
+    @threads[time] << code
+  end
+  
   # Does two things:
   # 1. Move one step in time.
   # 2. Execute all blocks with time 0.
@@ -39,17 +50,11 @@ class Scheduling
         new_threads[time] = codes
       end
     end
+    
+    require 'pp'
+    pp new_threads
+    
     @threads = new_threads
-  end
-  
-  # Adds a code block at time time.
-  #
-  # TODO Reverse: code, time = 1
-  #      To add next step block.
-  #
-  def add time, code
-    @threads[time] ||= []
-    @threads[time] << code
   end
   
   # Call all given blocks.

@@ -10,7 +10,7 @@ class SpaceBattle < GameWindow
   background 'space.png', :hard_borders => false
   damping 0.1
   
-  gravity
+  gravity 0.5
   
   collisions do
     add_collision_func :projectile, :projectile, &nil

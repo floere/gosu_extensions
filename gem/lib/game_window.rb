@@ -244,8 +244,8 @@ class GameWindow < Gosu::Window
   #     destroy!
   #   end
   #
-  def threaded time, code
-    @scheduling.add time, code
+  def threaded time = 1, &code
+    @scheduling.add time, &code
   end
   
   # Moves each moveable.

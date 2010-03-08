@@ -1,7 +1,7 @@
 #
 class Smoke < ShortLived
   
-  lifetime { 50 + rand(10) }
+  lifetime { 150 + rand(10) }
   sequenced_image 'smoke.png', 10, 10, 1
   shape :circle
   radius 1.0

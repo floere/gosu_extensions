@@ -4,6 +4,7 @@ class ShortLived < Moveable
     super window
     
     threaded self.lifetime do
+      p [:destroy, object_id] if self.class == Smoke
       self.destroy!
     end
   end

@@ -6,7 +6,6 @@ class Moveable < Thing
   
   def initialize window
     super window
-    after_initialize
   end
   
   class << self
