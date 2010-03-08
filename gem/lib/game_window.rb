@@ -13,7 +13,8 @@ class GameWindow < Gosu::Window
               :damping,
               :caption,
               :screen_width,
-              :screen_height
+              :screen_height,
+              :gravity
   attr_reader :environment
   attr_accessor :background_path,
                 :background_hard_borders
@@ -67,7 +68,9 @@ class GameWindow < Gosu::Window
   
   class << self
     def gravity amount = 0.98
-      @gravity = CP::Vec2.new 0, amount.to_f/SUBSTEPS
+      InitializerHooks.register self do
+        self.gravity = CP::Vec2.new 0, amount.to_f/SUBSTEPS
+      end
     end
     def width value = DEFAULT_SCREEN_WIDTH
       InitializerHooks.register self do
