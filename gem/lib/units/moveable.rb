@@ -91,15 +91,15 @@ class Moveable < Thing
   def drawing_rotation
     self.rotation.radians_to_gosu
   end
+  def rotation_vector
+    @shape.body.a.radians_to_vec2
+  end
   
   def friction= friction
     @shape.u = friction
   end
   def friction
     @shape.u
-  end
-  def rotation_vector
-    @shape.body.a.radians_to_vec2
   end
   
   # Length is the vector length you want.
