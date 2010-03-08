@@ -25,9 +25,9 @@ class Player < Moveable
   mass 0.1
   moment 0.1
   friction 100.0
-  rotation -Math::PI
+  rotation -Math::PI/2
   
-  #
+  # TODO
   #
   # acceleration
   # top_speed
@@ -57,47 +57,10 @@ class Player < Moveable
            # Gosu::Button::Kb1 => :revive
            Gosu::Button::KbSpace => :shoot
   
-  # alternative_controls do
-  #
-  
-  # def initialize window, color = 0x99ff0000
-  #   super window
-  #   
-  #   # @font = window.font
-  #   # @color = color
-  #   
-  #   # @score = 0
-  #   # @projectile_loaded = true
-  #   
-  #   # @image = Gosu::Image.new window, "media/spaceship.png", false
-  #   # @shape = CP::Shape::Circle.new CP::Body.new(0.1, 0.1), 5.0, CP::Vec2.new(0, 0)
-  #   # 
-  #   # self.friction = 1.0
-  #   # self.rotation = -Math::PI
-  #   
-  #   # @shape.collision_type = :ship
-  #   
-  #   # self.shoots Projectile
-  #   # self.muzzle_position_func { self.position + self.direction_to_earth * 20 }
-  #   # self.muzzle_velocity_func { |target| self.direction_to_earth }
-  #   # self.muzzle_rotation_func { self.rotation }
-  #   # self.frequency = 20
-  # end
-  
-  # def revive
-  #   window.revive self
-  # end
-  
-  # def colorize red, green, blue
-  #   @color.red = red
-  #   @color.green = green
-  #   @color.blue = blue
-  # end
-  
   #
   #
   def move
-    # obey_gravity
+    obey_gravity
     bounce_off_border_y # a helper method that makes the player bounce off the walls 100% elastically
     wrap_around_border_x # a helper method that makes the player wrap around the border
   end

@@ -20,10 +20,10 @@ class Missile < ShortLived
   # Generates a number of explosions when destroyed!
   #
   def destroy!
+    super
     explosion = SmallExplosion.new window
     explosion.warp position + random_vector(rand(10))
     window.register explosion
-    super
   end
   
   def move
