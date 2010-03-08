@@ -123,7 +123,7 @@ class Thing
     return if instance_variable_get(name)
     instance_variable_set name, true
     result = block.call
-    threaded units do
+    threaded units.to_i do
       self.instance_variable_set name, false
     end
     result

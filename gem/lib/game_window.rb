@@ -211,9 +211,9 @@ class GameWindow < Gosu::Window
     @environment.step @dt
   end
   
-  # Moveables unregister themselves here.
+  # Things unregister themselves here.
   #
-  # Note: Use as follows in a Moveable.
+  # Note: Use as follows in a Thing.
   #       
   #       def destroy
   #         threaded do
@@ -222,8 +222,8 @@ class GameWindow < Gosu::Window
   #         end
   #       end
   #
-  def unregister moveable
-    remove moveable.shape
+  def unregister thing
+    remove thing.shape
   end
   
   # Remove this shape the next turn.
@@ -315,7 +315,7 @@ class GameWindow < Gosu::Window
     @remove_shapes.each do |shape|
       @environment.remove_body shape.body
       @environment.remove_shape shape
-      @moveables.delete_if { |moveable| moveable.shape == shape && moveable.destroy! }
+      @moveables.delete_if { |moveable| moveable.shape == shape }
     end
     @remove_shapes.clear
   end

@@ -13,7 +13,6 @@ class Player < Moveable
   # Pod
   #
   # attach Missile, 30, 30
-  generates Smoke, 10, 1000, 5
   
   # Lives
   #
@@ -45,9 +44,9 @@ class Player < Moveable
   range 10
   frequency 2
   shoots Missile # Bullet
-  muzzle_position { self.position + self.rotation_vector.normalize*self.radius*2 }
-  muzzle_velocity { |_| self.rotation_vector.normalize*5 + self.random_vector*rand/10 }
-  muzzle_rotation { |_| self.rotation }
+  # muzzle_position { self.position + self.rotation_vector*self.radius*3 }
+  muzzle_velocity { |*| self.rotation_vector*10 }
+  # muzzle_rotation { |*| self.rotation }
   
   # Controllable
   #

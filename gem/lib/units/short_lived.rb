@@ -9,10 +9,12 @@ class ShortLived < Moveable
   end
   
   class << self
+    
     def lifetime lifetime = nil, &block
       block = lambda { lifetime } unless block_given?
       define_method :lifetime, &block
     end
+    
   end
   
 end

@@ -172,5 +172,8 @@ class Moveable < Thing
   def destroy_on_hitting_y
     destroy! if position.y > window.screen_height || position.y < 0
   end
+  def rotate_towards_velocity
+    self.rotation = self.speed.to_angle
+  end
   
 end

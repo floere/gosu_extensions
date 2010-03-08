@@ -9,6 +9,6 @@ class Smoke < ShortLived
   moment 0.1
   collision_type :projectile
   friction 0.0001
-  layer Layer::Background
+  layer Layer::Ambient
   
 end

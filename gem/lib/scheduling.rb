@@ -29,7 +29,7 @@ class Scheduling
       # Set time 1 lower.
       #
       time = time - 1
-      if time <= 0
+      if time == 0
         # Execute all if time is 0.
         #
         execute codes

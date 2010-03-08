@@ -59,7 +59,6 @@ module Shooter
     end
   end
   
-  # attr_reader :muzzle_position, :muzzle_velocity, :muzzle_rotation
   attr_accessor :shot_type, :shooting_range, :shooting_rate
   
   def shot
@@ -67,13 +66,13 @@ module Shooter
   end
   
   def muzzle_position
-    instance_eval &@muzzle_position
+    instance_eval &(@muzzle_position || @muzzle_position = lambda { |*| self.position + self.rotation_vector*self.radius })
   end
   def muzzle_velocity target = nil
-    instance_eval &@muzzle_velocity
+    instance_eval &(@muzzle_velocity || @muzzle_velocity = lambda { |*| self.rotation_vector })
   end
   def muzzle_rotation target = nil
-    instance_eval &@muzzle_rotation
+    instance_eval &(@muzzle_rotation || @muzzle_rotation = lambda { |*| self.rotation })
   end
   def muzzle_position_func &position
     @muzzle_position = position
