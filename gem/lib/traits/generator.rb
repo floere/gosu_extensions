@@ -25,13 +25,11 @@ module Generator
     
     def start_generating klass, every_rate, til, offset
       return if til <= 0
-      p [:threaded, offset, Time.now.usec]
       threaded offset, &generation(klass, every_rate, til)
     end
     
     def generation klass, every_rate, til
       lambda do
-        p [:called, Time.now.usec]
         self.generate klass
         self.start_generating klass, every_rate, til - every_rate, every_rate
       end

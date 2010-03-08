@@ -9,6 +9,7 @@ class Thing
   #
   def initialize window
     @window = window
+    self.destroyed = false
     after_initialize
   end
   
@@ -106,9 +107,14 @@ class Thing
   
   # Destroy this thing.
   #
+  attr_writer :destroyed
+  def destroyed?
+    @destroyed
+  end
   def destroy!
+    return if self.destroyed?
     self.window.unregister self
-    true
+    self.destroyed = true
   end
   
   # Some things you can only do every x time units.

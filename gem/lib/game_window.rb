@@ -188,7 +188,7 @@ class GameWindow < Gosu::Window
     # Step the physics environment SUBSTEPS times each update.
     #
     SUBSTEPS.times do
-      remove_collided
+      remove_shapes!
       reset_forces
       move_all
       targeting
@@ -303,7 +303,7 @@ class GameWindow < Gosu::Window
     moveable.add_to @environment
   end
   
-  def remove_collided
+  def remove_shapes!
     # This iterator makes an assumption of one Shape per Star making it safe to remove
     # each Shape's Body as it comes up
     # If our Stars had multiple Shapes, as would be required if we were to meticulously
@@ -312,6 +312,7 @@ class GameWindow < Gosu::Window
     # We would probably solve this by creating a separate @remove_bodies array to remove the Bodies
     # of the Stars that were gathered by the Player
     #
+    # p @remove_shapes unless @remove_shapes.empty?
     @remove_shapes.each do |shape|
       @environment.remove_body shape.body
       @environment.remove_shape shape

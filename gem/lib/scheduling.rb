@@ -20,7 +20,6 @@ class Scheduling
   #      To add next step block.
   #
   def add time, &code
-    p [:added, code]
     @threads[time] ||= []
     @threads[time] << code
   end
@@ -31,8 +30,12 @@ class Scheduling
   #
   # TODO Rewrite to be faster.
   #
+  # FIXME - threads added while threads are handled!
+  #
   def step
     new_threads = {}
+    
+    execute @threads[1]
     
     # Go over all threads.
     #
@@ -51,10 +54,11 @@ class Scheduling
       end
     end
     
-    require 'pp'
-    pp new_threads
-    
     @threads = new_threads
+  end
+  
+  def lower_all_times_by_one
+    
   end
   
   # Call all given blocks.

@@ -14,7 +14,10 @@ class SpaceBattle < GameWindow
   
   collisions do
     add_collision_func :projectile, :projectile, &nil
-    add_collision_func :projectile, :player, &nil
+    add_collision_func :projectile, :player, &nil # do |projectile_shape, player_shape| # &nil
+      # self.remove projectile_shape
+      # @moveables.each { |possible_player| possible_player.shape == player_shape && possible_player.hit! }
+    # end
     add_collision_func :projectile, :enemy do |projectile_shape, enemy_shape|
       # TODO
       #
