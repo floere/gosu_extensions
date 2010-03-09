@@ -3,7 +3,7 @@ class Missile < ShortLived
   
   it_is_a Shot
   it_is_a Generator
-  generates Smoke, :every => 10, :until => 50, :starting_at => 20
+  generates Smoke, :starting_at => 20, :every => 10, :until => 50
   
   lifetime { 100 + rand(100) }
   image 'missile.png'

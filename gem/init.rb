@@ -1,8 +1,16 @@
 require 'rubygems'
 require 'active_support'
 # require 'texplay'
-require 'gosu'
-require 'chipmunk' # A physics framework.
+begin
+  require 'gosu'
+rescue LoadError => e
+  puts "Couldn't find gem gosu. Install using:\n\nsudo gem install gosu.\n\n"
+end
+begin
+  require 'chipmunk' # A physics framework.
+rescue LoadError => e
+  puts "Couldn't find gem chipmunk. Install using:\n\nsudo gem install chipmunk.\n\n"
+end
 
 $:.unshift File.join(File.dirname(__FILE__), '/lib')
 require 'resources'
