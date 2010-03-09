@@ -15,7 +15,9 @@ class GameWindow < Gosu::Window
               :screen_width,
               :screen_height,
               :gravity
-  attr_reader :environment
+  attr_reader :environment,
+              :moveables,
+              :font
   attr_accessor :background_path,
                 :background_hard_borders
   
@@ -144,6 +146,10 @@ class GameWindow < Gosu::Window
   end
   def setup_environment
     @environment = CP::Space.new
+    class << @environment
+      attr_accessor :window
+    end
+    @environment.window = self
     @environment.damping = -self.damping + 1 # recalculate the damping such that 0.0 has no damping.
   end
   

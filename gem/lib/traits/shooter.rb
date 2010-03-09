@@ -1,5 +1,7 @@
 module Shooter
   
+  Shoot = :shoot
+  
   def self.manual!
     puts <<-MANUAL
       MANUAL FOR #{self}

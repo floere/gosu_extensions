@@ -7,7 +7,7 @@ class Smoke < ShortLived
   radius 1.0
   mass 0.1
   moment 0.1
-  collision_type :projectile
+  collision_type :ambient
   friction 0.0001
   layer Layer::Ambient
   

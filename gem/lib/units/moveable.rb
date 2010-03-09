@@ -4,6 +4,10 @@
 #
 class Moveable < Thing
   
+  Accelerate = :accelerate
+  Left       = :move_left
+  Right      = :move_right
+  
   def initialize window
     super window
   end
@@ -125,6 +129,12 @@ class Moveable < Thing
   def accelerate strength = 1
     self.speed += self.rotation_vector * strength/SUBSTEPS
   end
+  def move_left strength = 1
+    self.speed += CP::Vec2.new(-strength.to_f/SUBSTEPS, 0) 
+  end
+  def move_right strength = 1
+    self.speed += CP::Vec2.new(strength.to_f/SUBSTEPS, 0) 
+  end
   
   # Movement rules
   #
@@ -165,11 +175,11 @@ class Moveable < Thing
   def obey_gravity
     self.speed += window.gravity_vector
   end
-  def destroy_on_hitting_x
-    destroy! if position.x > window.screen_height || position.x < 0
+  def on_hitting_x
+    yield if block_given? && position.x > window.screen_width || position.x < 0
   end
-  def destroy_on_hitting_y
-    destroy! if position.y > window.screen_height || position.y < 0
+  def on_hitting_y
+    yield if block_given? && position.y > window.screen_height || position.y < 0
   end
   def rotate_towards_velocity
     self.rotation = self.speed.to_angle
