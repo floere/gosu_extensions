@@ -7,7 +7,7 @@ class SmallExplosion < ShortLived
   lifetime 30
   sequenced_image 'small_explosion.png', 16, 16, 10
   shape :circle
-  radius 1.0
+  radius 2.0
   mass 100
   moment 100
   collision_type :projectile
