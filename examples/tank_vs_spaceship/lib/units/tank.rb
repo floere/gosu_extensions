@@ -43,9 +43,9 @@ class Tank < Moveable
   #
   range 10
   frequency 1
-  shoots Missile # Bullet
+  shoots Bullet
   muzzle_position { self.position + self.rotation_vector*self.radius*2 }
-  muzzle_velocity { |*| self.rotation_vector*10 }
+  muzzle_velocity { |*| self.rotation_vector*5 }
   # muzzle_rotation { |*| self.rotation }
   
   # Controllable

@@ -44,7 +44,8 @@ class Bullet < ShortLived
   
   def move
     obey_gravity
-    bounce_off_border_y # a helper method that makes the player bounce off the walls 100% elastically
+    on_hitting_y { destroy! }
+    # bounce_off_border_y # a helper method that makes the player bounce off the walls 100% elastically
     wrap_around_border_x # a helper method that makes the player wrap around the border
   end
   
