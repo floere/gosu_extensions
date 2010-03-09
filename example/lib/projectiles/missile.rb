@@ -3,7 +3,7 @@ class Missile < ShortLived
   
   it_is_a Shot
   it_is_a Generator
-  generates Smoke, :every => 10, :until => 50, :starting_at => 5
+  generates Smoke, :every => 10, :until => 50, :starting_at => 20
   
   lifetime { 100 + rand(100) }
   image 'missile.png'
@@ -39,7 +39,7 @@ class Missile < ShortLived
     destroy_on_hitting_y and return
     bounce_off_border_y # a helper method that makes the player bounce off the walls 100% elastically
     wrap_around_border_x # a helper method that makes the player wrap around the border
-    rotate_towards_velocity
+    rotate_towards_velocity if self.current_speed > 30
   end
   
 end
