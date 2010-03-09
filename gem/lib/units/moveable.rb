@@ -7,6 +7,8 @@ class Moveable < Thing
   Accelerate = :accelerate
   Left       = :move_left
   Right      = :move_right
+  Up         = :move_up
+  Down       = :move_down
   
   def initialize window
     super window
@@ -134,6 +136,12 @@ class Moveable < Thing
   end
   def move_right strength = 1
     self.speed += CP::Vec2.new(strength.to_f/SUBSTEPS, 0) 
+  end
+  def move_up strength = 1
+    self.speed += CP::Vec2.new(0, -strength.to_f/SUBSTEPS) 
+  end
+  def move_down strength = 1
+    self.speed += CP::Vec2.new(0, strength.to_f/SUBSTEPS) 
   end
   
   # Movement rules

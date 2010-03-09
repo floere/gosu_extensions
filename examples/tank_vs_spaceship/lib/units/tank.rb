@@ -64,17 +64,8 @@ class Tank < Moveable
   end
   
   def righten
-    difference = (self.rotation + Math::PI/2) % (2*Math::PI)
-    p difference
-    self.rotation += difference/5_000
+    self.rotation += (self.rotation + Math::PI/2) % (2*Math::PI)/5_000
   end
-  
-  # def draw
-  #   @font.draw "P1 Score: #{score}", 10, 10, ZOrder::UI, 1.0, 1.0, @color
-  #   @font.draw "#{torque.round}", position.x - 10, position.y + 10, ZOrder::UI, 0.5, 0.5, @color
-  #   @font.draw "#{speed.length.round}", position.x + 10, position.y + 10, ZOrder::UI, 0.5, 0.5, @color
-  #   @image.draw_rot position.x, position.y, ZOrder::Player, drawing_rotation
-  # end
   
   # TODO explosive death
   #

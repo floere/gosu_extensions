@@ -42,7 +42,7 @@ class Spaceship < Moveable
   # Shooter
   #
   range 10
-  frequency 1
+  frequency 1.5
   shoots Missile # Bullet
   muzzle_position { self.position + self.rotation_vector*self.radius*2 }
   muzzle_velocity { |*| self.rotation_vector*10 }
