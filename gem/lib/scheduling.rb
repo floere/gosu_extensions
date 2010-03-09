@@ -21,7 +21,7 @@ class Scheduling
     # @threads[time] ||= []
     # @threads[time] << code
     @threads << [time, code]
-    @threads.sort!
+    # @threads.sort!
   end
   
   # Does two things:
