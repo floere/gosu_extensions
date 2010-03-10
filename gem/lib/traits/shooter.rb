@@ -24,8 +24,19 @@ module Shooter
     self
   end
   
+  attr_accessor :shot_type
+  attr_writer :shooting_range, :shooting_rate
+  
   def self.included base
     base.extend ClassMethods
+  end
+  
+  def shooting_range
+    @shooting_range || @shooting_range = 300
+  end
+  
+  def shooting_rate
+    @shooting_rate || @shooting_rate = (SUBSTEPS**2).to_f/2
   end
   
   module ClassMethods
@@ -60,8 +71,6 @@ module Shooter
       end
     end
   end
-  
-  attr_accessor :shot_type, :shooting_range, :shooting_rate
   
   def shot
     self.shot_type.new @window
