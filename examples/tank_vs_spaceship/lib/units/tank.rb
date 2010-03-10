@@ -2,21 +2,34 @@
 #
 class Tank < Moveable
   
-  it_is_a Shooter, Controllable, Generator#, Pod.manual!
+  it_is_a Controllable, Generator#, Pod.manual!
   it_is Targetable
-  include Lives
   
   # Thing
   #
   image 'tank.png'
   
+  it_is_a Shooter do
+    range 10
+    frequency 1
+    shoots Bullet
+    muzzle_position { self.position + self.rotation_vector*self.radius*2 }
+    muzzle_velocity { |*| self.rotation_vector*5 }
+    # muzzle_rotation { |*| self.rotation }
+  end
+  
+  it_is Controllable
+  it_has Lives
+  
+  controls Gosu::Button::KbLeft => Moveable::Left,
+           Gosu::Button::KbRight => Moveable::Right,
+           Gosu::Button::KbUp => Shooter::Shoot,
+           Gosu::Button::KbDown => :righten
+  lives 3
+  
   # Pod
   #
   # attach Missile, 30, 30
-  
-  # Lives
-  #
-  lives 3
   
   #
   #
@@ -39,23 +52,7 @@ class Tank < Moveable
   
   collision_type :player
   
-  # Shooter
-  #
-  range 10
-  frequency 1
-  shoots Bullet
-  muzzle_position { self.position + self.rotation_vector*self.radius*2 }
-  muzzle_velocity { |*| self.rotation_vector*5 }
-  # muzzle_rotation { |*| self.rotation }
-  
-  # Controllable
-  #
-  controls Gosu::Button::KbLeft => Moveable::Left,
-           Gosu::Button::KbRight => Moveable::Right,
-           Gosu::Button::KbUp => Shooter::Shoot,
-           Gosu::Button::KbDown => :righten
-  
-  #
+  # Overridden.
   #
   def move
     obey_gravity

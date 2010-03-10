@@ -2,27 +2,22 @@ module Shooter
   
   Shoot = :shoot
   
-  def self.manual!
-    puts <<-MANUAL
-      MANUAL FOR #{self}
-      Defines:
-        range <some range> # This is only needed for targeted shooting, e.g. automatic cannons
-        frequency <some shooting frequency> # TODO block
-        shoots <class:thing>
-        muzzle_position { position calculation } || frontal # a block
-        muzzle_velocity { velocity calculation }
-        muzzle_rotation { rotation calculation }
+  manual <<-MANUAL
+    Defines:
+      range <some range> # This is only needed for targeted shooting, e.g. automatic cannons
+      frequency <some shooting frequency> # TODO block
+      shoots <class:thing>
+      muzzle_position { position calculation } || frontal # a block
+      muzzle_velocity { velocity calculation }
+      muzzle_rotation { rotation calculation }
       
-      Example:
-        frequency 20
-        shoots Bullet
-        muzzle_position { self.position + self.rotation_vector.normalize*self.radius }
-        muzzle_velocity { |_| self.rotation_vector.normalize }
-        muzzle_rotation { |_| self.rotation }
-      Change #{self}.manual! -> #{self}, to not show the manual anymore.
-    MANUAL
-    self
-  end
+    Example:
+      frequency 20
+      shoots Bullet
+      muzzle_position { self.position + self.rotation_vector.normalize*self.radius }
+      muzzle_velocity { |_| self.rotation_vector.normalize }
+      muzzle_rotation { |_| self.rotation }
+  MANUAL
   
   attr_accessor :shot_type
   attr_writer :shooting_range, :shooting_rate

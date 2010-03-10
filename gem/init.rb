@@ -16,9 +16,11 @@ $:.unshift File.join(File.dirname(__FILE__), '/lib')
 require 'resources'
 
 $:.unshift File.join(File.dirname(__FILE__), '/lib/extensions')
+require 'module'
 require 'numeric'
 
 $:.unshift File.join(File.dirname(__FILE__), '/lib/traits')
+require 'it_is_a'
 require 'pod'
 require 'attachable'
 require 'damaging'

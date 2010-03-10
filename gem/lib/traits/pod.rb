@@ -5,19 +5,14 @@
 #
 module Pod
   
-  def self.manual!
-    puts <<-MANUAL
-      MANUAL FOR #{self}
-      Defines:
-        attach <class>, x_pos, y_pos
-      
-      Example:
-        class Battleship
-          attach Cannon, 10, 20
-      Change #{self}.manual! -> #{self}, to not show the manual anymore.
-    MANUAL
-    self
-  end
+  manual <<-MANUAL
+    Defines:
+      attach <class>, x_pos, y_pos
+    
+    Example:
+      class Battleship
+        attach Cannon, 10, 20
+  MANUAL
   
   def self.included target_class
     target_class.extend IncludeMethods
