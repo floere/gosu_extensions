@@ -3,7 +3,7 @@ class Missile < ShortLived
   
   it_is_a Shot
   it_is_a Generator
-  generates Smoke, :starting_at => 20, :every => 10, :until => 50
+  generates Smoke, :starting_at => 10, :every => 10, :until => 100
   
   lifetime { 100 + rand(100) }
   image 'missile.png'
@@ -28,7 +28,7 @@ class Missile < ShortLived
   
   def deviate
     @deviation ||= 0
-    @deviation += (rand-0.5)/100
+    @deviation += (rand-0.5)/20
     self.position += (self.rotation_vector.perp * @deviation)
   end
   

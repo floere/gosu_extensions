@@ -2,7 +2,7 @@
 #
 class Tank < Moveable
   
-  it_is_a Shooter, Controllable, Generator #, Pod.manual!
+  it_is_a Shooter, Controllable, Generator#, Pod.manual!
   it_is Targetable
   include Lives
   

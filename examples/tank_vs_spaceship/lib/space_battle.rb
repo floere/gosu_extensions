@@ -20,7 +20,7 @@ class SpaceBattle < GameWindow
   
   width  1022
   height  595
-  # full_screen # comment if you want a windowed app.
+  full_screen # comment if you want a windowed app.
   caption "Incredible Space Battles!"
   
   # font Gosu::default_font_name, 20
@@ -32,6 +32,7 @@ class SpaceBattle < GameWindow
   
   collisions do
     add_collision_func :ambient, :player, &nil
+    add_collision_func :projectile, :projectile, &nil
     add_collision_func :projectile, :player do |projectile_shape, player_shape|
       window.remove projectile_shape
       window.moveables.each do |possible_player|
@@ -57,6 +58,8 @@ class SpaceBattle < GameWindow
     register @tank
   end
   
+  # TODO to FW
+  #
   def draw_ui
     @players.each(&:draw_ui)
   end

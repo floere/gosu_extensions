@@ -35,15 +35,15 @@ class Spaceship < Moveable
   
   # Turnable
   #
-  turn_speed 0.5 # turns per second
+  turn_speed 1 # turns per second
   
   collision_type :player
   
   # Shooter
   #
   range 10
-  frequency 1.5
-  shoots Missile # Bullet
+  frequency 1
+  shoots Missile #Bullet
   muzzle_position { self.position + self.rotation_vector*self.radius*2 }
   muzzle_velocity { |*| self.rotation_vector*10 }
   # muzzle_rotation { |*| self.rotation }
@@ -53,6 +53,7 @@ class Spaceship < Moveable
   controls Gosu::Button::KbA => Turnable::Left,
            Gosu::Button::KbD => Turnable::Right,
            Gosu::Button::KbW => Moveable::Accelerate,
+           Gosu::Button::KbS => Moveable::Backwards,
            Gosu::Button::KbSpace => Shooter::Shoot
   
   #

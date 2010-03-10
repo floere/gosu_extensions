@@ -4,7 +4,7 @@ class SmallExplosion < ShortLived
   
   # rotation rand * 2 * Math::PI
   
-  lifetime 30
+  lifetime 20
   sequenced_image 'small_explosion.png', 16, 16, 10
   shape :circle
   radius 2.0

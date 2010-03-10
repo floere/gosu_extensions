@@ -9,6 +9,7 @@ class Moveable < Thing
   Right      = :move_right
   Up         = :move_up
   Down       = :move_down
+  Backwards  = :backwards
   
   def initialize window
     super window
@@ -130,6 +131,9 @@ class Moveable < Thing
   #
   def accelerate strength = 1
     self.speed += self.rotation_vector * strength/SUBSTEPS
+  end
+  def backwards strength = 1
+    accelerate -0.5*strength
   end
   def move_left strength = 1
     self.speed += CP::Vec2.new(-strength.to_f/SUBSTEPS, 0) 
