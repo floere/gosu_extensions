@@ -20,7 +20,7 @@ class SpaceBattle < GameWindow
   
   width  1022
   height  595
-  full_screen # comment if you want a windowed app.
+  # full_screen # comment if you want a windowed app.
   caption "Incredible Space Battles!"
   
   # font Gosu::default_font_name, 20
