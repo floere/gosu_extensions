@@ -77,8 +77,7 @@ class Tank < Moveable
     super
   end
   
-  def kill!
-    super
+  def killed!
     @ui = ["Tank hit!: #{lives} lives remain.", window.width-220, 10, Layer::UI, 1.0, 1.0, 0xffff0000]
   end
   

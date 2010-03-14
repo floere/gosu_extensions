@@ -7,16 +7,15 @@ module Lives
   
   # Prints an amount of information on these capabilities.
   #
-  # Examples:
-  # * Lives.debug
-  # * include Lives.debug
-  #
-  def self.debug
-    puts <<-DOC
-      
-    DOC
-    self
-  end
+  manual <<-MANUAL
+    Defines:
+      lives <some trait>
+    
+    Example:
+      lives 10
+    
+    Call kill! to remove a live. Override killed! to exhibit behaviour.
+  MANUAL
   
   def self.included target_class
     target_class.extend IncludeMethods
@@ -46,8 +45,12 @@ module Lives
     # * Check to see if the amount is 0.
     # * Calls #destroy! if yes.
     #
+    def killed!
+      
+    end
     def kill!
       self.lives -= 1
+      killed!
       destroy! if self.lives == 0
     end
     

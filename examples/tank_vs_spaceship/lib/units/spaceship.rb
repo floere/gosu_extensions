@@ -76,8 +76,7 @@ class Spaceship < Moveable
     super
   end
   
-  def kill!
-    super
+  def killed!
     @ui = ["Spaceship hit!: #{lives} lives remain.", 10, 10, Layer::UI, 1.0, 1.0, 0xff0000ff]
   end
   
