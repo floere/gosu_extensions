@@ -23,9 +23,10 @@ class Controls
     @mapping = controllable.controls_mapping
   end
   
-  # Checks if 
+  # 
   #
   def handle
+    return if @controllable.destroyed?
     @mapping.each do |key, command|
       @controllable.send(command) if @window.button_down? key
     end
