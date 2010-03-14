@@ -5,11 +5,13 @@ begin
   require 'gosu'
 rescue LoadError => e
   puts "Couldn't find gem gosu. Install using:\n\nsudo gem install gosu.\n\n"
+  raise e
 end
 begin
   require 'chipmunk' # A physics framework.
 rescue LoadError => e
   puts "Couldn't find gem chipmunk. Install using:\n\nsudo gem install chipmunk.\n\n"
+  raise e
 end
 
 $:.unshift File.join(File.dirname(__FILE__), '/lib')

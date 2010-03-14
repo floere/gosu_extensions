@@ -42,9 +42,7 @@ class Thing
         @image[(block ? block : lambda { (Time.now - @image_sequence_started)*frequency % @image.size })[]]
       end
     end
-    @@form_shape_class_mapping = {
-      :circle => CP::Shape::Circle
-    }
+    @@form_shape_class_mapping = { :circle => CP::Shape::Circle }
     def shape form
       form_shape_class_mapping = @@form_shape_class_mapping
       InitializerHooks.append self do
