@@ -10,6 +10,7 @@ class Moveable < Thing
   Up         = :move_up
   Down       = :move_down
   Backwards  = :backwards
+  # Jump       = :jump
   
   def initialize window
     super window
@@ -83,6 +84,8 @@ class Moveable < Thing
     @shape.body.v
   end
   def current_speed
+    # TODO use built-in function
+    #
     Math.sqrt(speed.x**2 + speed.y**2)
   end
   
@@ -121,8 +124,6 @@ class Moveable < Thing
     CP::Vec2.new(x * multiplier, y * multiplier)
   end
   
-  # Wrap to the other side of the screen when we fly off the edge.
-  #
   def move
     
   end
@@ -147,6 +148,9 @@ class Moveable < Thing
   def move_down strength = 1
     self.speed += CP::Vec2.new(0, strength.to_f/SUBSTEPS) 
   end
+  # def jump strength = 100
+  #   self.speed += CP::Vec2.new(0, -strength.to_f/SUBSTEPS) if self.current_speed <= 1
+  # end
   
   # Movement rules
   #
