@@ -28,7 +28,7 @@ class Missile < ShortLived
   
   def deviate
     @deviation ||= 0
-    @deviation += (rand-0.5)/20
+    @deviation += (rand-0.5)/100
     self.position += (self.rotation_vector.perp * @deviation)
   end
   
