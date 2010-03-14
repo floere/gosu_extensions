@@ -34,7 +34,7 @@ class Tank < Moveable
   #
   #
   shape :circle
-  radius 10.0
+  radius 11.0
   mass 0.1
   moment 0.1
   friction 100.0
