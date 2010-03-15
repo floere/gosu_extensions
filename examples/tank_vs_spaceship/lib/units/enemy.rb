@@ -15,14 +15,4 @@ class Enemy < Moveable
   rotation -Math::PI/2
   layer Layer::Players
   
-  # def initialize window
-  #   super window
-  #   
-  #   # after_initialize
-  # end
-  
-  # def draw
-  #   image = @image[Gosu::milliseconds / 100 % @image.size];
-  #   image.draw_rot self.position.x, self.position.y, ZOrder::Player, drawing_rotation
-  # end
 end

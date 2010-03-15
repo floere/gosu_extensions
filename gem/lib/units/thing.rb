@@ -149,7 +149,7 @@ class Thing
   # TODO
   #
   def draw
-    self.image.draw_rot position.x, position.y, self.layer, self.drawing_rotation
+    self.image.draw_rot self.position.x, self.position.y, self.layer, self.drawing_rotation
   end
   
 end
