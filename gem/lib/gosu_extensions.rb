@@ -14,15 +14,14 @@ rescue LoadError => e
   raise e
 end
 
-$:.unshift File.join(File.dirname(__FILE__), '/lib')
 require 'resources'
 require 'vector_utilities'
 
-$:.unshift File.join(File.dirname(__FILE__), '/lib/extensions')
+$:.unshift File.join(File.dirname(__FILE__), '/extensions')
 require 'module'
 require 'numeric'
 
-$:.unshift File.join(File.dirname(__FILE__), '/lib/traits')
+$:.unshift File.join(File.dirname(__FILE__), '/traits')
 require 'it_is_a'
 require 'pod'
 require 'attachable'
@@ -38,7 +37,7 @@ require 'targetable'
 require 'turnable'
 require 'controllable'
 
-$:.unshift File.join(File.dirname(__FILE__), '/lib/units')
+$:.unshift File.join(File.dirname(__FILE__), '/units')
 require 'thing'
 require 'moveable'
 require 'short_lived'

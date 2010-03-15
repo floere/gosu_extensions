@@ -1,4 +1,4 @@
-require File.join(File.dirname(__FILE__), '/../../gem/init')
+require File.join(File.dirname(__FILE__), '/../../gem/lib/gosu_extensions')
 $:.unshift File.dirname(__FILE__)
 
 require 'lib/ambient/smoke'

@@ -1,0 +1,18 @@
+begin
+  require 'jeweler'
+  Jeweler::Tasks.new do |gemspec|
+    gemspec.name = "gosu_extensions"
+    gemspec.summary = ""
+    gemspec.email = "florian.hanke@gmail.com"
+    gemspec.homepage = "http://www.github.com/floere/gosu_extensions"
+    gemspec.description = ""
+    gemspec.authors = ["Florian Hanke"]
+    gemspec.rdoc_options = ["--inline-source", "--charset=UTF-8"]
+    gemspec.files = FileList["[A-Z]*", "{generators,lib,rails,spec}/**/*"]
+    gemspec.add_dependency 'gosu'
+    gemspec.add_dependency 'chipmunk'
+  end
+  Jeweler::GemcutterTasks.new
+rescue LoadError => e
+  puts "Jeweler not available (#{e}). Install it with: sudo gem install technicalpickles-jeweler -s http://gems.github.com"
+end
