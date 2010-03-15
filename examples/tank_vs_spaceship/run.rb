@@ -19,4 +19,4 @@ Resources.root = File.join File.dirname(__FILE__), 'media'
 require 'lib/space_battle'
 
 battle = SpaceBattle.new
-battle.show
+battle.show # TODO show a splash screen first
