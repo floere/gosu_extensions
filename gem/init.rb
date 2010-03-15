@@ -16,6 +16,7 @@ end
 
 $:.unshift File.join(File.dirname(__FILE__), '/lib')
 require 'resources'
+require 'vector_utilities'
 
 $:.unshift File.join(File.dirname(__FILE__), '/lib/extensions')
 require 'module'

@@ -1,5 +1,6 @@
 class Thing
   
+  include VectorUtilities
   include InitializerHooks
   include ItIsA
   

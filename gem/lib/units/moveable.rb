@@ -12,12 +12,10 @@ class Moveable < Thing
   Backwards  = :backwards
   # Jump       = :jump
   
-  def initialize window
-    super window
-  end
-  
   class << self
     
+    # Initial setting.
+    #
     def friction amount = nil, &block
       to_execute = block_given? ? block : lambda { amount }
       InitializerHooks.register self do
@@ -37,12 +35,6 @@ class Moveable < Thing
       end
     end
     
-  end
-  
-  # Return a random vector with a given strength.
-  #
-  def random_vector strength = 1.0
-    CP::Vec2.new(rand-0.5, rand-0.5).normalize! * strength
   end
   
   # Directly set the position of our Moveable using a vector.
