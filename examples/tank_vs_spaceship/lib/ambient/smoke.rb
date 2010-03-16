@@ -1,5 +1,7 @@
 #
-class Smoke < ShortLived
+class Smoke < Thing
+  
+  it_is ShortLived
   
   lifetime { 50 + rand(10) }
   sequenced_image 'smoke.png', 10, 10, 1

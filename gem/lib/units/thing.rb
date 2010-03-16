@@ -4,6 +4,10 @@ class Thing
   include InitializerHooks
   include ItIsA
   
+  # TODO Move this.
+  #
+  it_is Moveable
+  
   attr_writer :layer
   attr_reader :window, :shape
   

@@ -1,6 +1,6 @@
 # This game will have multiple Players in the form of a ship.
 #
-class Spaceship < Moveable
+class Spaceship < Thing
   
   it_is_a Turnable, Shooter, Controllable, Generator #, Pod.manual!
   it_is Targetable

@@ -1,6 +1,6 @@
 #
 #
-class MissileLauncher < Moveable
+class MissileLauncher < Thing
   
   it_is Targeting::Closest
   it_is_a Shooter

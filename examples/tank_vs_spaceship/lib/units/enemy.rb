@@ -1,6 +1,6 @@
 # An enemy moves towards the players.
 #
-class Enemy < Moveable
+class Enemy < Thing
   
   include Lives
   it_is Targetable

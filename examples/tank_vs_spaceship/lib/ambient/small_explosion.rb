@@ -1,4 +1,6 @@
-class SmallExplosion < ShortLived
+class SmallExplosion < Thing
+  
+  it_is ShortLived
   
   # include Hurting
   

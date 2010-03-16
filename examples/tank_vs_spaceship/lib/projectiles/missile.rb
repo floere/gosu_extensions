@@ -1,6 +1,7 @@
 #
-class Missile < ShortLived
+class Missile < Thing
   
+  it_is ShortLived
   it_is_a Shot
   it_is_a Generator
   generates Smoke, :starting_at => 10, :every => 10, :until => 100

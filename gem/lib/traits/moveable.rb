@@ -2,7 +2,7 @@
 #
 # TODO moveable should only have active components, like accelerate etc. Positioning etc. should go to Thing.
 #
-class Moveable < Thing
+module Moveable
   
   Accelerate = :accelerate
   Left       = :move_left
@@ -12,7 +12,11 @@ class Moveable < Thing
   Backwards  = :backwards
   # Jump       = :jump
   
-  class << self
+  def self.included klass
+    klass.extend ClassMethods
+  end
+  
+  module ClassMethods
     
     # Initial setting.
     #

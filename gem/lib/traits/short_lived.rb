@@ -1,4 +1,8 @@
-class ShortLived < Moveable
+module ShortLived
+  
+  def self.included klass
+    klass.extend ClassMethods
+  end
   
   def initialize window
     super window
@@ -8,7 +12,7 @@ class ShortLived < Moveable
     end
   end
   
-  class << self
+  module ClassMethods
     
     def lifetime lifetime = nil, &block
       block = lambda { lifetime } unless block_given?

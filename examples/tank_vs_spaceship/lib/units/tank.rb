@@ -1,6 +1,6 @@
 # This game will have multiple Players in the form of a ship.
 #
-class Tank < Moveable
+class Tank < Thing
   
   it_is_a Controllable, Generator#, Pod.manual!
   it_is Targetable

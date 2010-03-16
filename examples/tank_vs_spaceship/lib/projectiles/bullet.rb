@@ -1,7 +1,8 @@
 #
 #
-class Bullet < ShortLived
+class Bullet < Thing
   
+  it_is ShortLived
   it_is_a Shot
   
   lifetime { 100 + rand(50) }

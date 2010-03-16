@@ -36,11 +36,11 @@ require 'shot'
 require 'targetable'
 require 'turnable'
 require 'controllable'
+require 'moveable'
+require 'short_lived'
 
 $:.unshift File.join(File.dirname(__FILE__), '/units')
 require 'thing'
-require 'moveable'
-require 'short_lived'
 
 require 'controls'
 require 'game_window'

@@ -1,7 +1,8 @@
 # Use this for a thing that damages.
 #
 # Example:
-#   class Rocket < ShortLived
+#   class Rocket
+#     it_is ShortLived
 #     it_is Damaging
 #   end
 #
