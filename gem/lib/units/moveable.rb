@@ -76,9 +76,7 @@ class Moveable < Thing
     @shape.body.v
   end
   def current_speed
-    # TODO use built-in function
-    #
-    Math.sqrt(speed.x**2 + speed.y**2)
+    speed.length
   end
   
   # Directly set the rotation of our Moveable.
