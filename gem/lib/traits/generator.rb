@@ -17,8 +17,8 @@ module Generator
         klass
       end
       class_eval <<-GENERATION
-def start_generating every_rate = #{rate || 10}, til = #{til || 100}, offset = #{offset || 0}
-  return if til <= 0
+def start_generating! every_rate = #{rate || 10}, til = #{til || false}, offset = #{offset || rate || 10}
+  return if til && til <= 0
   threaded offset, &generation(generated_class, every_rate, til)
 end
       GENERATION
@@ -27,7 +27,7 @@ end
       #
       if offset
         InitializerHooks.register self do
-          start_generating
+          start_generating!
         end
       end
       
@@ -37,17 +37,21 @@ end
   
   module InstanceMethods
     
-    # See in #generates.
-    #
-    # def start_generating every_rate, til, offset, klass
-    #   return if til <= 0
-    #   threaded offset, &generation(klass, every_rate, til)
-    # end
+    def destroy!
+      stop_generating!
+      super
+    end
+    
+    def stop_generating!
+      @stop_generating = true
+    end
     
     def generation klass, every_rate, til
+      return lambda {} if @stop_generating
       lambda do
         self.generate klass
-        self.start_generating every_rate, til - every_rate, every_rate
+        til = til - every_rate if til
+        self.start_generating! every_rate, til, every_rate
       end
     end
     

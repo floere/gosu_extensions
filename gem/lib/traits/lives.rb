@@ -50,7 +50,7 @@ module Lives
     end
     def kill!
       self.lives -= 1
-      killed!
+      killed! if self.lives > 0
       destroy! if self.lives == 0
     end
     
