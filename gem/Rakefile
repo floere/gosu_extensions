@@ -2,7 +2,7 @@ begin
   require 'jeweler'
   Jeweler::Tasks.new do |gemspec|
     gemspec.name = "gosu_extensions"
-    gemspec.summary = "Default extensions built onto the popular Gosu Framework. Uses Chipmunk for game physics. That's it for now. GAME ON!"
+    gemspec.summary = "Default extensions built onto the popular Gosu Framework. Uses Chipmunk for game physics. That's it for now. I'm working on them. Anyway, GAME ON!"
     gemspec.email = "florian.hanke@gmail.com"
     gemspec.homepage = "http://www.github.com/floere/gosu_extensions"
     gemspec.description = ""
