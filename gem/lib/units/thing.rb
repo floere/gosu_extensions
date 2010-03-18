@@ -150,10 +150,11 @@ class Thing
     space.add_shape @shape
   end
   
-  # TODO
+  # TODO include size
   #
   def draw
-    self.image.draw_rot self.position.x, self.position.y, self.layer, self.drawing_rotation
+    # size = self.momentary_size TODO
+    self.image.draw_rot self.position.x, self.position.y, self.layer, self.drawing_rotation, 0.5, 0.5, 1.0, 1.0
   end
   
 end
