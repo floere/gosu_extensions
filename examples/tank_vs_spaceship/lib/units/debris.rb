@@ -1,12 +1,10 @@
 class Debris < Thing
   
-  it_is_a Generator do
+  it_is_a Generator
     generates Smoke, :starting_at => 10, :every => 10
-  end
   
-  it_is ShortLived do
+  it_is ShortLived
     lifetime { 200 + rand(50) }
-  end
   
   image 'debris.png'
   

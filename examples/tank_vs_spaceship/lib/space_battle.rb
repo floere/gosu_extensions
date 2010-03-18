@@ -31,6 +31,7 @@ class SpaceBattle < GameWindow
   gravity 0.2
   
   collisions do
+    add_collision_func :ambient, :ambient, &nil
     add_collision_func :ambient, :player, &nil
     add_collision_func :projectile, :projectile, &nil
     add_collision_func :projectile, :player do |projectile_shape, player_shape|
