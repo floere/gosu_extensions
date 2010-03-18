@@ -39,6 +39,10 @@ module Moveable
       end
     end
     
+    def random_rotation
+      rotation { 2*Math::PI*rand }
+    end
+    
   end
   
   # Directly set the position of our Moveable using a vector.
