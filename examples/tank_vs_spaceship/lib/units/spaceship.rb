@@ -26,7 +26,7 @@ class Spaceship < Thing
   radius 10.0
   mass 0.1
   moment 0.1
-  friction 100.0
+  friction 100.0 # TODO wrong?
   rotation -Math::PI/2
   
   # TODO
