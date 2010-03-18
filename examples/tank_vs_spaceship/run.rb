@@ -10,6 +10,7 @@ require 'lib/ambient/small_explosion'
 require 'lib/projectiles/bullet'
 require 'lib/projectiles/missile'
 
+require 'lib/units/debris'
 require 'lib/units/spaceship'
 require 'lib/units/tank'
 require 'lib/units/enemy'

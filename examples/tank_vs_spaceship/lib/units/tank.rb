@@ -2,7 +2,7 @@
 #
 class Tank < Thing
   
-  it_is_a Controllable, Generator#, Pod.manual!
+  it_is_a Generator
   it_is Targetable
   
   # Thing
