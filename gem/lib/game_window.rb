@@ -34,7 +34,6 @@ class GameWindow < Gosu::Window
   
   def initialize
     setup_window
-    
     setup_containers
     
     after_initialize
@@ -73,21 +72,25 @@ class GameWindow < Gosu::Window
     end
   end
   
-  def menu_loop
-    @menu_loop ||= lambda do
-      @menu.handle_input
-    end
-  end
-  
   def install_main_loop
     @current_loop = main_loop
   end
   
+  def show_menu
+    suspend
+  end
+  
   def suspend
-    @current_loop = menu_loop
+    return if @suspended
+    @current_loop = @menu.loop
+    @suspended = Time.now
+    p "suspended"
   end
   def continue
+    return unless @suspended
     @current_loop = main_loop
+    @suspended = false
+    p "continued"
   end
   
   def media_path
@@ -170,7 +173,7 @@ class GameWindow < Gosu::Window
   end
   
   def setup_menu
-    # @menu = 
+    @menu = Menu.new self
   end
   
   def setup_window

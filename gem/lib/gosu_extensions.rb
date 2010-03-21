@@ -43,6 +43,7 @@ $:.unshift File.join(File.dirname(__FILE__), '/units')
 require 'thing'
 
 require 'controls'
+require 'menu'
 require 'game_window'
 require 'scheduling'
 require 'waves'
