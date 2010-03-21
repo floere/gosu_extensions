@@ -7,6 +7,17 @@ class GameWindow < Gosu::Window
   
   include InitializerHooks
   
+  # TODO handle more elegantly
+  #
+  def window
+    self
+  end
+  def destroyed?
+    false
+  end
+  
+  include ItIsA # Move up to standard object, also from thing
+  
   attr_writer :full_screen,
               :font_name,
               :font_size,
@@ -22,13 +33,17 @@ class GameWindow < Gosu::Window
                 :background_hard_borders
   
   def initialize
+    setup_window
+    
+    setup_containers
+    
     after_initialize
     
     super self.screen_width, self.screen_height, self.full_screen, 16
     
-    setup_window
     setup_background
-    setup_containers
+    setup_menu
+    
     setup_steps
     setup_waves
     setup_scheduling
@@ -38,6 +53,41 @@ class GameWindow < Gosu::Window
     setup_enemies
     setup_players
     setup_collisions
+    
+    install_main_loop
+  end
+  
+  def main_loop
+    @main_loop ||= lambda do
+      next_step
+      # Step the physics environment SUBSTEPS times each update.
+      #
+      SUBSTEPS.times do
+        remove_shapes!
+        reset_forces
+        move_all
+        targeting
+        handle_input
+        step_physics
+      end
+    end
+  end
+  
+  def menu_loop
+    @menu_loop ||= lambda do
+      @menu.handle_input
+    end
+  end
+  
+  def install_main_loop
+    @current_loop = main_loop
+  end
+  
+  def suspend
+    @current_loop = menu_loop
+  end
+  def continue
+    @current_loop = main_loop
   end
   
   def media_path
@@ -119,6 +169,10 @@ class GameWindow < Gosu::Window
     end
   end
   
+  def setup_menu
+    # @menu = 
+  end
+  
   def setup_window
     self.caption = self.class.caption || ""
   end
@@ -181,6 +235,12 @@ class GameWindow < Gosu::Window
     @controls << Controls.new(self, object)
   end
   
+  def next_step
+    @step += 1
+    @waves.check @step # TODO maybe the waves should move into the scheduling
+    @scheduling.step
+  end
+  
   
   # Core methods used by the extensions "framework"
   #
@@ -190,19 +250,7 @@ class GameWindow < Gosu::Window
   # TODO implement hooks.
   #
   def update
-    @step += 1
-    # Step the physics environment SUBSTEPS times each update.
-    #
-    SUBSTEPS.times do
-      remove_shapes!
-      reset_forces
-      move_all
-      targeting
-      handle_input
-      step_once
-    end
-    @waves.check @step
-    @scheduling.step
+    @current_loop.call
   end
   # Each step, this is called to handle any input.
   #
@@ -211,7 +259,7 @@ class GameWindow < Gosu::Window
   end
   # Does a single step.
   #
-  def step_once
+  def step_physics
     # Perform the step over @dt period of time
     # For best performance @dt should remain consistent for the game
     @environment.step @dt

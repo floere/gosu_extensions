@@ -18,6 +18,11 @@ class SpaceBattle < GameWindow
     Have fun!
   MANUAL
   
+  it_is Controllable
+  
+  controls Gosu::Button::KbP => :suspend,
+           Gosu::Button::KbM => :continue
+  
   width  1022
   height  595
   # full_screen # comment if you want a windowed app.

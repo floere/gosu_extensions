@@ -15,7 +15,7 @@ class Missile < Thing
   collision_type :projectile
   friction 0.0001
   velocity 1
-  plays 'missile/sound.mp3', :volume => 0.3
+  # plays 'missile/sound.mp3', :volume => 0.3
   layer Layer::Players
   
   # Generates a number of explosions when destroyed!
