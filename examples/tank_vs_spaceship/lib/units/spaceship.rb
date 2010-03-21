@@ -10,7 +10,7 @@ class Spaceship < Thing
   
   # Thing
   #
-  image 'spaceship.png'
+  image 'spaceship/image.png'
   
   # Pod
   #

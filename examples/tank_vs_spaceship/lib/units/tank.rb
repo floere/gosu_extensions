@@ -7,7 +7,7 @@ class Tank < Thing
   
   # Thing
   #
-  image 'tank.png'
+  image 'tank/image.png'
   
   it_is_a Shooter do
     range 10
@@ -60,8 +60,21 @@ class Tank < Thing
     wrap_around_border_x # a helper method that makes the player wrap around the border
   end
   
+  # 
+  #
   def righten
+    # Play a rightening sound if the tank is not upright.
+    #
+    unless @righten_sound || upright?
+      @righten_sound = Gosu::Sample.new self.window, File.join(Resources.root, 'tank/righten.mp3')
+      @righten_sound.play 0.2
+    end
     self.rotation += (self.rotation + Math::PI/2) % (2*Math::PI)/5_000
+  end
+  
+  def upright?
+    # TODO self.rotation.close_to 4.75, :e => 0.05
+    self.rotation < 4.72 && self.rotation > 4.70
   end
   
   # TODO explosive death

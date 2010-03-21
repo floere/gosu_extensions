@@ -6,7 +6,7 @@ class Debris < Thing
   # it_is ShortLived
   #   lifetime { 200 + rand(50) }
   
-  image 'debris.png'
+  image 'spaceship/debris.png'
   
   shape :circle
   radius 5.0 # TODO multiply by size

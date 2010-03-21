@@ -7,7 +7,7 @@ class Missile < Thing
   generates Smoke, :starting_at => 10, :every => 10, :until => 100
   
   lifetime { 100 + rand(100) }
-  image 'missile.png'
+  image 'missile/image.png'
   shape :circle
   radius 1.0
   mass 0.1
@@ -15,7 +15,7 @@ class Missile < Thing
   collision_type :projectile
   friction 0.0001
   velocity 1
-  # plays 'cannon-02.wav'
+  plays 'missile/sound.mp3', :volume => 0.3
   layer Layer::Players
   
   # Generates a number of explosions when destroyed!
