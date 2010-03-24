@@ -87,7 +87,7 @@ class Spaceship < Thing
   end
   
   def killed!
-    start_generating!
+    start_generating
     @ui = ["Spaceship hit!: #{lives} lives remain.", 10, 10, Layer::UI, 1.0, 1.0, 0xff0000ff]
   end
   
