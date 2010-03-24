@@ -13,13 +13,10 @@ module Generator
       til    = options[:until]
       offset = options[:starting_at]
       
-      define_method :generated_class do
-        klass
-      end
       class_eval <<-GENERATION
-def start_generating! every_rate = #{rate || 10}, til = #{til || false}, offset = #{offset || rate || 10}
+def start_generating! klass = #{klass.name}, every_rate = #{rate || 10}, til = #{til || false}, offset = #{offset || rate || 10}
   return if til && til <= 0
-  threaded offset, &generation(generated_class, every_rate, til)
+  threaded offset, &generation(klass, every_rate, til)
 end
       GENERATION
       
@@ -51,7 +48,7 @@ end
       lambda do
         self.generate klass
         til = til - every_rate if til
-        self.start_generating! every_rate, til, every_rate
+        self.start_generating! klass, every_rate, til, every_rate
       end
     end
     
