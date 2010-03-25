@@ -7,14 +7,27 @@ File.open(File.join(File.dirname(__FILE__), '../VERSION')) do |f|
   puts "Gosu Extensions #{f.read}"
 end
 
-app_path = ARGV.first
+application = ARGV.first
 
-p app_path
+puts "Usage: gogogosu <application_name>" and exit(1) unless application
 
-# require File.dirname(__FILE__) + '/../lib/rails_generator'
-# 
-# require 'rails_generator/scripts/generate'
-# Rails::Generator::Base.use_application_sources!
-# Rails::Generator::Scripts::Generate.new.run(ARGV, :generator => 'app')
+require File.dirname(__FILE__) + '/../generator/gogogosu'
 
-# Dir.chdir(app_path) { `rake rails:freeze:gems`; puts "froze" } if freeze
+generator = Generator::Gogogosu.new
+
+generator.dir application do
+  generator.dir 'lib' do
+    
+  end
+  generator.dir 'media' do
+    
+  end
+end
+
+puts <<-START
+Great!
+
+Now proceed as follows:
+1. cd #{application}
+2. 
+START

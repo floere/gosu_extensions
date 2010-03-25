@@ -7,8 +7,13 @@ module Generator
     
     # Generates a directory.
     #
-    def directory name
-      
+    def dir name
+      Dir.mkdir name unless File.file?(name) || File.exist?(name)
+      if block_given?
+        Dir.chdir name
+        yield
+        Dir.chdir '..'
+      end
     end
     
     # Generates a file. Will be rendered with erb.
