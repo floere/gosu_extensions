@@ -1,0 +1,20 @@
+#!/usr/local/bin/ruby
+# TODO remove
+
+Signal.trap("INT") { puts; exit } # CTRL-C
+
+File.open(File.join(File.dirname(__FILE__), '../VERSION')) do |f|
+  puts "Gosu Extensions #{f.read}"
+end
+
+app_path = ARGV.first
+
+p app_path
+
+# require File.dirname(__FILE__) + '/../lib/rails_generator'
+# 
+# require 'rails_generator/scripts/generate'
+# Rails::Generator::Base.use_application_sources!
+# Rails::Generator::Scripts::Generate.new.run(ARGV, :generator => 'app')
+
+# Dir.chdir(app_path) { `rake rails:freeze:gems`; puts "froze" } if freeze

@@ -11,6 +11,9 @@ begin
     gemspec.files = FileList["[A-Z]*", "{generators,lib,rails,spec}/**/*"]
     gemspec.add_dependency 'gosu'
     gemspec.add_dependency 'chipmunk'
+    gemspec.bindir = 'bin'
+    gemspec.executables = ['bin/gogogosu']
+    gemspec.default_executable = 'bin/gogogosu'
   end
   Jeweler::GemcutterTasks.new
 rescue LoadError => e
