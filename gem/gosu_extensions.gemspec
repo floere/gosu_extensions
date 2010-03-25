@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{gosu_extensions}
-  s.version = "0.1.7"
+  s.version = "0.1.8"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Florian Hanke"]
-  s.date = %q{2010-03-19}
+  s.date = %q{2010-03-24}
   s.description = %q{}
   s.email = %q{florian.hanke@gmail.com}
   s.files = [
@@ -21,7 +21,7 @@ Gem::Specification.new do |s|
      "lib/game_window.rb",
      "lib/gosu_extensions.rb",
      "lib/layer.rb",
-     "lib/old_game_window.rb",
+     "lib/menu.rb",
      "lib/resources.rb",
      "lib/scheduling.rb",
      "lib/traits/attachable.rb",
