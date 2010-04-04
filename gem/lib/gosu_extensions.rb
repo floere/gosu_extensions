@@ -49,6 +49,6 @@ require 'scheduling'
 require 'waves'
 require 'layer'
 
-DEFAULT_SCREEN_WIDTH  = 1200
-DEFAULT_SCREEN_HEIGHT =  700
-SUBSTEPS              =   10
+DEFAULT_SCREEN_WIDTH  = 1200 unless defined?(DEFAULT_SCREEN_WIDTH)
+DEFAULT_SCREEN_HEIGHT =  700 unless defined?(DEFAULT_SCREEN_HEIGHT)
+SUBSTEPS              =   10 unless defined?(SUBSTEPS)
