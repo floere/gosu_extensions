@@ -1,5 +1,9 @@
 module ShortLived
   
+  # TODO Explain better what to do.
+  #
+  class LifetimeMissingError < StandardError; end
+  
   def self.included klass
     klass.extend ClassMethods
   end
@@ -7,9 +11,8 @@ module ShortLived
   def initialize window
     super window
     
-    threaded self.lifetime do
-      self.destroy!
-    end
+    raise ShortLived::LifetimeMissingError.new unless self.respond_to? :lifetime 
+    threaded self.lifetime { self.destroy! }
   end
   
   module ClassMethods
