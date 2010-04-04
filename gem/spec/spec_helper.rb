@@ -1,9 +1,6 @@
 require File.join(File.dirname(__FILE__), '/../lib/gosu_extensions.rb')
 
-puts "Before spec"
-
 require 'spec'
-require 'spec/rails' # TODO?
 
 # Spec::Runner.configure do |config|
 #   # If you're not using ActiveRecord you should remove these

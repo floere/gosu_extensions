@@ -4,7 +4,7 @@ describe Shot do
   
   before(:each) do
     @shot = Class.new do
-      it_is_a Shot
+      include Shot
     end.new 
   end
   it "should define an attr_reader :velocity" do
@@ -22,6 +22,9 @@ describe Shot do
   
   describe "shoot_from" do
     before(:each) do
+      @window = stub :window, :null_object => true
+      @shot.stub :position= => nil
+      @shot.stub :window => @window
       @shooter = stub :shooter, :muzzle_position => :some_muzzle_position
     end
     it "should return itself" do
@@ -39,6 +42,9 @@ describe Shot do
     end
     it "should register itself with the window" do
       # TODO Or should it?
+      @window.should_receive(:register).once.with @shot
+      
+      @shot.shoot_from @shooter
     end
   end
   

@@ -4,7 +4,7 @@ describe Shooter do
   
   before(:each) do
     @shooter = Class.new do
-      it_is_a Shooter
+      include Shooter
     end
   end
   it "should define a constant Shoot" do
