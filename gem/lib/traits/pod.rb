@@ -77,6 +77,12 @@ module Pod
     
     #
     #
+    def detach attachment
+      self.attachments.delete attachment if self.attachments
+    end
+    
+    #
+    #
     def move_attachments
       self.attachments.each do |attachment|
         attachment.move_relative self
