@@ -12,7 +12,9 @@ module ShortLived
     super window
     
     raise ShortLived::LifetimeMissingError.new unless self.respond_to? :lifetime 
-    threaded self.lifetime { self.destroy! }
+    threaded self.lifetime do
+      self.destroy!
+    end
   end
   
   module ClassMethods
