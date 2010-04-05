@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{gosu_extensions}
-  s.version = "0.1.11"
+  s.version = "0.1.12"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Florian Hanke"]
@@ -29,6 +29,7 @@ Gem::Specification.new do |s|
      "lib/traits/controllable.rb",
      "lib/traits/damaging.rb",
      "lib/traits/generator.rb",
+     "lib/traits/imageable.rb",
      "lib/traits/initializer_hooks.rb",
      "lib/traits/it_is_a.rb",
      "lib/traits/lives.rb",
@@ -54,12 +55,14 @@ Gem::Specification.new do |s|
     "spec/lib/extensions/numeric_spec.rb",
      "spec/lib/traits/attachable_spec.rb",
      "spec/lib/traits/damaging_spec.rb",
+     "spec/lib/traits/imageable_spec.rb",
      "spec/lib/traits/shooter_spec.rb",
      "spec/lib/traits/short_lived_spec.rb",
      "spec/lib/traits/shot_spec.rb",
      "spec/lib/traits/targetable_spec.rb",
      "spec/lib/traits/targeting_spec.rb",
-     "spec/lib/traits/turnable_spec.rb"
+     "spec/lib/traits/turnable_spec.rb",
+     "spec/lib/units/thing_spec.rb"
   ]
 
   if s.respond_to? :specification_version then
