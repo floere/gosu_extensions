@@ -26,9 +26,19 @@
 #
 module Damaging
   
-  # TODO Explain better what to do.
-  #
-  class DamageMissingError < StandardError; end
+  class DamageMissingError < RuntimeError
+    def initialize
+      super <<-MESSAGE
+        In a Damaging thing, you need to define method
+          damage damage = nil, &block
+        with params
+          damage 13 # some value
+        or
+          damage { 13 + rand(7) } # some block
+        to define how much damage the thing does.
+      MESSAGE
+    end
+  end
   
   def self.included klass
     klass.extend ClassMethods
