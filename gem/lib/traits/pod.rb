@@ -3,7 +3,7 @@
 #
 #
 #
-module Pod
+module Pod extend Trait
   
   manual <<-MANUAL
     Defines:

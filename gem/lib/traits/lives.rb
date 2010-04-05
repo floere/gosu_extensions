@@ -1,6 +1,6 @@
 # A thing is destroyed if a number of lives has been passed.
 #
-module Lives
+module Lives extend Trait
   
   # TODO def revive!
   #

@@ -1,4 +1,4 @@
-module Imageable
+module Imageable extend Trait
   
   class ImageMissingError < RuntimeError
     def initialize

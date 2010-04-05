@@ -1,4 +1,4 @@
-module Shot
+module Shot extend Trait
   
   #
   #

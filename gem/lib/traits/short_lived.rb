@@ -1,4 +1,4 @@
-module ShortLived
+module ShortLived extend Trait
   
   class LifetimeMissingError < RuntimeError
     def initialize

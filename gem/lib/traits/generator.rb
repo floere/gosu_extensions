@@ -1,4 +1,4 @@
-module Generator
+module Generator extend Trait
   
   def self.included base
     base.extend ClassMethods

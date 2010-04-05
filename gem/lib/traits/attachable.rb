@@ -1,6 +1,6 @@
 # An Attachable can be attached to a Pod.
 #
-module Attachable
+module Attachable extend Trait
   
   attr_accessor :relative_position
   

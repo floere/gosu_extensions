@@ -15,19 +15,24 @@ rescue LoadError => e
 end
 
 require 'resources'
-require 'vector_utilities'
 
 $:.unshift File.join(File.dirname(__FILE__), '/extensions')
 require 'module'
 require 'numeric'
 
-$:.unshift File.join(File.dirname(__FILE__), '/traits')
+$:.unshift File.join(File.dirname(__FILE__), '/core')
+require 'vector_utilities'
+require 'initializer_hooks'
+
+require 'trait'
+require 'traits'
 require 'it_is_a'
+
+$:.unshift File.join(File.dirname(__FILE__), '/traits')
 require 'pod'
 require 'attachable'
 require 'damaging'
 require 'generator'
-require 'initializer_hooks'
 require 'lives'
 require 'targeting'
 require 'targeting/closest'

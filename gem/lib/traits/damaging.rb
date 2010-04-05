@@ -24,7 +24,7 @@
 #     end
 #   end
 #
-module Damaging
+module Damaging extend Trait
   
   class DamageMissingError < RuntimeError
     def initialize

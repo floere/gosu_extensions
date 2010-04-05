@@ -2,7 +2,7 @@
 #
 module Targeting
   
-  module Closest
+  module Closest extend Trait
     
     # Returns the closest target of all targets in the fire arc.
     #

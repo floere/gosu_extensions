@@ -1,6 +1,6 @@
 #
 #
-module Controllable
+module Controllable extend Trait
   
   def self.included controllable
     controllable.extend ClassMethods

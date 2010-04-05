@@ -2,7 +2,7 @@
 #
 # TODO moveable should only have active components, like accelerate etc. Positioning etc. should go to Thing.
 #
-module Moveable
+module Moveable extend Trait
   
   Accelerate = :accelerate
   Left       = :move_left

@@ -1,6 +1,6 @@
 # Any object that is targetable.
 #
-module Targetable
+module Targetable extend Trait
   
   # Distance from the potential shooter.
   #

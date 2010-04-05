@@ -1,6 +1,6 @@
 #
 #
-module Turnable
+module Turnable extend Trait
   
   Left  = :turn_left
   Right = :turn_right

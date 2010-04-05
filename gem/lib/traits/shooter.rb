@@ -1,4 +1,4 @@
-module Shooter
+module Shooter extend Trait
   
   Shoot = :shoot
   
