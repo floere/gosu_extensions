@@ -4,9 +4,8 @@ class Module
     metaclass.send :define_method, :manual! do
       puts <<-MANUAL
     MANUAL FOR #{self}
-#{text}
+      #{text}
     Change #{self}.manual! -> #{self}, to not show the manual anymore.
-    
       MANUAL
       self
     end
