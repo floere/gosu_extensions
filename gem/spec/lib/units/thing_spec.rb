@@ -13,6 +13,50 @@ describe Thing do
     end
   end
   
+  describe "destroy!" do
+    context 'already destroyed' do
+      before(:each) do
+        @thing.destroyed = true
+      end
+      it "should not unregister" do
+        @window.should_receive(:unregister).never
+        
+        @thing.destroy!
+      end
+      it "should not set destroyed" do
+        @thing.should_receive(:destroyed=).never
+        
+        @thing.destroy!
+      end
+    end
+    context 'not yet destroyed' do
+      before(:each) do
+        @window.stub! :unregister => nil
+      end
+      it "should unregister" do
+        @window.should_receive(:unregister).once.with @thing
+        
+        @thing.destroy!
+      end
+      it "should set destroyed" do
+        @thing.should_receive(:destroyed=).once.with true
+        
+        @thing.destroy!
+      end
+    end
+  end
+  
+  describe "destroyed?" do
+    it "should be false after creating the object" do
+      @thing.destroyed?.should == false
+    end
+  end
+  describe "destroyed=" do
+    it "should exist" do
+      lambda { @thing.destroyed = true }.should_not raise_error
+    end
+  end
+  
   describe "layer" do
     context 'default' do
       it "should be on the player layer" do
