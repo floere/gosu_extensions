@@ -48,12 +48,22 @@ describe ShortLived do
   end
   context 'no lifetime given – what now?' do
     before(:each) do
-      @short_lived_class = Class.new(SuperClass) do
-        include ShortLived
-      end
+      @short_lived_class = test_class_with ShortLived
     end
     it "should raise a LifetimeMissingError" do
       lambda { @short_lived_class.new(@window) }.should raise_error(ShortLived::LifetimeMissingError)
+    end
+    it "should raise with the right message" do
+      lambda { @short_lived_class.new(@window) }.should raise_error(ShortLived::LifetimeMissingError, <<-MESSAGE
+        A ShortLived thing must define method
+          lifetime lifetime = nil, &block
+        with either params
+          lifetime 74 # some value
+        or
+          lifetime { 50 + rand(50) } # some block
+        to define how long the thing should live until it is destroyed.
+      MESSAGE
+      )
     end
   end
   
