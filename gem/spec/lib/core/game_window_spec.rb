@@ -34,7 +34,7 @@ describe GameWindow do
       end
       it "should have a user defined value" do
         @window.gravity_vector.x.should == 0.0
-        @window.gravity_vector.y.should == 10.0
+        @window.gravity_vector.y.should == (100/SUBSTEPS)
       end
     end
   end
