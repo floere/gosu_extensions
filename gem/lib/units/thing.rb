@@ -22,6 +22,11 @@ class Thing
   
   # Default layer is Layer::Players.
   #
+  def self.layer layer
+    InitializerHooks.register self do
+      self.layer = layer
+    end
+  end
   def layer
     @layer || Layer::Players
   end
@@ -61,12 +66,6 @@ class Thing
         #
         InitializerHooks.append self.class, &to_execute unless @shape
         to_execute[@shape]
-      end
-    end
-    
-    def layer layer
-      InitializerHooks.register self do
-        self.layer = layer
       end
     end
     
@@ -122,13 +121,13 @@ class Thing
     result
   end
   
-  # Add this thing to a space.
+  # Add this thing to an environment.
   #
   # Note: Adds the body and the shape.
   #
-  def add_to space
-    space.add_body @shape.body
-    space.add_shape @shape
+  def add_to environment
+    environment.add_body self.shape.body # could develop into adding multiple bodies
+    environment.add_shape self.shape
   end
   
   # TODO include size

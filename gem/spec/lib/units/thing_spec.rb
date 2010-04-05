@@ -7,6 +7,25 @@ describe Thing do
     @thing = Thing.new @window
   end
   
+  describe "add_to" do
+    before(:each) do
+      @environment = stub :environment, :null_object => true
+      @body  = stub :body
+      @shape = stub :shape, :body => @body
+      @thing.stub! :shape => @shape
+    end
+    it "should add its body to the given environment" do
+      @environment.should_receive(:add_body).once.with @body
+      
+      @thing.add_to @environment
+    end
+    it "should add its shape to the given environment" do
+      @environment.should_receive(:add_shape).once.with @shape
+      
+      @thing.add_to @environment
+    end
+  end
+  
   describe "threaded" do
     it "should delegate to the window" do
       some_block = Proc.new {}
