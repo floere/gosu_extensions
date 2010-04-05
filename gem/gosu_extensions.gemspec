@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{gosu_extensions}
-  s.version = "0.1.14"
+  s.version = "0.1.15"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Florian Hanke"]
@@ -16,22 +16,26 @@ Gem::Specification.new do |s|
     "Rakefile",
      "VERSION",
      "generator/gogogosu.rb",
-     "lib/controls.rb",
+     "lib/core/controls.rb",
+     "lib/core/game_window.rb",
+     "lib/core/initializer_hooks.rb",
+     "lib/core/it_is_a.rb",
+     "lib/core/layer.rb",
+     "lib/core/resources.rb",
+     "lib/core/scheduling.rb",
+     "lib/core/trait.rb",
+     "lib/core/traits.rb",
+     "lib/core/vector_utilities.rb",
+     "lib/core/waves.rb",
      "lib/extensions/module.rb",
      "lib/extensions/numeric.rb",
-     "lib/game_window.rb",
      "lib/gosu_extensions.rb",
-     "lib/layer.rb",
      "lib/menu.rb",
-     "lib/resources.rb",
-     "lib/scheduling.rb",
      "lib/traits/attachable.rb",
      "lib/traits/controllable.rb",
      "lib/traits/damaging.rb",
      "lib/traits/generator.rb",
      "lib/traits/imageable.rb",
-     "lib/traits/initializer_hooks.rb",
-     "lib/traits/it_is_a.rb",
      "lib/traits/lives.rb",
      "lib/traits/moveable.rb",
      "lib/traits/pod.rb",
@@ -42,9 +46,7 @@ Gem::Specification.new do |s|
      "lib/traits/targeting.rb",
      "lib/traits/targeting/closest.rb",
      "lib/traits/turnable.rb",
-     "lib/units/thing.rb",
-     "lib/vector_utilities.rb",
-     "lib/waves.rb"
+     "lib/units/thing.rb"
   ]
   s.homepage = %q{http://www.github.com/floere/gosu_extensions}
   s.rdoc_options = ["--inline-source", "--charset=UTF-8"]
@@ -52,12 +54,15 @@ Gem::Specification.new do |s|
   s.rubygems_version = %q{1.3.6}
   s.summary = %q{Default extensions built onto the popular Gosu Framework. Uses Chipmunk for game physics. That's it for now. I'm working on them. Anyway, GAME ON!}
   s.test_files = [
-    "spec/lib/extensions/module_spec.rb",
+    "spec/lib/core/initializer_hooks_spec.rb",
+     "spec/lib/core/it_is_a_spec.rb",
+     "spec/lib/core/trait_spec.rb",
+     "spec/lib/core/traits_spec.rb",
+     "spec/lib/extensions/module_spec.rb",
      "spec/lib/extensions/numeric_spec.rb",
      "spec/lib/traits/attachable_spec.rb",
      "spec/lib/traits/damaging_spec.rb",
      "spec/lib/traits/imageable_spec.rb",
-     "spec/lib/traits/initializer_hooks_spec.rb",
      "spec/lib/traits/shooter_spec.rb",
      "spec/lib/traits/short_lived_spec.rb",
      "spec/lib/traits/shot_spec.rb",
