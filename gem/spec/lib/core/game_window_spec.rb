@@ -18,7 +18,7 @@ describe GameWindow do
     @window = GameWindowTest.new
   end
   
-  describe "gravity_vector" do
+  describe "gravity and gravity_vector" do
     context 'default' do
       it "should have a calculated value" do
         @window.gravity_vector.x.should == 0.0
@@ -27,9 +27,7 @@ describe GameWindow do
     end
     context 'user defined' do
       before(:each) do
-        GameWindowTest.class_eval do
-          gravity 100
-        end
+        GameWindowTest.gravity 100
         @window = GameWindowTest.new
       end
       it "should have a user defined value" do

@@ -28,6 +28,8 @@ require 'trait'
 require 'traits'
 require 'it_is_a'
 
+require 'moveables'
+require 'remove_shapes'
 require 'scheduling'
 require 'game_window'
 require 'controls'

@@ -34,7 +34,9 @@ class GameWindow < Gosu::Window
   
   def initialize
     setup_window
-    setup_containers
+    setup_moveables
+    setup_remove_shapes
+    setup_controls
     
     after_initialize
     
@@ -48,6 +50,8 @@ class GameWindow < Gosu::Window
     setup_waves
     setup_scheduling
     setup_font
+    
+    setup_containers
     
     setup_environment
     setup_enemies
@@ -63,9 +67,8 @@ class GameWindow < Gosu::Window
       # Step the physics environment SUBSTEPS times each update.
       #
       SUBSTEPS.times do
-        remove_shapes!
-        reset_forces
-        move_all
+        remove_shapes
+        move
         targeting
         handle_input
         step_physics
@@ -185,11 +188,17 @@ class GameWindow < Gosu::Window
       @background_image = Gosu::Image.new self, File.join(Resources.root, self.background_path), self.background_hard_borders
     end
   end
+  def setup_moveables
+    @moveables = Moveables.new
+  end
+  def setup_remove_shapes
+    @remove_shapes = RemoveShapes.new
+  end
+  def setup_controls
+    @controls = []
+  end
   def setup_containers
-    @moveables     = []
-    @controls      = []
-    @remove_shapes = []
-    @players       = []
+    @players = []
   end
   def setup_steps
     @step = 0
@@ -266,8 +275,6 @@ class GameWindow < Gosu::Window
   # Does a single step.
   #
   def step_physics
-    # Perform the step over @dt period of time
-    # For best performance @dt should remain consistent for the game
     @environment.step @dt
   end
   
@@ -291,7 +298,7 @@ class GameWindow < Gosu::Window
   # Note: Internal use. Use unregister to properly remove a moveable.
   #
   def remove shape
-    @remove_shapes << shape
+    @remove_shapes.add shape
   end
   
   # Run some code at relative time <time>.
@@ -310,20 +317,14 @@ class GameWindow < Gosu::Window
   
   # Moves each moveable.
   #
-  def move_all
-    @moveables.each &:move
+  def move
+    @moveables.move
   end
-  
   # Handles the targeting process.
   #
   def targeting
-    @moveables.select { |m| m.respond_to? :target }.each do |gun|
-      gun.target *@moveables.select { |m| m.kind_of? Enemy }
-    end
+    @moveables.targeting
   end
-  
-  
-  
   
   # Utility Methods
   #
@@ -359,44 +360,25 @@ class GameWindow < Gosu::Window
   # Moveables register themselves here.
   #
   def register moveable
-    @moveables << moveable
+    @moveables.register moveable
     moveable.add_to @environment
   end
   
-  def remove_shapes!
-    # This iterator makes an assumption of one Shape per Star making it safe to remove
-    # each Shape's Body as it comes up
-    # If our Stars had multiple Shapes, as would be required if we were to meticulously
-    # define their true boundaries, we couldn't do this as we would remove the Body
-    # multiple times
-    # We would probably solve this by creating a separate @remove_bodies array to remove the Bodies
-    # of the Stars that were gathered by the Player
-    #
-    # p @remove_shapes unless @remove_shapes.empty?
-    @remove_shapes.each do |shape|
-      @environment.remove_body shape.body
-      @environment.remove_shape shape
-      @moveables.delete_if { |moveable| moveable.shape == shape }
-    end
-    @remove_shapes.clear
+  def remove_shapes
+    @remove_shapes.remove_from @environment, @moveables
   end
   
-  def reset_forces
-    # When a force or torque is set on a Body, it is cumulative
-    # This means that the force you applied last SUBSTEP will compound with the
-    # force applied this SUBSTEP; which is probably not the behavior you want
-    # We reset the forces on the Player each SUBSTEP for this reason
-    #
-    # @player1.shape.body.reset_forces
-    # @player2.shape.body.reset_forces
-    # @player3.shape.body.reset_forces
-    # @players.each { |player| player.shape.body.reset_forces }
+  # Revives the player if not already in.
+  #
+  def revive player
+    register player unless registered?(player) # player.registered?
   end
   
-  # def revive player
-  #   return if @moveables.find { |moveable| moveable == player }
-  #   register player
-  # end
+  # Is the thing registered?
+  #
+  def registered? thing
+    @moveables.registered? thing
+  end
   
   # Drawing methods
   #
@@ -414,7 +396,7 @@ class GameWindow < Gosu::Window
     
   end
   def draw_moveables
-    @moveables.each &:draw
+    @moveables.draw
   end
   def draw_ui
     # @font.draw "P1 Score: ", 10, 10, ZOrder::UI, 1.0, 1.0, 0xffff0000
