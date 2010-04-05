@@ -7,6 +7,16 @@ describe Thing do
     @thing = Thing.new @window
   end
   
+  describe "threaded" do
+    it "should delegate to the window" do
+      some_block = Proc.new {}
+      
+      @window.should_receive(:threaded).once.with :some_time, &some_block
+      
+      @thing.threaded :some_time, &some_block
+    end
+  end
+  
   describe "window" do
     it "should return the window" do
       @thing.window.should == @window
