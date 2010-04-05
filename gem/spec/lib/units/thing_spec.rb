@@ -7,6 +7,21 @@ describe Thing do
     @thing = Thing.new @window
   end
   
+  describe "draw" do
+    before(:each) do
+      @image = stub :image
+      @thing.stub! :image            => @image,
+                   :position         => Struct.new(:x, :y).new(:some_x, :some_y),
+                   :layer            => :some_layer,
+                   :drawing_rotation => :some_drawing_rotation
+    end
+    it "should delegate to the image" do
+      @image.should_receive(:draw_rot).once.with :some_x, :some_y, :some_layer, :some_drawing_rotation, 0.5, 0.5, 1.0, 1.0
+      
+      @thing.draw
+    end
+  end
+  
   describe "add_to" do
     before(:each) do
       @environment = stub :environment, :null_object => true
