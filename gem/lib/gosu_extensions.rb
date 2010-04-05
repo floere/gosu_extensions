@@ -37,6 +37,7 @@ require 'targetable'
 require 'turnable'
 require 'controllable'
 require 'moveable'
+require 'imageable'
 require 'short_lived'
 
 $:.unshift File.join(File.dirname(__FILE__), '/units')
