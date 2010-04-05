@@ -9,9 +9,8 @@ module ShortLived
   end
   
   def initialize window
+    raise LifetimeMissingError.new unless self.respond_to? :lifetime
     super window
-    
-    raise ShortLived::LifetimeMissingError.new unless self.respond_to? :lifetime 
     threaded self.lifetime do
       self.destroy!
     end

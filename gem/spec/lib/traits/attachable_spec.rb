@@ -3,9 +3,7 @@ require File.join(File.dirname(__FILE__), '/../../spec_helper')
 describe Attachable do
   
   before(:each) do
-    @attachable = Class.new do
-      include Attachable
-    end.new
+    @attachable = test_class_with(Attachable).new stub(:window)
   end
   
   describe "move_relative" do
