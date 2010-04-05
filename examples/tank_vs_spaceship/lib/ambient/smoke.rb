@@ -13,4 +13,12 @@ class Smoke < Thing
   friction 0.0001
   layer Layer::Ambient
   
+  # Smoke is reduced in size with each time it is "drawn".
+  #
+  def current_size
+    @multiplier ||= 2.0
+    @multiplier *= 0.97
+    [1.0*@multiplier, 1.0*@multiplier]
+  end
+  
 end

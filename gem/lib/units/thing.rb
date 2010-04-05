@@ -130,11 +130,13 @@ class Thing
     environment.add_shape self.shape
   end
   
-  # TODO include size
+  # Draws its image.
   #
   def draw
-    # size = self.momentary_size TODO
-    self.image.draw_rot self.position.x, self.position.y, self.layer, self.drawing_rotation, 0.5, 0.5, 1.0, 1.0
+    self.image.draw_rot self.position.x, self.position.y, self.layer, self.drawing_rotation, 0.5, 0.5, *self.current_size
+  end
+  def current_size
+    [1.0, 1.0] # default implementation - change this to [1.0, 2.0] if you want a "light" version ;)
   end
   
 end
