@@ -25,7 +25,7 @@ class GameWindow < Gosu::Window
               :caption,
               :screen_width,
               :screen_height,
-              :gravity
+              :gravity_vector
   attr_reader :environment,
               :moveables,
               :font
@@ -41,6 +41,7 @@ class GameWindow < Gosu::Window
     super self.screen_width, self.screen_height, self.full_screen, 16
     
     setup_background
+    
     setup_menu
     
     setup_steps
@@ -118,13 +119,13 @@ class GameWindow < Gosu::Window
     @screen_height || DEFAULT_SCREEN_HEIGHT
   end
   def gravity_vector
-    @gravity || @gravity = CP::Vec2.new(0, 0.98/SUBSTEPS)
+    @gravity_vector || @gravity_vector = CP::Vec2.new(0, 0.98/SUBSTEPS)
   end
   
   class << self
     def gravity amount = 0.98
       InitializerHooks.register self do
-        self.gravity = CP::Vec2.new 0, amount.to_f/SUBSTEPS
+        self.gravity_vector = CP::Vec2.new(0, amount.to_f/SUBSTEPS)
       end
     end
     def width value = DEFAULT_SCREEN_WIDTH
@@ -180,13 +181,15 @@ class GameWindow < Gosu::Window
     self.caption = self.class.caption || ""
   end
   def setup_background
-    @background_image = Gosu::Image.new self, File.join(Resources.root, self.background_path), self.background_hard_borders
+    if self.background_path
+      @background_image = Gosu::Image.new self, File.join(Resources.root, self.background_path), self.background_hard_borders
+    end
   end
   def setup_containers
-    @moveables = []
-    @controls = []
+    @moveables     = []
+    @controls      = []
     @remove_shapes = []
-    @players = []
+    @players       = []
   end
   def setup_steps
     @step = 0
@@ -222,7 +225,7 @@ class GameWindow < Gosu::Window
   #     add_collision_func ...
   #
   def setup_collisions
-    @environment.instance_eval &@collision_definitions
+    self.environment.instance_eval &@collision_definitions if @collision_definitions
   end
   
   # Add controls for a player.
