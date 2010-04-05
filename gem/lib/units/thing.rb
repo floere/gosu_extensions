@@ -6,7 +6,7 @@ class Thing
   
   # TODO Move these.
   #
-  # it_is Imageable
+  it_is Imageable
   it_is Moveable
   
   attr_writer :layer
