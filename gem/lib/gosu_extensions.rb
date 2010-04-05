@@ -28,6 +28,12 @@ require 'trait'
 require 'traits'
 require 'it_is_a'
 
+require 'scheduling'
+require 'game_window'
+require 'controls'
+require 'waves'
+require 'layer'
+
 $:.unshift File.join(File.dirname(__FILE__), '/traits')
 require 'pod'
 require 'attachable'
@@ -48,12 +54,7 @@ require 'short_lived'
 $:.unshift File.join(File.dirname(__FILE__), '/units')
 require 'thing'
 
-require 'controls'
 require 'menu'
-require 'game_window'
-require 'scheduling'
-require 'waves'
-require 'layer'
 
 DEFAULT_SCREEN_WIDTH  = 1200 unless defined?(DEFAULT_SCREEN_WIDTH)
 DEFAULT_SCREEN_HEIGHT =  700 unless defined?(DEFAULT_SCREEN_HEIGHT)
