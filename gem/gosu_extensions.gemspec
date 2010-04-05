@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{gosu_extensions}
-  s.version = "0.1.13"
+  s.version = "0.1.14"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Florian Hanke"]
@@ -57,6 +57,7 @@ Gem::Specification.new do |s|
      "spec/lib/traits/attachable_spec.rb",
      "spec/lib/traits/damaging_spec.rb",
      "spec/lib/traits/imageable_spec.rb",
+     "spec/lib/traits/initializer_hooks_spec.rb",
      "spec/lib/traits/shooter_spec.rb",
      "spec/lib/traits/short_lived_spec.rb",
      "spec/lib/traits/shot_spec.rb",

@@ -9,7 +9,10 @@ module Turnable
     base.extend ClassMethods
   end
   
-  # TODO meta
+  # Defines a turn_speed method on the class.
+  #
+  # Calling it will define a turn_speed method on the instance
+  # that lets the thing rotate with the given frequency.
   #
   module ClassMethods
     def turn_speed amount
