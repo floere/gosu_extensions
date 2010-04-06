@@ -89,7 +89,7 @@ module Shooter extend Trait
     @muzzle_rotation = rotation
   end
   def shoot? target = nil
-    target.nil? ? true : target.distance_from(self) < self.range
+    target.nil? ? true : target.distance_from(self) <= self.shooting_range
   end
   def shoot target = nil
     return unless shoot? target

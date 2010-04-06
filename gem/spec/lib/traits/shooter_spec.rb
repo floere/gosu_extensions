@@ -8,6 +8,50 @@ describe Shooter do
     @shooter = test_class_with(Shooter).new @window
   end
   
+  describe 'shoot?' do
+    context 'nil target given' do
+      it 'should return true' do
+        @shooter.shoot?(nil).should == true
+      end
+    end
+    context 'no target given' do
+      it 'should return true' do
+        @shooter.shoot?.should == true
+      end
+    end
+    context 'target given' do
+      before(:each) do
+        @shooter = test_class_with(Shooter) do
+          range 300
+        end.new @window
+      end
+      context 'distance equal the range' do
+        before(:each) do
+          @target = stub :target, :distance_from => 300
+        end
+        it 'should return true' do
+          @shooter.shoot?(@target).should == true
+        end
+      end
+      context 'distance smaller than range' do
+        before(:each) do
+          @target = stub :target, :distance_from => 200
+        end
+        it 'should return true' do
+          @shooter.shoot?(@target).should == true
+        end
+      end
+      context 'distance larger than range' do
+        before(:each) do
+          @target = stub :target, :distance_from => 600
+        end
+        it 'should return false' do
+          @shooter.shoot?(@target).should == false
+        end
+      end
+    end
+  end
+  
   describe 'shot' do
     it 'should return a new shot instance of type shot_type' do
       shot_type = stub :shot_type, :new => :some_shot_instance
