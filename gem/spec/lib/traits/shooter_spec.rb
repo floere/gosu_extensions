@@ -8,6 +8,39 @@ describe Shooter do
     end.new
   end
   
+  describe 'shoots' do
+    before(:each) do
+      @shooter_class = test_class_with(Shooter) do
+        shoots :some_type
+      end
+    end
+    it 'should set the shooting_range' do
+      @shooter_class.new(:some_window).shot_type.should == :some_type
+    end
+  end
+  
+  describe 'frequency' do
+    before(:each) do
+      @shooter_class = test_class_with(Shooter) do
+        frequency 3.14
+      end
+    end
+    it 'should set the shooting_rate' do
+      @shooter_class.new(:some_window).shooting_rate.should be_close(16, 0.1)
+    end
+  end
+  
+  describe 'range' do
+    before(:each) do
+      @shooter_class = test_class_with(Shooter) do
+        range :some_range
+      end
+    end
+    it 'should set the shooting_range' do
+      @shooter_class.new(:some_window).shooting_range.should == :some_range
+    end
+  end
+  
   describe 'shooting_rate' do
     context 'default' do
       it 'should return the default' do
