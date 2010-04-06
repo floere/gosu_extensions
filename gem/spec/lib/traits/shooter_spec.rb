@@ -8,6 +8,19 @@ describe Shooter do
     @shooter = test_class_with(Shooter).new @window
   end
   
+  describe 'shoot' do
+    context 'shoot? false' do
+      before(:each) do
+        @shooter.stub! :shoot? => false
+      end
+      it 'should return without doing anything' do
+        @shooter.should_receive(:sometimes).never
+        
+        @shooter.shoot
+      end
+    end
+  end
+  
   describe 'shoot?' do
     context 'nil target given' do
       it 'should return true' do
