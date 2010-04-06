@@ -2,6 +2,15 @@ require File.join(File.dirname(__FILE__), '/../../spec_helper')
 
 describe Turnable do
   
+  describe "Constants" do
+    it "should have turn left" do
+      Turnable::Left.should == :turn_left
+    end
+    it "should have turn right" do
+      Turnable::Right.should == :turn_right
+    end
+  end
+  
   context 'default' do
     before(:each) do
       @turnable = Class.new do
@@ -27,16 +36,7 @@ describe Turnable do
       end.new
       @turnable.stub! :rotation => 1.0
     end
-  
-    describe "Constants" do
-      it "should have turn left" do
-        Turnable::Left.should == :turn_left
-      end
-      it "should have turn right" do
-        Turnable::Right.should == :turn_right
-      end
-    end
-  
+    
     describe "turn_speed" do
       it "should have a defined turn_speed method" do
         lambda { @turnable.turn_speed }.should_not raise_error
