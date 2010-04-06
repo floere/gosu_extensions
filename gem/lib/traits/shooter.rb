@@ -29,7 +29,6 @@ module Shooter extend Trait
   def shooting_range
     @shooting_range || @shooting_range = 300
   end
-  
   def shooting_rate
     @shooting_rate || @shooting_rate = (SUBSTEPS**2).to_f/2
   end

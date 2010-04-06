@@ -7,6 +7,39 @@ describe Shooter do
       include Shooter
     end.new
   end
+  
+  describe 'shooting_rate' do
+    context 'default' do
+      it 'should return the default' do
+        @shooter.shooting_rate.should == 50.0
+      end
+    end
+    context 'non-default' do
+      before(:each) do
+        @shooter.shooting_rate = :some_rate
+      end
+      it 'should return the set range' do
+        @shooter.shooting_rate.should == :some_rate
+      end
+    end
+  end
+  
+  describe 'shooting_range' do
+    context 'default' do
+      it 'should return the default' do
+        @shooter.shooting_range.should == 300
+      end
+    end
+    context 'non-default' do
+      before(:each) do
+        @shooter.shooting_range = :some_range
+      end
+      it 'should return the set range' do
+        @shooter.shooting_range.should == :some_range
+      end
+    end
+  end
+  
   it "should define a constant Shoot" do
     Shooter::Shoot.should == :shoot
   end
