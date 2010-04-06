@@ -3,7 +3,27 @@ require File.join(File.dirname(__FILE__), '/../../spec_helper')
 describe Shooter do
   
   before(:each) do
-    @shooter = test_class_with(Shooter).new :some_window
+    @window = stub :window
+    
+    @shooter = test_class_with(Shooter).new @window
+  end
+  
+  describe 'shot' do
+    it 'should return a new shot instance of type shot_type' do
+      shot_type = stub :shot_type, :new => :some_shot_instance
+      
+      @shooter.stub! :shot_type => shot_type
+      
+      @shooter.shot.should == :some_shot_instance
+    end
+    it 'should initialize the shot with its window' do
+      shot_type = stub :shot_type
+      @shooter.stub! :shot_type => shot_type
+      
+      shot_type.should_receive(:new).once.with @window
+      
+      @shooter.shot
+    end
   end
   
   describe 'muzzle_rotation' do
