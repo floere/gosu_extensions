@@ -3,7 +3,6 @@
 class Enemy < Thing
   
   include Lives
-  it_is Targetable
   
   lives 10
   sequenced_image 'enemy.png', 22, 22

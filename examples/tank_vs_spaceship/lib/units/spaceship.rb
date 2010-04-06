@@ -14,6 +14,7 @@ class Spaceship < Thing
   
   # Pod
   #
+  # it_is_a Pod
   # attach Missile, 30, 30
   
   # Lives
