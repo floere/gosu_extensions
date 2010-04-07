@@ -37,6 +37,7 @@ class GameWindow < Gosu::Window
     setup_moveables
     setup_remove_shapes
     setup_controls
+    setup_window_control # e.g. ESC => exits
     
     after_initialize
     
@@ -195,7 +196,10 @@ class GameWindow < Gosu::Window
     @remove_shapes = RemoveShapes.new
   end
   def setup_controls
-    @controls = []
+    @controls = Controls.new
+  end
+  def setup_window_control
+    add_controls_for self
   end
   def setup_containers
     @players = []
@@ -247,7 +251,7 @@ class GameWindow < Gosu::Window
   #                              Gosu::Button::Kb1 => :revive
   #
   def add_controls_for object
-    @controls << Controls.new(self, object)
+    @controls << Control.new(self, object)
   end
   
   def next_step
@@ -270,9 +274,7 @@ class GameWindow < Gosu::Window
   # Each step, this is called to handle any input.
   #
   def handle_input
-    # TODO Move this into the button_down method.
-    #
-    @controls.each &:handle
+    @controls.handle
   end
   # Does a single step.
   #
@@ -417,16 +419,10 @@ class GameWindow < Gosu::Window
     
   end
   
-  # Escape exits by default.
+  # 
   #
-  def button_down id
-    close if exit?(id)
-  end
-  
-  # Override exit? if you want to define another exit rule.
-  #
-  def exit? id = nil
-    id == Gosu::Button::KbEscape
+  def button_down *
+    handle_input
   end
   
 end

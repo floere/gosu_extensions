@@ -20,7 +20,8 @@ class SpaceBattle < GameWindow
   
   it_is Controllable
   
-  controls Gosu::Button::KbP => :show_menu
+  controls Gosu::Button::KbEscape => :close,
+           Gosu::Button::KbP      => :show_menu
   
   width  1022
   height  595
