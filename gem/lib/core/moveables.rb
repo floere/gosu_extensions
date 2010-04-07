@@ -2,8 +2,8 @@
 #
 class Moveables
   
-  def initialize
-    @elements = []
+  def initialize elements = []
+    @elements = elements
   end
   
   delegate :each, :to => :@elements
