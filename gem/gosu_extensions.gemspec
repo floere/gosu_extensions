@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{gosu_extensions}
-  s.version = "0.1.22"
+  s.version = "0.1.23"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Florian Hanke"]
@@ -60,6 +60,8 @@ Gem::Specification.new do |s|
      "spec/lib/core/controls_spec.rb",
      "spec/lib/core/initializer_hooks_spec.rb",
      "spec/lib/core/it_is_a_spec.rb",
+     "spec/lib/core/layer_spec.rb",
+     "spec/lib/core/moveables_spec.rb",
      "spec/lib/core/trait_spec.rb",
      "spec/lib/core/traits_spec.rb",
      "spec/lib/extensions/module_spec.rb",
