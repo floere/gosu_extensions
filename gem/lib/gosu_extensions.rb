@@ -57,8 +57,6 @@ require 'short_lived'
 $:.unshift File.join(File.dirname(__FILE__), '/units')
 require 'thing'
 
-require 'menu'
-
 DEFAULT_SCREEN_WIDTH  = 1200 unless defined?(DEFAULT_SCREEN_WIDTH)
 DEFAULT_SCREEN_HEIGHT =  700 unless defined?(DEFAULT_SCREEN_HEIGHT)
 SUBSTEPS              =   10 unless defined?(SUBSTEPS)

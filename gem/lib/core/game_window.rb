@@ -45,8 +45,6 @@ class GameWindow < Gosu::Window
     
     setup_background
     
-    setup_menu
-    
     setup_steps
     setup_waves
     setup_scheduling
@@ -62,11 +60,12 @@ class GameWindow < Gosu::Window
     install_main_loop
   end
   
+  # This is the main game loop.
+  #
   def main_loop
     @main_loop ||= lambda do
+      # Smoother, but slower: GC.start if rand > 0.98
       next_step
-      # Step the physics environment SUBSTEPS times each update.
-      #
       SUBSTEPS.times do
         remove_shapes
         move
@@ -76,26 +75,8 @@ class GameWindow < Gosu::Window
       end
     end
   end
-  
   def install_main_loop
     @current_loop = main_loop
-  end
-  
-  def show_menu
-    suspend
-  end
-  
-  def suspend
-    return if @suspended
-    @current_loop = @menu.loop
-    @suspended = Time.now
-    p "suspended"
-  end
-  def continue
-    return unless @suspended
-    @current_loop = main_loop
-    @suspended = false
-    p "continued"
   end
   
   def media_path
@@ -175,10 +156,6 @@ class GameWindow < Gosu::Window
         @collision_definitions = block
       end
     end
-  end
-  
-  def setup_menu
-    @menu = Menu.new self
   end
   
   def setup_window
