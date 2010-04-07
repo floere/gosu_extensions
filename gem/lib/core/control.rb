@@ -7,13 +7,13 @@ class Control
   def initialize window, controllable, mapping = nil
     @window = window
     @controllable = controllable
-    @mapping = mapping || controllable.controls_mapping
+    @mapping = mapping || controllable.respond_to?(:controls_mapping) && controllable.controls_mapping
   end
   
   #
   #
   def mapping?
-    !@mapping.nil? && !@mapping.empty?
+    @mapping && !@mapping.empty?
   end
   
   # 
