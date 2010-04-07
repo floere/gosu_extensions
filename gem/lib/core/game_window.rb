@@ -270,6 +270,8 @@ class GameWindow < Gosu::Window
   # Each step, this is called to handle any input.
   #
   def handle_input
+    # TODO Move this into the button_down method.
+    #
     @controls.each &:handle
   end
   # Does a single step.
@@ -364,6 +366,8 @@ class GameWindow < Gosu::Window
     moveable.add_to @environment
   end
   
+  # Remove the shapes that are marked for removal.
+  #
   def remove_shapes
     @remove_shapes.remove_from @environment, @moveables
   end
@@ -383,23 +387,34 @@ class GameWindow < Gosu::Window
   # Drawing methods
   #
   
+  # Method called by Gosu.
+  #
   def draw
     draw_background
     draw_ambient
     draw_moveables
     draw_ui
   end
+  # Draws a background image.
+  #
   def draw_background
     @background_image.draw 0, 0, Layer::Background, 1.0, 1.0 if @background_image
   end
+  # Draw ambient objects, like asteroids or the like that do not influence the player.
+  #
   def draw_ambient
     
   end
+  # Draw the moveables.
+  #
   def draw_moveables
     @moveables.draw
   end
+  # Override for example with
+  # @font.draw "P1 Score: ", 10, 10, ZOrder::UI, 1.0, 1.0, 0xffff0000
+  #
   def draw_ui
-    # @font.draw "P1 Score: ", 10, 10, ZOrder::UI, 1.0, 1.0, 0xffff0000
+    
   end
   
   # Escape exits by default.
