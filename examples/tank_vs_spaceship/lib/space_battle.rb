@@ -19,7 +19,6 @@ class SpaceBattle < GameWindow
   MANUAL
   
   it_is Controllable
-  
   controls Gosu::Button::KbEscape => :close,
            Gosu::Button::KbP      => :show_menu
   
