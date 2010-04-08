@@ -16,8 +16,8 @@ class Scheduling
   
   # Adds a code block at time time.
   #
-  def add time = 1, &code
-    @threads << [time, code]
+  def add time = 1, proc = nil, &code
+    @threads << [time, code || proc]
   end
   
   # Does two things:

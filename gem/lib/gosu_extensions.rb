@@ -30,11 +30,12 @@ require 'it_is_a'
 
 require 'moveables'
 require 'remove_shapes'
+require 'wave'
+require 'waves'
 require 'scheduling'
 require 'game_window'
 require 'control'
 require 'controls'
-require 'waves'
 require 'layer'
 
 $:.unshift File.join(File.dirname(__FILE__), '/traits')

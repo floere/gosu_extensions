@@ -28,7 +28,8 @@ class GameWindow < Gosu::Window
               :gravity_vector
   attr_reader :environment,
               :moveables,
-              :font
+              :font,
+              :scheduling
   attr_accessor :background_path,
                 :background_hard_borders
   
@@ -46,15 +47,17 @@ class GameWindow < Gosu::Window
     setup_background
     
     setup_steps
-    setup_waves
     setup_scheduling
     setup_font
     
     setup_containers
     
     setup_environment
+    
     setup_enemies
     setup_players
+    setup_waves
+    
     setup_collisions
     
     install_main_loop
@@ -183,13 +186,11 @@ class GameWindow < Gosu::Window
   end
   def setup_containers
     @players = []
+    @waves   = Waves.new self, @scheduling
   end
   def setup_steps
     @step = 0
     @dt = 1.0 / 60.0
-  end
-  def setup_waves
-    @waves = Waves.new self
   end
   def setup_scheduling
     @scheduling = Scheduling.new
@@ -209,6 +210,7 @@ class GameWindow < Gosu::Window
   #
   def setup_players; end
   def setup_enemies; end
+  def setup_waves; end
   #
   #
   # Example:
@@ -244,7 +246,6 @@ class GameWindow < Gosu::Window
   #
   def next_step
     @step += 1
-    @waves.check @step # TODO maybe the waves should move into the scheduling
     @scheduling.step
   end
   # Each step, this is called to handle any input.

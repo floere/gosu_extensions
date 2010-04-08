@@ -2,33 +2,25 @@
 #
 class Waves
   
+  attr_reader :window, :scheduling
+  
   #
   #
-  def initialize window
-    @window = window
-    @waves = {}
+  def initialize window, scheduling
+    @window     = window
+    @scheduling = scheduling
   end
   
   #
   #
-  def add amount, type, time
-    @waves[time] ||= []
-    @waves[time] << [amount, type]
+  def add time, generated_type, times, &generation
+    add_wave time, Wave.new(generated_type, times, &generation)
   end
   
   #
   #
-  def check time
-    if wave? time
-      types = @waves[time]
-      types.each { |amount, type| amount.times { @window.randomly_add type } }
-    end
-  end
-  
-  #
-  #
-  def wave? time
-    !@waves[time].nil?
+  def add_wave time, wave
+    scheduling.add time, wave.for_scheduling(window)
   end
   
 end
