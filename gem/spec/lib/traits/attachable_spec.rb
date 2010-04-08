@@ -9,6 +9,7 @@ describe Attachable do
   describe "move_relative" do
     before(:each) do
       @attachable.stub! :position= => nil, :rotation= => nil
+      
       @pod = stub :pod, :relative_position => :relative_position, :rotation => :some_rotation
     end
     it "should set the position to the pod's position plus the relative position" do
