@@ -1,5 +1,7 @@
 class Rock < Thing
   
+  layer Layer::Players
+  
   image 'rock.png'
   
   shape :circle
@@ -12,7 +14,8 @@ class Rock < Thing
   collision_type :hurtful
   
   def move
-    self.position.x -= 0.5
+    self.position.x -= window.current_speed
+    on_hitting_x { destroy!; return }
   end
   
 end

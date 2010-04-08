@@ -20,6 +20,7 @@ class Jeep < Thing
   
   it_is_a Pod
   attach MissileLauncher, 22, 0
+  attach Machinegun, 7, 25
   
   def move
     obey_gravity

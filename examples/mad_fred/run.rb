@@ -6,8 +6,10 @@ $:.unshift File.dirname(__FILE__)
 
 require 'lib/ambient/smoke'
 
+require 'lib/projectiles/bullet'
 require 'lib/projectiles/missile'
 
+require 'lib/units/machinegun'
 require 'lib/units/rock'
 require 'lib/units/missile_launcher'
 require 'lib/units/jeep'

@@ -6,7 +6,7 @@ module Attachable extend Trait
   
   def move_relative pod
     self.position = pod.relative_position self
-    self.rotation = pod.rotation
+    self.rotation = pod.rotation unless self.kind_of? Turnable
   end
   
 end

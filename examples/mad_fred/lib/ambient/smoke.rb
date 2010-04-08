@@ -22,4 +22,9 @@ class Smoke < Thing
     [1.0*@multiplier, 1.0*@multiplier]
   end
   
+  def move
+    obey_gravity
+    self.position.x -= window.current_speed
+  end
+  
 end

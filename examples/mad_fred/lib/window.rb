@@ -8,6 +8,8 @@ class Window < GameWindow
   
   caption "Mad Fred"
   
+  # full_screen
+  
   # background 'space.png', :hard_borders => false
   damping 0.1
   
@@ -16,11 +18,16 @@ class Window < GameWindow
   collisions do
     add_collision_func :player, :player, &nil
     add_collision_func :player, :player_projectile, &nil
+    add_collision_func :player_projectile, :player_projectile, &nil
+  end
+  
+  def current_speed
+    ((self.width - @jeep.position.x) / self.width) + 0.3
   end
   
   def setup_players
     @jeep = Jeep.new self
-    @jeep.warp_to 100, window.height - 20
+    @jeep.warp_to 250, window.height - 20
     register @jeep
   end
   
