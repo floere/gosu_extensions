@@ -12,11 +12,6 @@ class Spaceship < Thing
   #
   image 'spaceship/image.png'
   
-  # Pod
-  #
-  # it_is_a Pod
-  # attach Missile, 30, 30
-  
   # Lives
   #
   lives 5
@@ -46,10 +41,17 @@ class Spaceship < Thing
   #
   range 10
   frequency 1
-  shoots Missile #Bullet
+  shoots Missile # or: Bullet
   muzzle_position { self.position + self.rotation_vector*self.radius*2 }
   muzzle_velocity { |*| self.rotation_vector*10 }
   # muzzle_rotation { |*| self.rotation }
+  
+  # Pod
+  #
+  # Example: You can attach a Tank if you want.
+  #
+  it_is_a Pod
+  attach Tank, 0, 23
   
   # Controllable
   #
@@ -88,6 +90,8 @@ class Spaceship < Thing
   end
   
   def killed!
+    # For fun:
+    # attach Tank.new(window), 0, rand(100)+20
     start_generating
     @ui = ["Spaceship hit!: #{lives} lives remain.", 10, 10, Layer::UI, 1.0, 1.0, 0xff0000ff]
   end

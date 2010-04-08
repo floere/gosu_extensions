@@ -5,7 +5,7 @@ module Attachable extend Trait
   attr_accessor :relative_position
   
   def move_relative pod
-    self.position = pod.position + relative_position # pod.rotation
+    self.position = pod.position + self.relative_position.rotate(pod.rotation_vector)
     self.rotation = pod.rotation
   end
   

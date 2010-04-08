@@ -11,8 +11,8 @@ require 'lib/projectiles/bullet'
 require 'lib/projectiles/missile'
 
 require 'lib/units/debris'
-require 'lib/units/spaceship'
 require 'lib/units/tank'
+require 'lib/units/spaceship'
 require 'lib/units/enemy'
 require 'lib/units/missile_launcher'
 

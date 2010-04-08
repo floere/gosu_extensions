@@ -15,25 +15,17 @@ module Pod extend Trait
   MANUAL
   
   def self.included target_class
-    target_class.extend IncludeMethods
+    target_class.extend ClassMethods
     target_class.holds_attachments
+    target_class.send :include, InstanceMethods
   end
   
-  # TODO is_a Rack
   #
-  # TODO Maybe
-  #      is_a Rack.
-  #           with(Cannon, 10, 10).
-  #           with(Cannon, 20, 10)
   #
-  module IncludeMethods
+  module ClassMethods
     
     def holds_attachments
-      include InstanceMethods
-      alias_method_chain :move, :attachments
-      
       class_inheritable_accessor :prototype_attachments
-      extend ClassMethods
       hook = lambda do
         self.class.prototype_attachments.each do |type, x, y|
           attach type.new(self.window), x, y
@@ -41,10 +33,6 @@ module Pod extend Trait
       end
       InitializerHooks.append self, &hook
     end
-    
-  end
-  
-  module ClassMethods
     
     # Example:
     # class MotherShip
@@ -62,17 +50,26 @@ module Pod extend Trait
   
   module InstanceMethods
     
-    attr_accessor :attachments
+    def materialize attachment
+      attachment.extend Attachable # This is where Ruby shines.
+      window.register attachment
+    end
+    
+    #
+    #
+    def attachments
+      @attachments || @attachments = []
+    end
     
     #
     #
     def attach attachment, x, y
-      self.attachments ||= []
-      attachment.extend Attachable # This is where Ruby shines.
-      window.register attachment
-      # attachment.rotation = self.rotation
+      # TODO Move to better place.
+      self.class.alias_method_chain :move, :attachments unless respond_to?(:move_without_attachments)
+      #
+      materialize attachment
       attachment.relative_position = CP::Vec2.new x, y
-      self.attachments << attachment
+      attachments << attachment
     end
     
     #
@@ -95,6 +92,7 @@ module Pod extend Trait
       move_attachments
       move_without_attachments
     end
+    # alias_method_chain :move, :attachments
     
   end
   
