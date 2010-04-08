@@ -91,6 +91,7 @@ class Spaceship < Thing
   
   def killed!
     # For fun:
+    #
     # attach Tank.new(window), 0, rand(100)+20
     start_generating
     @ui = ["Spaceship hit!: #{lives} lives remain.", 10, 10, Layer::UI, 1.0, 1.0, 0xff0000ff]
