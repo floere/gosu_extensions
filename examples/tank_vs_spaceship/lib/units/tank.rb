@@ -21,8 +21,8 @@ class Tank < Thing
   it_is Controllable
   it_has Lives
   
-  controls Gosu::Button::KbLeft => Moveable::Left(),
-           Gosu::Button::KbRight => Moveable::Right(),
+  controls Gosu::Button::KbLeft => Moveable::Left,
+           Gosu::Button::KbRight => Moveable::Right,
            Gosu::Button::KbUp => Shooter::Shoot,
            Gosu::Button::KbDown => :righten
   lives 3

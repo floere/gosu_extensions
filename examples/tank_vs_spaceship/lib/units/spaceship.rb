@@ -58,8 +58,8 @@ class Spaceship < Thing
   #
   controls Gosu::Button::KbA => Turnable::Left,
            Gosu::Button::KbD => Turnable::Right,
-           Gosu::Button::KbW => Moveable::Accelerate(),
-           Gosu::Button::KbS => Moveable::Backwards(),
+           Gosu::Button::KbW => Moveable::Accelerate,
+           Gosu::Button::KbS => Moveable::Backwards,
            Gosu::Button::KbSpace => Shooter::Shoot
   
   #

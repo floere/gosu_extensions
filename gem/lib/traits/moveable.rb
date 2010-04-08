@@ -4,12 +4,12 @@
 #
 module Moveable extend Trait
   
-  def self::Accelerate strength = 1.0; [:accelerate, strength] end
-  def self::Left       strength = 1.0; [:move_left,  strength] end
-  def self::Right      strength = 1.0; [:move_right, strength] end
-  def self::Up         strength = 1.0; [:move_up,    strength] end
-  def self::Down       strength = 1.0; [:move_down,  strength] end
-  def self::Backwards  strength = 1.0; [:backwards,  strength] end
+  Accelerate = :accelerate; def self.accelerate strength = 1.0; [Accelerate, strength] end
+  Left       = :move_left;  def self.left       strength = 1.0; [Left,       strength] end
+  Right      = :move_right; def self.right      strength = 1.0; [Right,      strength] end
+  Up         = :move_up;    def self.up         strength = 1.0; [Up,         strength] end
+  Down       = :move_down;  def self.down       strength = 1.0; [Down,       strength] end
+  Backwards  = :backwards;  def self.backwards  strength = 1.0; [Backwards,  strength] end
   # TODO Jump       = :jump
   
   def self.included klass

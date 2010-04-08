@@ -14,8 +14,8 @@ class Jeep < Thing
   collision_type :player
   
   it_is Controllable
-  controls Gosu::Button::KbLeft  => Moveable::Left(),
-           Gosu::Button::KbRight => Moveable::Right(),
+  controls Gosu::Button::KbLeft  => Moveable::Left,
+           Gosu::Button::KbRight => Moveable::Right,
            Gosu::Button::KbUp    => :jump
   
   it_is_a Pod
