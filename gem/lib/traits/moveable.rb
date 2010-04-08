@@ -4,13 +4,13 @@
 #
 module Moveable extend Trait
   
-  Accelerate = :accelerate
-  Left       = :move_left
-  Right      = :move_right
-  Up         = :move_up
-  Down       = :move_down
-  Backwards  = :backwards
-  # Jump       = :jump
+  def self::Accelerate strength = 1.0; [:accelerate, strength] end
+  def self::Left       strength = 1.0; [:move_left,  strength] end
+  def self::Right      strength = 1.0; [:move_right, strength] end
+  def self::Up         strength = 1.0; [:move_up,    strength] end
+  def self::Down       strength = 1.0; [:move_down,  strength] end
+  def self::Backwards  strength = 1.0; [:backwards,  strength] end
+  # TODO Jump       = :jump
   
   def self.included klass
     klass.extend ClassMethods
@@ -128,23 +128,23 @@ module Moveable extend Trait
   
   # Methods for controls.
   #
-  def accelerate strength = 1
+  def accelerate strength = 1.0
     self.speed += self.rotation_vector * strength/SUBSTEPS
   end
-  def backwards strength = 1
-    accelerate -0.5*strength
-  end
-  def move_left strength = 1
+  def move_left strength = 1.0
     self.speed += CP::Vec2.new(-strength.to_f/SUBSTEPS, 0) 
   end
-  def move_right strength = 1
+  def move_right strength = 1.0
     self.speed += CP::Vec2.new(strength.to_f/SUBSTEPS, 0) 
   end
-  def move_up strength = 1
+  def move_up strength = 1.0
     self.speed += CP::Vec2.new(0, -strength.to_f/SUBSTEPS) 
   end
-  def move_down strength = 1
+  def move_down strength = 1.0
     self.speed += CP::Vec2.new(0, strength.to_f/SUBSTEPS) 
+  end
+  def backwards strength = 1.0
+    accelerate -0.5*strength
   end
   # def jump strength = 100
   #   self.speed += CP::Vec2.new(0, -strength.to_f/SUBSTEPS) if self.current_speed <= 1

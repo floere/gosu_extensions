@@ -20,8 +20,8 @@ class Control
   #
   def handle
     return if @controllable.destroyed?
-    @mapping.each do |key, command|
-      @controllable.send(command) if @window.button_down? key
+    @mapping.each do |key, send_params|
+      @controllable.send(*send_params) if @window.button_down? key
     end
   end
   
