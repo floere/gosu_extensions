@@ -42,7 +42,7 @@ class SpaceBattle < GameWindow
       window.remove projectile_shape
       window.moveables.each do |possible_player|
         if possible_player.shape == player_shape
-          possible_player.kill!
+          possible_player.kill! 
           possible_player.draw_ui
         end
       end

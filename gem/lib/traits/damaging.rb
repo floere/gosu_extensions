@@ -47,7 +47,7 @@ module Damaging extend Trait
   end
   
   def initialize window
-    raise DamageMissingError.new unless self.respond_to? :damage
+    raise DamageMissingError.new unless respond_to?(:damage)
     super window
   end
   

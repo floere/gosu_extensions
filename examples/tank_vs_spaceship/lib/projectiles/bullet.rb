@@ -5,6 +5,9 @@ class Bullet < Thing
   it_is ShortLived
   it_is_a Shot
   
+  # it_is Damaging
+  # damage 100
+  
   lifetime { 100 + rand(50) }
   image 'bullet.png'
   shape :circle

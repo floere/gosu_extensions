@@ -4,7 +4,7 @@ class Spaceship < Thing
   
   it_is_a Turnable, Shooter, Controllable, Generator
   it_is Targetable
-  it_has Lives
+  it_has Lives, Hitpoints
   
   generates Smoke, :every => 10, :until => 100
   
@@ -12,11 +12,10 @@ class Spaceship < Thing
   #
   image 'spaceship/image.png'
   
-  # Lives
+  # Lives, Hitpoints
   #
   lives 5
-  
-  it_is Damaging
+  hitpoints 1_000
   
   #
   #
@@ -52,8 +51,8 @@ class Spaceship < Thing
   #
   # Example: You can attach a Tank if you want.
   #
-  it_is_a Pod
-  attach Tank, 0, 23
+  # it_is_a Pod
+  # attach Tank, 0, 25
   
   # Controllable
   #
@@ -89,11 +88,15 @@ class Spaceship < Thing
     super
   end
   
+  # def hit!
+  #   start_generating # smokes
+  # end
+  
   def killed!
+    start_generating
     # For fun:
     #
     # attach Tank.new(window), 0, rand(100)+20
-    start_generating
     @ui = ["Spaceship hit!: #{lives} lives remain.", 10, 10, Layer::UI, 1.0, 1.0, 0xff0000ff]
   end
   
