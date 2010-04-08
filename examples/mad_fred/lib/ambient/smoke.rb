@@ -1,6 +1,8 @@
 #
 class Smoke < Thing
   
+  layer Layer::Ambient
+  
   it_is ShortLived
   
   lifetime { 50 + rand(10) }
@@ -11,7 +13,6 @@ class Smoke < Thing
   moment 0.1
   collision_type :ambient
   friction 0.0001
-  layer Layer::Ambient
   rotation { rand(2)*Math::PI }
   
   # Smoke is reduced in size with each time it is "drawn".
@@ -19,7 +20,7 @@ class Smoke < Thing
   def current_size
     @multiplier ||= 2.0
     @multiplier *= 0.97
-    [1.0*@multiplier, 1.0*@multiplier]
+    [@multiplier, @multiplier]
   end
   
   def move

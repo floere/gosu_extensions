@@ -17,8 +17,21 @@ class Window < GameWindow
   
   collisions do
     add_collision_func :player, :player, &nil
+    add_collision_func :player, :ambient, &nil
+    add_collision_func :enemy, :ambient, &nil
     add_collision_func :player, :player_projectile, &nil
     add_collision_func :player_projectile, :player_projectile, &nil
+    add_collision_func :player, :enemy do |player_shape, enemy_shape|
+      window.moveables.each do |moveable|
+        if moveable.shape == enemy_shape
+          moveable.destroy!
+        end
+        if moveable.shape == player_shape
+          moveable.kill!
+          moveable.draw_ui
+        end
+      end
+    end
   end
   
   def current_speed
@@ -32,8 +45,15 @@ class Window < GameWindow
   end
   
   def next_step
-    create_rock if rand > 0.98
+    create_rock  if rand > 0.99
+    create_enemy if rand > 0.99
     super
+  end
+  
+  def create_enemy
+    enemy = Enemy.new self
+    enemy.warp_to window.width, rand(window.height-40) + 20
+    window.register enemy
   end
   
   def create_rock

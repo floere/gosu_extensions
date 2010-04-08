@@ -11,7 +11,7 @@ class Missile < Thing
   
   it_is_a Shot
   it_is_a Generator
-  generates Smoke, :starting_at => 10, :every => 5
+  generates Smoke, :starting_at => 15, :every => 10
   
   shape :circle
   radius 1.0
@@ -32,7 +32,8 @@ class Missile < Thing
     self.position += (self.rotation_vector.perp * @deviation)
   end
   def move
-    accelerate 1.1
+    accelerate 1.3
+    self.position.x -= window.current_speed/2
     on_hitting_x { destroy!; return }
     on_hitting_y { destroy!; return }
   end

@@ -11,6 +11,7 @@ require 'lib/projectiles/missile'
 
 require 'lib/units/machinegun'
 require 'lib/units/rock'
+require 'lib/units/enemy'
 require 'lib/units/missile_launcher'
 require 'lib/units/jeep'
 

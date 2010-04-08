@@ -14,7 +14,7 @@ class Machinegun < Thing
   friction 0
   rotation -Math::PI/3
   
-  collision_type :player
+  collision_type :ambient
   
   it_is Controllable
   controls Gosu::Button::KbA => Turnable::Left,

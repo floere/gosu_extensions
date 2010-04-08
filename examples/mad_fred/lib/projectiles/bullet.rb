@@ -10,9 +10,9 @@ class Bullet < Thing
   
   shape :circle
   radius 1.0
-  mass 0.05
+  mass 5
   moment 0.1
-  friction 0
+  friction 0.01
   velocity { 20 + rand }
   
   collision_type :player_projectile
