@@ -72,7 +72,7 @@ class SpaceBattle < GameWindow
     
     # Generates 20 Tanks, at the top border, at time 100
     #
-    # @waves.add 50, Tank, 5, &Wave::TopBorder
+    # @waves.add 150, Tank, 5, &Wave.top_border(-100)
   end
   
   # TODO to FW
