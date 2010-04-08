@@ -45,12 +45,14 @@ describe Imageable do
     end
     it "should raise with the right message" do
       lambda { @imageable_class.new(@window) }.should raise_error(Imageable::ImageMissingError, <<-MESSAGE
+        
         In an Imageable, you either need to define method
           image path, *args
         for an unchanging image
         or
           sequenced_image path, width, height, frequency = 10, &block
         for a sprite sequence.
+        
       MESSAGE
       )
     end

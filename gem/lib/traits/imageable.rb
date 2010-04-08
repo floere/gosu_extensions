@@ -3,12 +3,14 @@ module Imageable extend Trait
   class ImageMissingError < RuntimeError
     def initialize
       super <<-MESSAGE
+        
         In an Imageable, you either need to define method
           image path, *args
         for an unchanging image
         or
           sequenced_image path, width, height, frequency = 10, &block
         for a sprite sequence.
+        
       MESSAGE
     end
   end
