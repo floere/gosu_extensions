@@ -14,13 +14,13 @@ rescue LoadError => e
   raise e
 end
 
-require 'resources'
-
 $:.unshift File.join(File.dirname(__FILE__), '/extensions')
 require 'module'
 require 'numeric'
 
 $:.unshift File.join(File.dirname(__FILE__), '/core')
+require 'resources'
+
 require 'vector_utilities'
 require 'initializer_hooks'
 
