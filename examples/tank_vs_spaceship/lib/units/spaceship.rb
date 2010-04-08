@@ -73,11 +73,9 @@ class Spaceship < Thing
   # Generates a number of explosions and debris when destroyed!
   #
   def destroy!
-    # 10.times do
     explosion = SmallExplosion.new window
     explosion.warp position + random_vector(rand(20))
     window.register explosion
-    # end
     5.times do
       # TODO replace by start_generating Debris
       #
