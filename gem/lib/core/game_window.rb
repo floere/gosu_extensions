@@ -158,6 +158,9 @@ class GameWindow < Gosu::Window
     end
   end
   
+  # Setup methods
+  #
+  
   def setup_window
     self.caption = self.class.caption || ""
   end
@@ -202,12 +205,10 @@ class GameWindow < Gosu::Window
     @environment.window = self
     @environment.damping = -self.damping + 1 # recalculate the damping such that 0.0 has no damping.
   end
-  
   # Override.
   #
   def setup_players; end
   def setup_enemies; end
-  
   #
   #
   # Example:
@@ -231,22 +232,20 @@ class GameWindow < Gosu::Window
     @controls << Control.new(self, object)
   end
   
-  def next_step
-    @step += 1
-    @waves.check @step # TODO maybe the waves should move into the scheduling
-    @scheduling.step
-  end
-  
-  
-  # Core methods used by the extensions "framework"
+  # Main loop methods.
   #
   
-  # The main loop.
-  #
   # TODO implement hooks.
   #
   def update
     @current_loop.call
+  end
+  # Advances to the next step in the game.
+  #
+  def next_step
+    @step += 1
+    @waves.check @step # TODO maybe the waves should move into the scheduling
+    @scheduling.step
   end
   # Each step, this is called to handle any input.
   #
@@ -258,7 +257,31 @@ class GameWindow < Gosu::Window
   def step_physics
     @environment.step @dt
   end
+  # Moves each moveable.
+  #
+  def move
+    @moveables.move
+  end
+  # Handles the targeting process.
+  #
+  def targeting
+    @moveables.targeting
+  end
+  # Remove the shapes that are marked for removal.
+  #
+  def remove_shapes
+    @remove_shapes.remove_from @environment, @moveables
+  end
   
+  # Adding things.
+  #
+  
+  # Moveables register themselves here.
+  #
+  def register moveable
+    @moveables.register moveable
+    moveable.add_to @environment
+  end
   # Things unregister themselves here.
   #
   # Note: Use as follows in a Thing.
@@ -273,7 +296,6 @@ class GameWindow < Gosu::Window
   def unregister thing
     remove thing.shape
   end
-  
   # Remove this shape the next turn.
   #
   # Note: Internal use. Use unregister to properly remove a moveable.
@@ -281,6 +303,14 @@ class GameWindow < Gosu::Window
   def remove shape
     @remove_shapes.add shape
   end
+  # Is the thing registered?
+  #
+  def registered? thing
+    @moveables.registered? thing
+  end
+  
+  # Scheduling
+  #
   
   # Run some code at relative time <time>.
   #
@@ -296,40 +326,16 @@ class GameWindow < Gosu::Window
     @scheduling.add time, &code
   end
   
-  # Moves each moveable.
-  #
-  def move
-    @moveables.move
-  end
-  # Handles the targeting process.
-  #
-  def targeting
-    @moveables.targeting
-  end
   
   # Utility Methods
   #
   
-  # 
-  #
   # Example:
   # * x, y = uniform_random_position
   #
   def uniform_random_position
     [rand(self.width), rand(self.height)]
   end
-  
-  #
-  #
-  # Example:
-  #   imprint do
-  #     circle x, y, radius, :fill => true, :color => :black
-  #   end
-  #
-  def imprint &block
-    @background_image.paint &block
-  end
-  
   # Randomly adds a Thing to a uniform random position.
   #
   def randomly_add type
@@ -337,30 +343,10 @@ class GameWindow < Gosu::Window
     thing.warp_to *uniform_random_position
     register thing
   end
-  
-  # Moveables register themselves here.
-  #
-  def register moveable
-    @moveables.register moveable
-    moveable.add_to @environment
-  end
-  
-  # Remove the shapes that are marked for removal.
-  #
-  def remove_shapes
-    @remove_shapes.remove_from @environment, @moveables
-  end
-  
   # Revives the player if not already in.
   #
   def revive player
     register player unless registered?(player) # player.registered?
-  end
-  
-  # Is the thing registered?
-  #
-  def registered? thing
-    @moveables.registered? thing
   end
   
   # Drawing methods
@@ -395,6 +381,19 @@ class GameWindow < Gosu::Window
   def draw_ui
     
   end
+  #
+  #
+  # Example:
+  #   imprint do
+  #     circle x, y, radius, :fill => true, :color => :black
+  #   end
+  #
+  def imprint &block
+    @background_image.paint &block
+  end
+  
+  # Input handling.
+  #
   
   # 
   #
