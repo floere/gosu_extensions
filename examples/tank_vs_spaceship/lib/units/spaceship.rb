@@ -16,6 +16,8 @@ class Spaceship < Thing
   #
   lives 5
   
+  it_is Damaging
+  
   #
   #
   shape :circle

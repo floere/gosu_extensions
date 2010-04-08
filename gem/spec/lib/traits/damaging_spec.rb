@@ -35,6 +35,7 @@ describe Damaging do
     end
     it "should raise with the right message" do
       lambda { @damaging_class.new(@window) }.should raise_error(Damaging::DamageMissingError, <<-MESSAGE
+        
         In a Damaging thing, you need to define method
           damage damage = nil, &block
         with params
@@ -42,6 +43,7 @@ describe Damaging do
         or
           damage { 13 + rand(7) } # some block
         to define how much damage the thing does.
+        
       MESSAGE
       )
     end

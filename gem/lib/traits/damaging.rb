@@ -29,6 +29,7 @@ module Damaging extend Trait
   class DamageMissingError < RuntimeError
     def initialize
       super <<-MESSAGE
+        
         In a Damaging thing, you need to define method
           damage damage = nil, &block
         with params
@@ -36,6 +37,7 @@ module Damaging extend Trait
         or
           damage { 13 + rand(7) } # some block
         to define how much damage the thing does.
+        
       MESSAGE
     end
   end
