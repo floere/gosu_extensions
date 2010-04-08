@@ -88,6 +88,12 @@ module Pod extend Trait
     
     #
     #
+    def relative_position attachment
+      self.position + attachment.relative_position.rotate(self.rotation_vector)
+    end
+    
+    #
+    #
     def move_with_attachments
       move_attachments
       move_without_attachments
