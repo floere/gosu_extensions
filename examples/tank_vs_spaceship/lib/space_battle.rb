@@ -70,7 +70,7 @@ class SpaceBattle < GameWindow
     #
     # @waves.add 100, Tank, 5
     
-    # Generates 20 Tanks, at the top border, at time 100
+    # Generates 20 Tanks, at the top border, at time 100, inside the game field by 100px
     #
     # @waves.add 150, Tank, 5, &Wave.top_border(-100)
   end
