@@ -1,0 +1,24 @@
+h1. Tree Run - A Suicidal Freeski Undertaking
+
+
+h2. "History"
+
+This little game was written for a game programming contest. As the contest finished (after 3 hours) the following functionality was implemented:
+
+- 2 skiers independently controllable
+- Random landscape/hills to ski
+- Collision with trees
+- A simple points system
+
+(See commit http://github.com/severin/tree_run/commit/e71601b68ba5ad9628436a2f3605675514ca4c03)
+
+
+
+h2. What's next?
+
+The code needs some polishing, the game should be restartable, highscores should be saved, a single-player mode would be nice, different undergrounds would be cool (ice, deep powder etc.), maybe some obstacles (rocks, cliffs) to jump over and get style points...
+You see, there's plenty to do :)
+
+
+---
+Copyright 2010, Severin Schoepke
