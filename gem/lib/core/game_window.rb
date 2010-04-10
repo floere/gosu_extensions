@@ -199,7 +199,7 @@ class GameWindow < Gosu::Window
     @font = Gosu::Font.new self, self.font_name, self.font_size
   end
   def setup_environment
-    @environment = CP::Space.new
+    @environment = Environment.new
     class << @environment
       attr_accessor :window
     end
