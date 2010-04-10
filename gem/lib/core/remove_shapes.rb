@@ -2,6 +2,9 @@
 #
 class RemoveShapes
   
+  attr_reader :shapes
+  delegate :clear, :empty?, :to => :@shapes
+  
   def initialize
     @shapes = []
   end
@@ -9,7 +12,7 @@ class RemoveShapes
   #
   #
   def add shape
-    @shapes << shape
+    shapes << shape
   end
   
   #
@@ -23,13 +26,12 @@ class RemoveShapes
     # We would probably solve this by creating a separate @remove_bodies array to remove the Bodies
     # of the Stars that were gathered by the Player
     #
-    return if @shapes.empty?
-    @shapes.each do |shape|
-      environment.remove_body shape.body
-      environment.remove_shape shape
-      moveables.remove shape
+    return if empty?
+    shapes.each do |shape|
+      environment.remove shape
+      moveables.remove shape # TODO Should the environment be the owner of the moveables? Probably, yes.
     end
-    @shapes.clear
+    clear
   end
   
 end
