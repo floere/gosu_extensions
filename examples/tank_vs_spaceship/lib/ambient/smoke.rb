@@ -5,8 +5,7 @@ class Smoke < Thing
   
   lifetime { 50 + rand(10) }
   sequenced_image 'smoke.png', 10, 10, 1
-  shape :circle
-  radius 1.0
+  shape :circle, 1.0
   mass 0.1
   moment 0.1
   collision_type :ambient

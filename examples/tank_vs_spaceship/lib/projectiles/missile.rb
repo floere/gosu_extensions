@@ -8,8 +8,7 @@ class Missile < Thing
   
   lifetime { 100 + rand(100) }
   image 'missile/image.png'
-  shape :circle
-  radius 1.0
+  shape :circle, 1.0
   mass 0.1
   moment 0.1
   collision_type :projectile

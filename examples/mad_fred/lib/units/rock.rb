@@ -4,8 +4,7 @@ class Rock < Thing
   
   image 'rock.png'
   
-  shape :circle
-  radius 20.0
+  shape :circle, 20.0
   mass 10_000
   moment 0.1
   friction 0.1

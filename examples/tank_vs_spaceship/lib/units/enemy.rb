@@ -6,8 +6,7 @@ class Enemy < Thing
   
   lives 10
   sequenced_image 'enemy.png', 22, 22
-  shape :circle
-  radius 11.0
+  shape :circle, 11.0
   mass 1.0
   moment 1.0
   collision_type :enemy

@@ -6,8 +6,7 @@ class MissileLauncher < Thing
   it_is_a Shooter
   
   image 'media/gun.png'
-  shape :circle
-  radius 3.0
+  shape :circle, 3.0
   mass 1000.0
   moment 75.0
   layer Layer::Players

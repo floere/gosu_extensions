@@ -19,8 +19,7 @@ class Spaceship < Thing
   
   #
   #
-  shape :circle
-  radius 10.0
+  shape :circle, 10.0
   friction 100.0       # TODO Remove these
   rotation -Math::PI/2 # TODO Remove these
   

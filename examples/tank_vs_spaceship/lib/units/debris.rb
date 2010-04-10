@@ -8,10 +8,7 @@ class Debris < Thing
   
   image 'spaceship/debris.png'
   
-  shape :circle
-  radius 5.0 # TODO multiply by size
-  mass 0.1 # TODO multiply by size
-  moment 0.1
+  shape :circle, 5.0
   friction 50.0
   random_rotation
   # size 1..3

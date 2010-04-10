@@ -33,8 +33,7 @@ class Tank < Thing
   
   #
   #
-  shape :circle
-  radius 11.0
+  shape :circle, 11.0
   friction 100.0       # TODO Remove these
   rotation -Math::PI/2 # TODO Remove these
   

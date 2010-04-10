@@ -7,8 +7,7 @@ class Machinegun < Thing
   
   image 'machinegun.png'
   
-  shape :circle
-  radius 10.0
+  shape :circle, 10.0
   mass 100
   moment 0.1
   friction 0

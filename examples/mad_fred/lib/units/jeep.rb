@@ -4,8 +4,7 @@ class Jeep < Thing
   
   sequenced_image 'jeep.png', 65, 43
   
-  shape :circle
-  radius 21.0
+  shape :circle, 21.0
   mass 500
   moment 0.1
   friction 10.0

@@ -5,8 +5,7 @@ class Crash < Thing
   
   image 'boom.png'
   
-  shape :circle
-  radius 100
+  shape :circle, 100
   mass 1000
   moment 0.01
   friction 1000

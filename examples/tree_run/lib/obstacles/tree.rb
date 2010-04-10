@@ -2,8 +2,7 @@ class Tree < Thing
   
   image 'tree.png'
   
-  shape :circle
-  radius 30
+  shape :circle, 30
   mass 1000
   moment 0.01
   friction 1000

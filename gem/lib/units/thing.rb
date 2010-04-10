@@ -39,13 +39,27 @@ class Thing
   end
   
   class << self
-    @@form_shape_class_mapping = { :circle => CP::Shape::Circle }
-    def shape form
+    @@form_shape_class_mapping = {
+      :circle  => CP::Shape::Circle, # :circle, radius
+      :poly    => CP::Shape::Poly,   # :poly, CP::Vec2.new(-22, -18), CP::Vec2.new(-22, -10), etc.
+      :segment => CP::Shape::Segment # :segment, ...
+      # TODO :image => # Special, just traces the extent of the image.
+    }
+    def shape form, *args
       form_shape_class_mapping = @@form_shape_class_mapping
+      define_method :radius do
+        args.first # TODO fix!
+      end
       InitializerHooks.append self do
         shape_class = form_shape_class_mapping[form]
         raise "Shape #{form} does not exist." unless shape_class
-        @shape = shape_class.new(CP::Body.new(self.mass, self.moment), self.radius, CP::Vec2.new(0.0, 0.0))
+        
+        params = []
+        params << CP::Body.new(self.mass, self.moment)
+        params += args
+        params << CP::Vec2.new(0.0, 0.0)
+        
+        @shape = shape_class.new *params
       end
     end
     def mass amount
@@ -55,11 +69,6 @@ class Thing
     end
     def moment amount
       define_method :moment do
-        amount
-      end
-    end
-    def radius amount
-      define_method :radius do
         amount
       end
     end

@@ -7,8 +7,7 @@ class Skier < Thing
   it_has Lives
   lives 1
   
-  shape :circle
-  radius 12
+  shape :circle, 12
   mass 0.1
   moment 0.01
   friction 0

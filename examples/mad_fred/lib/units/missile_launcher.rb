@@ -4,8 +4,7 @@ class MissileLauncher < Thing
   
   sequenced_image 'missile_launcher.png', 34, 19
   
-  shape :circle
-  radius 10.0
+  shape :circle, 10.0
   mass 100
   moment 0.1
   friction 0

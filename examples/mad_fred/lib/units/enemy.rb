@@ -4,8 +4,7 @@ class Enemy < Thing
   
   image 'enemy.png'
   
-  shape :circle
-  radius 21.0
+  shape :circle, 21.0
   mass 100
   moment 0.1
   friction 10.0

@@ -13,8 +13,7 @@ class Missile < Thing
   it_is_a Generator
   generates Smoke, :starting_at => 15, :every => 10
   
-  shape :circle
-  radius 1.0
+  shape :circle, 1.0
   mass 0.1
   moment 0.1
   friction 0.0001
