@@ -31,6 +31,13 @@ class Thing
     @layer || Layer::Players
   end
   
+  def mass
+    0.1
+  end
+  def moment
+    0.1
+  end
+  
   class << self
     @@form_shape_class_mapping = { :circle => CP::Shape::Circle }
     def shape form
@@ -43,17 +50,17 @@ class Thing
     end
     def mass amount
       define_method :mass do
-        amount || 1.0
+        amount
       end
     end
     def moment amount
       define_method :moment do
-        amount || 1.0
+        amount
       end
     end
     def radius amount
       define_method :radius do
-        amount || 10.0
+        amount
       end
     end
     
