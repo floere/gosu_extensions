@@ -6,7 +6,7 @@ class Thing < Sprite
   #
   it_is Moveable
   
-  attr_reader :window, :shape
+  attr_reader :shape
   
   def mass
     0.1

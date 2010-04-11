@@ -9,6 +9,8 @@ class Sprite
   include InitializerHooks
   include ItIsA
   
+  attr_reader :window
+  
   # Every thing knows the window it is attached to.
   #
   def initialize window
