@@ -70,8 +70,8 @@ class Spaceship < Thing
   
   # Smoke on accelerating.
   #
-  def accelerate
-    super
+  def accelerate *args
+    super *args
     sometimes :accelerating, 20 do
       generate Smoke
     end

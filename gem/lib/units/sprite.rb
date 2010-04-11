@@ -28,7 +28,7 @@ class Sprite
   # Default rotation is upwards.
   #
   def rotation
-    -Math::PI/2
+    @rotation || -Math::PI/2
   end
   
   class << self
@@ -46,10 +46,9 @@ class Sprite
     def rotation amount = nil, &block
       # Override default.
       #
-      attr_reader :rotation
       to_execute = block_given? ? block : lambda { amount }
       InitializerHooks.append self do
-        @rotation = to_execute[]
+        self.rotation = to_execute[]
       end
     end
     def random_rotation
@@ -140,7 +139,7 @@ class Sprite
   # Directly set the position of our Moveable.
   #
   def warp_to x, y
-    self.position = CP::Vec2.new(x, y)
+    warp CP::Vec2.new(x, y)
   end
   def drawing_rotation
     self.rotation.radians_to_gosu

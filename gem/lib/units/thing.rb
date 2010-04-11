@@ -104,8 +104,8 @@ class Thing < Sprite
   end
   #
   #
-  def rotation= rot
-    @shape.body.a = rot % (2*Math::PI)
+  def rotation= rotation
+    @shape.body.a = rotation % (2*Math::PI)
   end
   def rotation
     @shape.body.a
