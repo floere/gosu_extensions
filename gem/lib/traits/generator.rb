@@ -1,5 +1,10 @@
 module Generator extend Trait
   
+  def self.start klass, *args
+    [:start_generating, klass, *args]
+  end
+  Start = :start_generating
+  
   def self.included base
     base.extend ClassMethods
   end
