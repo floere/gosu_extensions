@@ -39,9 +39,8 @@ end
   
   module InstanceMethods
     
-    def destroy!
+    def destroyed!
       stop_generating!
-      super
     end
     
     def stop_generating!

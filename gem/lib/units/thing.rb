@@ -111,8 +111,12 @@ class Thing
   def destroyed?
     @destroyed
   end
+  def destroyed!
+    # Override
+  end
   def destroy!
     return if self.destroyed?
+    self.destroyed!
     self.window.unregister self
     self.destroyed = true
   end

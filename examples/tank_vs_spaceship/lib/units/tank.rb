@@ -78,13 +78,12 @@ class Tank < Thing
   #
   # Generates a number of explosions when destroyed!
   #
-  def destroy!
+  def destroyed!
     20.times do
       explosion = SmallExplosion.new window
       explosion.warp position + random_vector(rand(50))
       window.register explosion
     end
-    super
   end
   
   def killed!

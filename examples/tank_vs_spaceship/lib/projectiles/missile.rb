@@ -19,11 +19,10 @@ class Missile < Thing
   
   # Generates a number of explosions when destroyed!
   #
-  def destroy!
+  def destroyed!
     explosion = SmallExplosion.new window
     explosion.warp position + random_vector(rand(10))
     window.register explosion
-    super
   end
   
   def deviate
