@@ -12,147 +12,26 @@ module Moveable extend Trait
   Backwards  = :backwards;  def self.backwards  strength = 1.0; [Backwards,  strength] end
   # TODO Jump       = :jump
   
-  def self.included klass
-    klass.extend klass <= Thing ? ThingClassMethods : SpriteClassMethods
-  end
-  
-  module SpriteClassMethods
-    
-  end
-  
-  module ThingClassMethods
-    
-    # Initial setting.
-    #
-    def friction amount = nil, &block
-      to_execute = block_given? ? block : lambda { amount }
-      InitializerHooks.register self do
-        self.friction = to_execute[]
-      end
-    end
-    def velocity amount = nil, &block
-      to_execute = block_given? ? block : lambda { amount }
-      InitializerHooks.register self do
-        self.velocity = to_execute[]
-      end
-    end
-    def rotation amount = nil, &block
-      to_execute = block_given? ? block : lambda { amount }
-      InitializerHooks.register self do
-        self.rotation = to_execute[]
-      end
-    end
-    
-    def random_rotation
-      rotation { 2*Math::PI*rand }
-    end
-    
-  end
-  
-  # Directly set the position of our Moveable using a vector.
-  #
-  def warp vector
-    @shape.body.p = vector
-  end
-  
-  # Directly set the position of our Moveable.
-  #
-  def warp_to x, y
-    @shape.body.p = CP::Vec2.new(x, y)
-  end
-  
-  # Directly set the position of our Moveable.
-  #
-  def position= position
-    @shape.body.p = position
-  end
-  def position
-    @shape.body.p
-  end
-  
-  # Directly set the torque of our Moveable.
-  #
-  def torque= torque
-    @shape.body.t = torque
-  end
-  def torque
-    @shape.body.t
-  end
-  
-  # Directly set the speed of our Moveable.
-  #
-  def speed= v
-    @shape.body.v = v
-  end
-  def speed
-    @shape.body.v
-  end
-  def current_speed
-    speed.length
-  end
-  
-  # Directly set the rotation of our Moveable.
-  #
-  def rotation= rotation
-    @shape.body.a = rotation % (2*Math::PI)
-  end
-  def rotation
-    @shape.body.a
-  end
-  def drawing_rotation
-    self.rotation.radians_to_gosu
-  end
-  def rotation_vector
-    @shape.body.a.radians_to_vec2
-  end
-  
-  def friction= friction
-    @shape.u = friction
-  end
-  def friction
-    @shape.u
-  end
-  
-  # Length is the vector length you want.
-  #
-  # Note: radians_to_vec2
-  #
-  def rotation_as_vector length
-    rotation = -self.rotation + Math::PI / 2
-    x = Math.sin rotation
-    y = Math.cos rotation
-    total_length = Math.sqrt(x**2 + y**2)
-    multiplier = length / total_length
-    CP::Vec2.new(x * multiplier, y * multiplier)
-  end
-  
-  def move
-    
-  end
-  
-  # Methods for controls.
+  # Default methods for controls.
   #
   def accelerate strength = 1.0
     self.speed += self.rotation_vector * strength/SUBSTEPS
   end
   def move_left strength = 1.0
-    self.speed += CP::Vec2.new(-strength.to_f/SUBSTEPS, 0) 
+    self.speed += CP::Vec2.new(-strength.to_f/SUBSTEPS, 0)
   end
   def move_right strength = 1.0
-    self.speed += CP::Vec2.new(strength.to_f/SUBSTEPS, 0) 
+    self.speed += CP::Vec2.new(strength.to_f/SUBSTEPS, 0)
   end
   def move_up strength = 1.0
-    self.speed += CP::Vec2.new(0, -strength.to_f/SUBSTEPS) 
+    self.speed += CP::Vec2.new(0, -strength.to_f/SUBSTEPS)
   end
   def move_down strength = 1.0
-    self.speed += CP::Vec2.new(0, strength.to_f/SUBSTEPS) 
+    self.speed += CP::Vec2.new(0, strength.to_f/SUBSTEPS)
   end
   def backwards strength = 1.0
     accelerate -0.5*strength
   end
-  # def jump strength = 100
-  #   self.speed += CP::Vec2.new(0, -strength.to_f/SUBSTEPS) if self.current_speed <= 1
-  # end
   
   # Movement rules
   #

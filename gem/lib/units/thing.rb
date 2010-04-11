@@ -2,10 +2,6 @@
 #
 class Thing < Sprite
   
-  # TODO Move these up, perhaps?
-  #
-  it_is Moveable
-  
   attr_reader :shape
   
   def mass
@@ -13,6 +9,9 @@ class Thing < Sprite
   end
   def moment
     0.1
+  end
+  def friction
+    100.0
   end
   
   class << self
@@ -49,6 +48,19 @@ class Thing < Sprite
         amount
       end
     end
+    def friction amount
+      define_method :friction do
+        amount
+      end
+    end
+    # TODO needed?
+    #
+    def velocity amount = nil, &block
+      to_execute = block_given? ? block : lambda { amount }
+      InitializerHooks.register self do
+        self.velocity = to_execute[]
+      end
+    end
     
     def collision_type type
       to_execute = lambda do |shape|
@@ -62,6 +74,51 @@ class Thing < Sprite
       end
     end
     
+  end
+  
+  # Movement and Position
+  #
+  
+  #
+  #
+  def speed= v
+    @shape.body.v = v
+  end
+  def speed
+    @shape.body.v
+  end
+  #
+  #
+  def rotation= rotation
+    @shape.body.a = rotation % (2*Math::PI)
+  end
+  def rotation
+    @shape.body.a
+  end
+  #
+  #
+  def position= position
+    @shape.body.p = position
+  end
+  def position
+    @shape.body.p
+  end
+  
+  # Friction.
+  #
+  def friction= friction
+    @shape.u = friction
+  end
+  def friction
+    @shape.u
+  end
+  # Torque.
+  #
+  def torque= torque
+    @shape.body.t = torque
+  end
+  def torque
+    @shape.body.t
   end
   
 end

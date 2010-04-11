@@ -8,6 +8,7 @@ class Sprite
   include Imageable
   include InitializerHooks
   include ItIsA
+  it_is   Moveable
   
   attr_reader :window
   
@@ -35,6 +36,18 @@ class Sprite
       end
     end
     
+    #
+    #
+    def rotation amount = nil, &block
+      to_execute = block_given? ? block : lambda { amount }
+      InitializerHooks.register self do
+        self.rotation = to_execute[]
+      end
+    end
+    def random_rotation
+      rotation { 2*Math::PI*rand }
+    end
+    
     # Plays a random sound of the given sounds.
     #
     def plays paths, options = {}
@@ -44,6 +57,12 @@ class Sprite
         sound.play options[:volume] || 1.0
       end
     end
+    
+  end
+  
+  # Override this.
+  #
+  def move
     
   end
   
@@ -107,6 +126,37 @@ class Sprite
   end
   def current_size
     [1.0, 1.0] # default implementation - change this to [1.0, 2.0] if you want a "light" version ;)
+  end
+  
+  # Derived Position/Movement methods.
+  #
+  def warp vector
+    self.position = vector
+  end
+  # Directly set the position of our Moveable.
+  #
+  def warp_to x, y
+    self.position = CP::Vec2.new(x, y)
+  end
+  def drawing_rotation
+    self.rotation.radians_to_gosu
+  end
+  def rotation_vector
+    self.rotation.radians_to_vec2
+  end
+  def current_speed
+    speed.length
+  end
+  
+  # Movement and Position.
+  #
+  
+  #
+  #
+  attr_accessor :position, :speed
+  attr_reader :rotation
+  def rotation= rotation
+    @rotation = rotation % (2*Math::PI)
   end
   
 end
