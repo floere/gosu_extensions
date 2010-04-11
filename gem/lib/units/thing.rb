@@ -26,7 +26,7 @@ class Thing < Sprite
       define_method :radius do
         args.first # TODO fix!
       end
-      InitializerHooks.append self do
+      InitializerHooks.prepend self do
         shape_class = form_shape_class_mapping[form]
         raise "Shape #{form} does not exist." unless shape_class
         
@@ -76,6 +76,21 @@ class Thing < Sprite
     
   end
   
+  # Unregister with the environment if destroyed.
+  #
+  def destroy!
+    self.window.unregister self if super
+  end
+  
+  # Add this thing to an environment.
+  #
+  # Note: Adds the body and the shape.
+  #
+  def add_to environment
+    environment.add_body self.shape.body # could develop into adding multiple bodies
+    environment.add_shape self.shape
+  end
+  
   # Movement and Position
   #
   
@@ -89,8 +104,8 @@ class Thing < Sprite
   end
   #
   #
-  def rotation= rotation
-    @shape.body.a = rotation % (2*Math::PI)
+  def rotation= rot
+    @shape.body.a = rot % (2*Math::PI)
   end
   def rotation
     @shape.body.a
@@ -103,8 +118,7 @@ class Thing < Sprite
   def position
     @shape.body.p
   end
-  
-  # Friction.
+  #
   #
   def friction= friction
     @shape.u = friction
@@ -112,7 +126,7 @@ class Thing < Sprite
   def friction
     @shape.u
   end
-  # Torque.
+  # 
   #
   def torque= torque
     @shape.body.t = torque

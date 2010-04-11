@@ -25,6 +25,11 @@ class Sprite
   def layer
     Layer::Players
   end
+  # Default rotation is upwards.
+  #
+  def rotation
+    -Math::PI/2
+  end
   
   class << self
     
@@ -39,9 +44,12 @@ class Sprite
     #
     #
     def rotation amount = nil, &block
+      # Override default.
+      #
+      attr_reader :rotation
       to_execute = block_given? ? block : lambda { amount }
-      InitializerHooks.register self do
-        self.rotation = to_execute[]
+      InitializerHooks.append self do
+        @rotation = to_execute[]
       end
     end
     def random_rotation
@@ -94,13 +102,10 @@ class Sprite
     result
   end
   
-  # Add this thing to an environment.
   #
-  # Note: Adds the body and the shape.
   #
   def add_to environment
-    environment.add_body self.shape.body # could develop into adding multiple bodies
-    environment.add_shape self.shape
+    # A sprite is not added to the physical environment.
   end
   
   # Destroy this thing.
@@ -115,7 +120,6 @@ class Sprite
   def destroy!
     return if self.destroyed?
     self.destroyed!
-    self.window.unregister self
     self.destroyed = true
   end
   
@@ -154,7 +158,6 @@ class Sprite
   #
   #
   attr_accessor :position, :speed
-  attr_reader :rotation
   def rotation= rotation
     @rotation = rotation % (2*Math::PI)
   end
