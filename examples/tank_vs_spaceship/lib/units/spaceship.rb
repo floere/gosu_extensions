@@ -68,6 +68,15 @@ class Spaceship < Thing
     wrap_around_border_x # a helper method that makes the player wrap around the border
   end
   
+  # Smoke on accelerating.
+  #
+  def accelerate
+    super
+    sometimes :accelerating, 20 do
+      generate Smoke
+    end
+  end
+  
   # Generates a number of explosions and debris when destroyed!
   #
   def destroy!
