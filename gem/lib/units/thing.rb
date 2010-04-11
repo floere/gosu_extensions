@@ -1,6 +1,5 @@
-class Thing
+class Thing < Sprite
   
-  include VectorUtilities
   include InitializerHooks
   include ItIsA
   

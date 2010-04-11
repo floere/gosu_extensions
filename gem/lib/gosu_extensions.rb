@@ -58,6 +58,7 @@ require 'imageable'
 require 'short_lived'
 
 $:.unshift File.join(File.dirname(__FILE__), '/units')
+require 'sprite'
 require 'thing'
 
 DEFAULT_SCREEN_WIDTH  = 1200 unless defined?(DEFAULT_SCREEN_WIDTH)
