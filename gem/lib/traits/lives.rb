@@ -19,6 +19,7 @@ module Lives extend Trait
   
   def self.included target_class
     target_class.extend IncludeMethods
+    target_class.send :include, InstanceMethods
   end
   
   module IncludeMethods
@@ -26,19 +27,21 @@ module Lives extend Trait
     # Define the amount of lives in the class.
     #
     def lives amount
-      include InstanceMethods
-      class_inheritable_accessor :prototype_lives
-      self.prototype_lives = amount
-      
-      hook = lambda { self.lives = self.class.prototype_lives }
-      InitializerHooks.register self, &hook
+      InitializerHooks.register self do
+        self.lives = amount
+      end
+      attr_reader :lives # override the default
     end
     
   end
   
   module InstanceMethods
     
-    attr_accessor :lives
+    attr_writer :lives
+    
+    def lives
+      3
+    end
     
     # Does three things:
     # * Deduct 1 live.
