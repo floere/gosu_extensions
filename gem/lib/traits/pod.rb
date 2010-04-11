@@ -26,6 +26,7 @@ module Pod extend Trait
     
     def holds_attachments
       class_inheritable_accessor :prototype_attachments
+      self.prototype_attachments ||= []
       hook = lambda do
         self.class.prototype_attachments.each do |type, x, y|
           attach type.new(self.window), x, y
@@ -42,7 +43,6 @@ module Pod extend Trait
     #   attach Cannon, 30, 10
     #
     def attach type, x, y
-      self.prototype_attachments ||= []
       self.prototype_attachments << [type, x, y]
     end
     
@@ -50,18 +50,7 @@ module Pod extend Trait
   
   module InstanceMethods
     
-    def materialize attachment
-      attachment.extend Attachable # This is where Ruby shines.
-      window.register attachment
-    end
-    
-    #
-    #
-    def attachments
-      @attachments || @attachments = [] # TODO use Attachments.new
-    end
-    
-    #
+    # Attach an instance to this.
     #
     def attach attachment, x, y
       # TODO Move to better place.
@@ -72,10 +61,22 @@ module Pod extend Trait
       attachments << attachment
     end
     
-    #
+    # Detach an instance from this.
     #
     def detach attachment
       self.attachments.delete attachment if self.attachments
+    end
+    
+    
+    def materialize attachment
+      attachment.extend Attachable # This is where Ruby shines.
+      window.register attachment
+    end
+    
+    #
+    #
+    def attachments
+      @attachments || @attachments = [] # TODO use Attachments.new
     end
     
     #
