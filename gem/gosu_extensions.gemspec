@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{gosu_extensions}
-  s.version = "0.1.28"
+  s.version = "0.2.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Florian Hanke"]
-  s.date = %q{2010-04-09}
+  s.date = %q{2010-04-11}
   s.description = %q{}
   s.email = %q{florian.hanke@gmail.com}
   s.files = [
@@ -18,6 +18,7 @@ Gem::Specification.new do |s|
      "generator/gogogosu.rb",
      "lib/core/control.rb",
      "lib/core/controls.rb",
+     "lib/core/environment.rb",
      "lib/core/game_window.rb",
      "lib/core/initializer_hooks.rb",
      "lib/core/it_is_a.rb",
@@ -64,6 +65,7 @@ Gem::Specification.new do |s|
      "spec/lib/core/it_is_a_spec.rb",
      "spec/lib/core/layer_spec.rb",
      "spec/lib/core/moveables_spec.rb",
+     "spec/lib/core/remove_shapes_spec.rb",
      "spec/lib/core/trait_spec.rb",
      "spec/lib/core/traits_spec.rb",
      "spec/lib/extensions/module_spec.rb",
