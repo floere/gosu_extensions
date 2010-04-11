@@ -13,14 +13,14 @@ module Moveable extend Trait
   # TODO Jump       = :jump
   
   def self.included klass
-    if klass <= Thing
-      klass.extend ClassMethods
-    else
-      # extend with Sprite Moveable
-    end
+    klass.extend klass <= Thing ? ThingClassMethods : SpriteClassMethods
   end
   
-  module ClassMethods
+  module SpriteClassMethods
+    
+  end
+  
+  module ThingClassMethods
     
     # Initial setting.
     #
