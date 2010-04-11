@@ -48,8 +48,9 @@ class Spaceship < Thing
   #
   # Example: You can attach a Tank if you want.
   #
-  # it_is_a Pod
+  it_is_a Pod
   # attach Tank, 0, 25
+  # attach Tank, 0, -25
   
   # Controllable
   #

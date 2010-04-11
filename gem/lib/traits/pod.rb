@@ -58,7 +58,7 @@ module Pod extend Trait
     #
     #
     def attachments
-      @attachments || @attachments = []
+      @attachments || @attachments = [] # TODO use Attachments.new
     end
     
     #
