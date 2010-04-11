@@ -116,10 +116,12 @@ describe Thing do
     end
     context 'non-default' do
       before(:each) do
-        @thing.layer = :non_default_layer
+        class Thong < Thing
+          layer :non_default_layer
+        end
       end
       it "should be on the non default layer" do
-        @thing.layer.should == :non_default_layer
+        Thong.new(:some_window).layer.should == :non_default_layer
       end
     end
   end
