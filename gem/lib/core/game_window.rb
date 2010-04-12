@@ -247,7 +247,7 @@ class GameWindow < Gosu::Window
     @environment.window = self
     @environment.damping = -self.damping + 1 # recalculate the damping such that 0.0 has no damping.
   end
-  # Callbacks:
+  # Callbacks.
   #
   def setup_players; end
   def setup_enemies; end
