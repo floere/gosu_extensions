@@ -4,6 +4,8 @@ class Collision
   #
   None   = nil       # do not collide
   Simple = lambda {} # just collide
+  # Kill   = lambda { kill! }
+  # Damage = lambda { damage! }
   
   #
   #
