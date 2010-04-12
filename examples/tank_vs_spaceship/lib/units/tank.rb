@@ -30,25 +30,11 @@ class Tank < Thing
            Gosu::Button::KbDown => :righten
   lives 3
   
-  # Pod
-  #
-  # attach Missile, 30, 30
-  
   #
   #
   shape :circle, 11.0
   friction 100.0       # TODO Remove these
   rotation -Math::PI/2 # TODO Remove these
-  
-  # TODO
-  #
-  # acceleration
-  # top_speed
-  #
-  
-  # Turnable
-  #
-  # turn_speed 0.5 # turns per second
   
   collision_type :player
   
