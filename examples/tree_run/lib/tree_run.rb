@@ -29,7 +29,7 @@ class TreeRun < GameWindow
   # full_screen
   
   caption "Tree Run - A Suicidal Freeski Undertaking"
-  background 'background.png', :hard_borders => false
+  background 'background.png'
   
   damping 0.5
   gravity 0.0
@@ -38,7 +38,7 @@ class TreeRun < GameWindow
   no_collision :ambient, :obstacle
   no_collision :ambient, :player
   collision(:player, :obstacle) { slam! } # slam!s the player
-  collision :player # players collide
+  collision :player # players do collide - you can also omit this, it will work
   # collision :player, :player do |player1, player2| # they will collide
   #   # do something with player 1
   #   # do something with player 2
