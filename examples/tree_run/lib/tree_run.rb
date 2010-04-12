@@ -44,6 +44,10 @@ class TreeRun < GameWindow
   #   # do something with player 2
   # end
   
+  attr_accessor :steepness, :tree_density
+  
+  # Callbacks
+  #
   def setup_players
     # Player 1
     #
@@ -71,14 +75,10 @@ class TreeRun < GameWindow
     
     @players.each {|p| register p}
   end
-  
-  attr_accessor :steepness, :tree_density
-  
   def after_setup
     self.steepness    = 0.3
     self.tree_density = 0.01
   end
-  
   def step
     factor = @players.map { |p| p.position.y }.max / height
     self.steepness    = 0.3  + 2*factor
@@ -87,31 +87,28 @@ class TreeRun < GameWindow
     @players.each(&:add_points)
     create_trees
   end
-  
   # Stopping condition
   #
   stop_on { game_over? }
-  
   def after_stopping
     self.steepness    = 0
     self.tree_density = 0
     display_end_message
   end
   
+  # Tree Run methods.
+  #
   def game_over?
     @players.any?(&:destroyed?)
   end
-  
   def winner
     @players.sort_by(&:points).last
   end
-  
   def display_end_message
     self.font.draw "Game Over - #{winner.name} won!", window.width/2-120, 10, Layer::UI, 1.0, 1.0, 0xff000000
     
     after(300) { close }
   end
-  
   def create_trees
     return unless rand > 1 - tree_density
     
