@@ -73,50 +73,33 @@ class TreeRun < GameWindow
   
   attr_accessor :steepness, :tree_density
   
-  def setup_environment
-    start_game
-    super
-  end
-  
-  def next_step
-    
-    display_points
-    
-    # game end
-    if game_over?
-      stop_game
-      display_end_message
-    else
-      # speed and stuff
-      proceed_game
-    
-      # trees
-      create_trees
-    end
-    
-    super
-  end
-  
-  def game_over?
-    @players.any?(&:destroyed?)
-  end
-  
-  def start_game
+  def after_setup
     self.steepness    = 0.3
     self.tree_density = 0.01
   end
   
-  def stop_game
-    self.steepness    = 0
-    self.tree_density = 0
-  end
-  
-  def proceed_game
-    factor = @players.map {|p| p.position.y}.max / height
+  def step
+    display_points
+    factor = @players.map { |p| p.position.y }.max / height
     self.steepness    = 0.3  + 2*factor
     self.tree_density = 0.01 + 0.1*factor
     
     @players.each(&:add_points)
+    create_trees
+  end
+  
+  # Stopping condition
+  #
+  stop_on { game_over? }
+  
+  def after_stopping
+    self.steepness    = 0
+    self.tree_density = 0
+    display_end_message
+  end
+  
+  def game_over?
+    @players.any?(&:destroyed?)
   end
   
   def winner
@@ -127,12 +110,11 @@ class TreeRun < GameWindow
   def display_end_message
     self.font.draw "Game Over - #{winner.name} won!", window.width/2-120, 10, Layer::UI, 1.0, 1.0, 0xff000000
     
-    @should_quit ||= 0; @should_quit += 1
-    if @should_quit > 300
-      close
-    end
+    after(300) { close }
   end
   
+  # Metaprogram.
+  #
   def display_points
     self.font.draw "#{@player1.points.to_i} points", 20, 10, Layer::UI, 1.0, 1.0, 0xff000000
     self.font.draw "#{@player2.points.to_i} points", window.width-120, 10, Layer::UI, 1.0, 1.0, 0xff000000
@@ -141,9 +123,7 @@ class TreeRun < GameWindow
   def create_trees
     return unless rand > 1 - tree_density
     
-    tree = Tree.new self
-    tree.warp_to rand(window.width), window.height
-    window.register tree
+    add Tree, rand(width), height
   end
   
 end

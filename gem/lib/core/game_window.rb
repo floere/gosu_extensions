@@ -32,7 +32,8 @@ class GameWindow < Gosu::Window
               :scheduling,
               :collisions
   attr_accessor :background_path,
-                :background_hard_borders
+                :background_hard_borders,
+                :stop_condition
   
   def initialize
     setup_window
@@ -64,6 +65,8 @@ class GameWindow < Gosu::Window
     setup_collisions
     
     install_main_loop
+    
+    after_setup
   end
   
   # This is the main game loop.
@@ -172,6 +175,18 @@ class GameWindow < Gosu::Window
       end
     end
     
+    # Stop the game if this condition is true.
+    #
+    # Block will instance eval in the window.
+    #
+    # Use the callback after_stopping.
+    #
+    def stop_on &condition
+      InitializerHooks.register self do
+        self.stop_condition = condition
+      end
+    end
+    
   end
   
   # Setup methods
@@ -219,11 +234,16 @@ class GameWindow < Gosu::Window
     @environment.window = self
     @environment.damping = -self.damping + 1 # recalculate the damping such that 0.0 has no damping.
   end
-  # Override.
+  # Callbacks:
   #
   def setup_players; end
   def setup_enemies; end
   def setup_waves; end
+  def after_setup; end
+  def after_stopping; end
+  def before_proceeding; end
+  def step; end # The most important callback
+  
   #
   #
   # Example:
@@ -255,11 +275,27 @@ class GameWindow < Gosu::Window
   def update
     @current_loop.call
   end
+  def stop
+    @current_loop = lambda do
+      # TODO proceed if proceed condition given.
+      advance_step
+    end
+    after_stopping
+  end
+  def proceed
+    before_proceeding
+    @current_loop = main_loop
+  end
   # Advances to the next step in the game.
   #
-  def next_step
+  def advance_step
     @step += 1
     @scheduling.step
+  end
+  def next_step
+    stop if stop_condition && instance_eval(&stop_condition)
+    advance_step
+    step
   end
   # Each step, this is called to handle any input.
   #
@@ -339,6 +375,7 @@ class GameWindow < Gosu::Window
   def threaded time = 1, &code
     @scheduling.add time, &code
   end
+  alias after threaded
   
   
   # Utility Methods
@@ -352,10 +389,14 @@ class GameWindow < Gosu::Window
   end
   # Randomly adds a Thing to a uniform random position.
   #
-  def randomly_add type
+  def add type, x = nil, y = nil, &random_function
     thing = type.new self
-    thing.warp_to *uniform_random_position
+    position = x && y && [x, y] || random_function && random_function[]
+    thing.warp_to *position
     register thing
+  end
+  def randomly_add type
+    add type, *uniform_random_position
   end
   # Revives the player if not already in.
   #
