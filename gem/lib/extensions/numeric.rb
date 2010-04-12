@@ -6,4 +6,10 @@ class Numeric
     CP::Vec2.new Math::cos(self), Math::sin(self)
   end
   
+  # Returns whether the number is close to the given one.
+  #
+  def close_to? number, e
+    self < (number+e) && self > (number-e)
+  end
+  
 end

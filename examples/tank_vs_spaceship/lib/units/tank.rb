@@ -58,9 +58,10 @@ class Tank < Thing
     self.rotation += (self.rotation + Math::PI/2) % (2*Math::PI)/5_000
   end
   
+  #
+  #
   def upright?
-    # TODO self.rotation.close_to 4.75, :e => 0.05
-    self.rotation < 4.72 && self.rotation > 4.70
+    self.rotation.close_to? 4.71, 0.01
   end
   
   # Generates a number of explosions when destroyed!
