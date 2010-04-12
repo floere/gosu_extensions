@@ -17,7 +17,7 @@ require 'lib/units/jeep'
 
 Resources.root = File.join File.dirname(__FILE__), 'media'
 
-require 'lib/window'
+require 'lib/mad_fred'
 
-window = Window.new
+window = MadFred.new
 window.show

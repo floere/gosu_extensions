@@ -9,7 +9,7 @@ class Bullet < Thing
   it_is_a Shot
   
   shape :circle, 1.0
-  mass 5
+  mass 50
   moment 0.1
   friction 0.01
   velocity { 20 + rand }

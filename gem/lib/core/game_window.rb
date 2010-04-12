@@ -159,7 +159,11 @@ class GameWindow < Gosu::Window
     
     attr_accessor :collisions
     def no_collision this, that = this
-      collision this, that, &Collision::None
+      # Doesn't work, as &nil == nil
+      # collision this, that, &Collision::None
+      InitializerHooks.register self do
+        self.collisions << Collision.new(self, this, that)
+      end
     end
     def collision this, that = this, &definition
       definition ||= Collision::Simple

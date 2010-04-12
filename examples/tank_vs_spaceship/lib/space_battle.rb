@@ -34,19 +34,14 @@ class SpaceBattle < GameWindow
   
   gravity 0.2
   
-  collisions do
-    add_collision_func :ambient, :ambient, &nil
-    add_collision_func :ambient, :player, &nil
-    add_collision_func :projectile, :projectile, &nil
-    add_collision_func :projectile, :player do |projectile_shape, player_shape|
-      window.remove projectile_shape
-      window.moveables.each do |possible_player|
-        if possible_player.shape == player_shape
-          possible_player.kill! 
-          possible_player.draw_ui
-        end
-      end
-    end
+  no_collision :ambient
+  no_collision :ambient, :player
+  no_collision :projectile
+  no_collision :projectile, :ambient
+  collision :player, :projectile do |player, projectile|
+    projectile.destroy!
+    player.kill!
+    player.draw_ui
   end
   
   # Overridden, called in the setup.
