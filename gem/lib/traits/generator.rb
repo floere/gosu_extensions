@@ -64,6 +64,8 @@ end
     
     # Returns the generated thing.
     #
+    # TODO generate klass, times = 1, &after_generation ?
+    #
     def generate klass
       generated = klass.new self.window
       generated.warp self.position
