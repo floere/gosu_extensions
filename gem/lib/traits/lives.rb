@@ -43,14 +43,17 @@ module Lives extend Trait
       3
     end
     
+    # Override to handle killed!
+    #
+    def killed!
+      
+    end
+    
     # Does three things:
     # * Deduct 1 live.
     # * Check to see if the amount is 0.
     # * Calls #destroy! if yes.
     #
-    def killed!
-      
-    end
     def kill!
       self.lives -= 1
       killed! if self.lives > 0

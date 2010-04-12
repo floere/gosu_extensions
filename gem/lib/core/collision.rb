@@ -35,11 +35,10 @@ class Collision
   #
   def simple_package definition
     lambda do |this_shape, _|
-      # TODO break if found.
-      #
-      window.moveables.each do |movable|
-        if movable.shape == this_shape
-          movable.instance_eval &definition
+      window.moveables.each do |moveable|
+        if moveable.shape == this_shape
+          moveable.instance_eval &definition
+          break
         end
       end
     end
@@ -50,15 +49,14 @@ class Collision
   def complex_package definition
     lambda do |this_shape, that_shape|
       this_that = Array.new(2)
-      # TODO break if found
-      #
-      window.moveables.each do |movable|
-        if movable.shape == this_shape
-          this_that[0] = movable
+      window.moveables.each do |moveable|
+        if moveable.shape == this_shape
+          this_that[0] = moveable
         end
-        if movable.shape == that_shape
-          this_that[1] = movable
+        if moveable.shape == that_shape
+          this_that[1] = moveable
         end
+        break if this_that.all?
       end
       definition.call *this_that
     end

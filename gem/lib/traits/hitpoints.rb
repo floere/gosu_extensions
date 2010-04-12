@@ -47,6 +47,7 @@ module Hitpoints extend Trait
     def hit!
       
     end
+    
     # Hit the thing with that much damage.
     #
     # hit!-s if hitpoints higher than 0
@@ -55,15 +56,8 @@ module Hitpoints extend Trait
     #
     def hit damage = 1
       self.hitpoints -= damage
-      if self.hitpoints > 0
-        hit!
-      else
-        if respond_to?(:kill!)
-          kill!
-        else
-          destroy!
-        end
-      end
+      hit! if hitpoints > 0
+      respond_to?(:kill!) ? kill! : destroy! if hitpoints == 0
     end
     
   end

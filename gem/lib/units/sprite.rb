@@ -46,7 +46,7 @@ class Sprite
     def rotation amount = nil, &block
       # Override default.
       #
-      to_execute = block_given? ? block : lambda { amount }
+      to_execute = block || lambda { amount }
       InitializerHooks.append self do
         self.rotation = to_execute[]
       end

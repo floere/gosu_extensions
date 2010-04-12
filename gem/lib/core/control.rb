@@ -13,7 +13,7 @@ class Control
   #
   #
   def mapping?
-    @mapping && !@mapping.empty?
+    @mapping.present?
   end
   
   # 
