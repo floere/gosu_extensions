@@ -1,12 +1,12 @@
-# TODO optimize
+# Holds the moveables that are moved and drawn.
 #
 class Moveables
+  
+  delegate :each, :to => :@elements
   
   def initialize elements = []
     @elements = elements
   end
-  
-  delegate :each, :to => :@elements
   
   def register moveable
     @elements << moveable
