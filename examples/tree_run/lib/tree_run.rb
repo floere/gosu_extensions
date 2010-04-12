@@ -34,19 +34,15 @@ class TreeRun < GameWindow
   damping 0.5
   gravity 0.0
   
-  collisions do
-    add_collision_func :ambient, :ambient, &nil
-    add_collision_func :ambient, :obstacle, &nil
-    add_collision_func :ambient, :player, &nil
-    # add_collision_func :player, :player
-    add_collision_func :player, :obstacle do |player_shape, obstacle_shape|
-      window.moveables.each do |movable|
-        if movable.shape == player_shape
-          movable.slam!
-        end
-      end
-    end
-  end
+  no_collision :ambient # no collisions between ambients
+  no_collision :ambient, :obstacle
+  no_collision :ambient, :player
+  collision(:player, :obstacle) { slam! } # slam!s the player
+  collision :player # players collide
+  # collision :player, :player do |player1, player2| # they will collide
+  #   # do something with player 1
+  #   # do something with player 2
+  # end
   
   def setup_players
     # player 1

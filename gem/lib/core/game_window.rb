@@ -29,7 +29,8 @@ class GameWindow < Gosu::Window
   attr_reader :environment,
               :moveables,
               :font,
-              :scheduling
+              :scheduling,
+              :collisions
   attr_accessor :background_path,
                 :background_hard_borders
   
@@ -39,6 +40,8 @@ class GameWindow < Gosu::Window
     setup_remove_shapes
     setup_controls
     setup_window_control # e.g. ESC => exits
+    
+    @collisions = []
     
     after_initialize
     
@@ -153,12 +156,18 @@ class GameWindow < Gosu::Window
         self.full_screen = true
       end
     end
-    def collisions &block
-      raise "collisions are defined in a block" unless block_given?
+    
+    attr_accessor :collisions
+    def no_collision this, that = this
+      collision this, that, &Collision::None
+    end
+    def collision this, that = this, &definition
+      definition ||= Collision::Simple
       InitializerHooks.register self do
-        @collision_definitions = block
+        self.collisions << Collision.new(self, this, that, &definition)
       end
     end
+    
   end
   
   # Setup methods
@@ -218,7 +227,7 @@ class GameWindow < Gosu::Window
   #     add_collision_func ...
   #
   def setup_collisions
-    self.environment.instance_eval &@collision_definitions if @collision_definitions
+    self.collisions.each { |collision| collision.install_on(environment) }
   end
   
   # Add controls for a player.
