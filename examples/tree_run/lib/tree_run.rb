@@ -70,7 +70,6 @@ class TreeRun < GameWindow
     @players << @player2
     
     @players.each {|p| register p}
-    super
   end
   
   attr_accessor :steepness, :tree_density
@@ -104,7 +103,6 @@ class TreeRun < GameWindow
   end
   
   def winner
-    return unless game_over?
     @players.sort_by(&:points).last
   end
   
