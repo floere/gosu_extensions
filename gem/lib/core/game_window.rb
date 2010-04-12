@@ -33,7 +33,8 @@ class GameWindow < Gosu::Window
               :collisions
   attr_accessor :background_path,
                 :background_hard_borders,
-                :stop_condition
+                :stop_condition,
+                :proceed_condition
   
   def initialize
     setup_window
@@ -187,6 +188,14 @@ class GameWindow < Gosu::Window
       end
     end
     
+    # # Proceed if this condition is true.
+    # #
+    # def proceed_on &condition
+    #   InitializerHooks.register self do
+    #     self.proceed_condition = condition
+    #   end
+    # end
+    
   end
   
   # Setup methods
@@ -277,8 +286,9 @@ class GameWindow < Gosu::Window
   end
   def stop
     @current_loop = lambda do
-      # TODO proceed if proceed condition given.
+      proceed if proceed_condition && instance_eval(&proceed_condition)
       advance_step
+      # TODO stopped
     end
     after_stopping
   end

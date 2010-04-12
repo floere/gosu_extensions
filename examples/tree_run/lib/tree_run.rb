@@ -113,8 +113,6 @@ class TreeRun < GameWindow
     after(300) { close }
   end
   
-  # Metaprogram.
-  #
   def display_points
     self.font.draw "#{@player1.points.to_i} points", 20, 10, Layer::UI, 1.0, 1.0, 0xff000000
     self.font.draw "#{@player2.points.to_i} points", window.width-120, 10, Layer::UI, 1.0, 1.0, 0xff000000
