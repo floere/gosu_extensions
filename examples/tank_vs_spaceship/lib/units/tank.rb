@@ -77,24 +77,13 @@ class Tank < Thing
     self.rotation < 4.72 && self.rotation > 4.70
   end
   
-  # TODO explosive death
-  #
   # Generates a number of explosions when destroyed!
   #
   def destroyed!
     20.times do
-      explosion = SmallExplosion.new window
-      explosion.warp position + random_vector(rand(50))
-      window.register explosion
+      explosion = generate SmallExplosion
+      explosion.position += random_vector(rand(50))
     end
-  end
-  
-  # def killed!
-  #   @ui = ["Tank hit!: #{lives} lives remain.", window.width-220, 10, Layer::UI, 1.0, 1.0, 0xffff0000]
-  # end
-  
-  def draw_ui
-    window.font.draw *@ui if @ui
   end
   
 end
