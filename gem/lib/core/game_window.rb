@@ -283,7 +283,7 @@ class GameWindow < Gosu::Window
   # Main loop methods.
   #
   
-  # TODO implement hooks.
+  #
   #
   def update
     @current_loop.call
@@ -293,7 +293,6 @@ class GameWindow < Gosu::Window
       proceed if proceed_condition && instance_eval(&proceed_condition)
       advance_step
       handle_input
-      # TODO stopped
     end
     after_stopping
   end

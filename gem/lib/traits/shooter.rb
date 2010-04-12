@@ -5,7 +5,7 @@ module Shooter extend Trait
   manual <<-MANUAL
     Defines:
       range <some range> # This is only needed for targeted shooting, e.g. automatic cannons
-      frequency <some shooting frequency> # TODO block
+      frequency <some shooting frequency>
       shoots <class:thing>
       muzzle_position { position calculation } || frontal # a block
       muzzle_velocity { velocity calculation }
@@ -39,6 +39,8 @@ module Shooter extend Trait
         self.shooting_range = amount
       end
     end
+    # TODO block
+    #
     def frequency amount
       InitializerHooks.register self do
         self.shooting_rate = ((SUBSTEPS**2).to_f/amount)/2

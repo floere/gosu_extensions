@@ -9,7 +9,7 @@ module Targeting
     # TODO fire arc
     #
     def acquire *targets
-      targets.sort_by {|target| distance = (target.position - self.position).length }.first
+      targets.sort_by { |target| (target.position - self.position).length }.first
     end
   end
   

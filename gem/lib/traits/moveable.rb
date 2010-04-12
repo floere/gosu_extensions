@@ -1,7 +1,5 @@
 # A moveable has a shape, speed etc.
 #
-# TODO moveable should only have active components, like accelerate etc. Positioning etc. should go to Thing.
-#
 module Moveable extend Trait
   
   Accelerate = :accelerate; def self.accelerate strength = 1.0; [Accelerate, strength] end
@@ -10,7 +8,6 @@ module Moveable extend Trait
   Up         = :move_up;    def self.up         strength = 1.0; [Up,         strength] end
   Down       = :move_down;  def self.down       strength = 1.0; [Down,       strength] end
   Backwards  = :backwards;  def self.backwards  strength = 1.0; [Backwards,  strength] end
-  # TODO Jump       = :jump
   
   # Default methods for controls.
   #
@@ -34,6 +31,8 @@ module Moveable extend Trait
   end
   
   # Movement rules
+  #
+  # TODO Move to Sprite?
   #
   # Note: Call in method move.
   #

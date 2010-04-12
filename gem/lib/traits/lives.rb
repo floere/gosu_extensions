@@ -2,9 +2,6 @@
 #
 module Lives extend Trait
   
-  # TODO def revive!
-  #
-  
   # Prints an amount of information on these capabilities.
   #
   manual <<-MANUAL
