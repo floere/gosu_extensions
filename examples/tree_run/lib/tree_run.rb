@@ -45,26 +45,26 @@ class TreeRun < GameWindow
   # end
   
   def setup_players
-    # player 1
+    # Player 1
+    #
     @player1 = Skier.new(self)
     @player1.name = "Player 1"
-    @controls << Control.new(self, @player1,
-      Gosu::Button::KbA => Moveable.left(2),
-      Gosu::Button::KbD => Moveable.right(2),
-      Gosu::Button::KbS => Moveable::Down,
-      Gosu::Button::KbW => Moveable::Up)
+    @player1.controls(Gosu::Button::KbA => Moveable.left(2),
+                      Gosu::Button::KbD => Moveable.right(2),
+                      Gosu::Button::KbS => Moveable::Down,
+                      Gosu::Button::KbW => Moveable::Up)
     @player1.warp_to width/3, height/3
     @player1.ui 20, 10, Gosu::Color::BLACK do "#{points.to_i} points" end
     @players << @player1
     
-    # player 2
+    # Player 2
+    #
     @player2 = Skier.new(self)
     @player2.name = "Player 2"
-    @controls << Control.new(self, @player2,
-      Gosu::Button::KbJ => Moveable.left(2),
-      Gosu::Button::KbL => Moveable.right(2),
-      Gosu::Button::KbK => Moveable::Down,
-      Gosu::Button::KbI => Moveable::Up)
+    @player2.controls(Gosu::Button::KbJ => Moveable.left(2),
+                      Gosu::Button::KbL => Moveable.right(2),
+                      Gosu::Button::KbK => Moveable::Down,
+                      Gosu::Button::KbI => Moveable::Up)
     @player2.warp_to width-width/3, height/3
     @player2.ui width-120, 10, Gosu::Color::BLACK do "#{points.to_i} points" end
     @players << @player2

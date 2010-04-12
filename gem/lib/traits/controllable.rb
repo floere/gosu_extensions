@@ -26,10 +26,20 @@ module Controllable extend Trait
       attr_accessor :controls_mapping
       InitializerHooks.register self do
         self.controls_mapping = mapping
-        self.window.add_controls_for self
+        self.controls
       end
     end
     
+  end
+  
+  # You can add controls dynamically.
+  #
+  # Provide a hash of mappings:
+  #   player_one.controls Gosu::Button::KbA => Turnable::Left,
+  #                       Gosu::Button::KbD => Turnable::Right
+  #
+  def controls mapping = nil
+    self.window.add_controls_for self, mapping
   end
   
 end

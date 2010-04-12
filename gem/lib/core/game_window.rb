@@ -276,8 +276,8 @@ class GameWindow < Gosu::Window
   #                              Gosu::Button::KbS => :reverse,
   #                              Gosu::Button::Kb1 => :revive
   #
-  def add_controls_for object
-    @controls << Control.new(self, object)
+  def add_controls_for object, mapping = nil
+    @controls << Control.new(self, object, mapping)
   end
   
   # Main loop methods.

@@ -6,6 +6,19 @@ describe Controllable do
     @window = stub :window
   end
   
+  describe "controls" do
+    before(:each) do
+      @controllable = test_class_with(Controllable).new @window
+    end
+    it "should return the mapping" do
+      mapping = stub :mapping
+      
+      @window.should_receive(:add_controls_for).once.with @controllable, mapping
+      
+      @controllable.controls mapping
+    end
+  end
+  
   describe "add_controls_for" do
     before(:each) do
       @controllable_class = test_class_with Controllable do
