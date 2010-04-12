@@ -26,6 +26,7 @@ class Jeep < Thing
   
   def move
     obey_gravity
+    bounce_off_border_x
     bounce_off_bottom_border_y
   end
   def bounce_off_bottom_border_y
