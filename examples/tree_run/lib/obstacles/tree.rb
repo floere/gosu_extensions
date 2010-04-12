@@ -12,7 +12,7 @@ class Tree < Thing
   
   def move
     self.position.y -= window.steepness
-    on_hitting_y { destroy!; return }
+    on_hitting_y { destroy! }
   end
   
 end
