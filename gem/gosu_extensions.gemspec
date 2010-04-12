@@ -5,10 +5,10 @@
 
 Gem::Specification.new do |s|
   s.name = %q{gosu_extensions}
-  s.version = "0.2.5"
+  s.version = "0.2.6"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.authors = ["Florian Hanke"]
+  s.authors = ["Florian Hanke", "Severin Schoepke (various improvements)"]
   s.date = %q{2010-04-12}
   s.description = %q{}
   s.email = %q{florian.hanke@gmail.com}
