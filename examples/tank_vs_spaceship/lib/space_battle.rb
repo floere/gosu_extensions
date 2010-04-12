@@ -70,10 +70,4 @@ class SpaceBattle < GameWindow
     # @waves.add 150, Tank, 5, &Wave.top_border(-100)
   end
   
-  # TODO to FW
-  #
-  def draw_ui
-    @players.each(&:draw_ui)
-  end
-  
 end

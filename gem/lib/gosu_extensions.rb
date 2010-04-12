@@ -41,6 +41,7 @@ require 'controls'
 require 'layer'
 
 $:.unshift File.join(File.dirname(__FILE__), '/traits')
+require 'user_interface'
 require 'pod'
 require 'attachable'
 require 'damaging'

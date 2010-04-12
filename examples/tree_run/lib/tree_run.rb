@@ -53,7 +53,8 @@ class TreeRun < GameWindow
       Gosu::Button::KbD => Moveable.right(2),
       Gosu::Button::KbS => Moveable::Down,
       Gosu::Button::KbW => Moveable::Up)
-    @player1.warp_to window.width/3, window.height/3
+    @player1.warp_to width/3, height/3
+    @player1.ui 20, 10, Gosu::Color::BLACK do "#{points.to_i} points" end
     @players << @player1
     
     # player 2
@@ -64,7 +65,8 @@ class TreeRun < GameWindow
       Gosu::Button::KbL => Moveable.right(2),
       Gosu::Button::KbK => Moveable::Down,
       Gosu::Button::KbI => Moveable::Up)
-    @player2.warp_to window.width-window.width/3, window.height/3
+    @player2.warp_to width-width/3, height/3
+    @player2.ui width-120, 10, Gosu::Color::BLACK do "#{points.to_i} points" end
     @players << @player2
     
     @players.each {|p| register p}
@@ -79,7 +81,6 @@ class TreeRun < GameWindow
   end
   
   def step
-    display_points
     factor = @players.map { |p| p.position.y }.max / height
     self.steepness    = 0.3  + 2*factor
     self.tree_density = 0.01 + 0.1*factor
@@ -113,11 +114,6 @@ class TreeRun < GameWindow
     after(300) { close }
   end
   
-  def display_points
-    self.font.draw "#{@player1.points.to_i} points", 20, 10, Layer::UI, 1.0, 1.0, 0xff000000
-    self.font.draw "#{@player2.points.to_i} points", window.width-120, 10, Layer::UI, 1.0, 1.0, 0xff000000
-  end
-
   def create_trees
     return unless rand > 1 - tree_density
     

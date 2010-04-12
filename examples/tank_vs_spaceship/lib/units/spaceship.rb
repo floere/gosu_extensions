@@ -4,7 +4,9 @@ class Spaceship < Thing
   
   it_is_a Turnable, Shooter, Controllable, Generator
   it_is Targetable
-  it_has Lives, Hitpoints
+  it_has Lives, Hitpoints, UserInterface
+  
+  ui 10, 10, 0xff0000ff do "Spaceship: #{lives} lives" end
   
   generates Smoke, :every => 10, :until => 100
   
@@ -105,11 +107,6 @@ class Spaceship < Thing
     # For fun:
     #
     # attach Tank.new(window), 0, rand(100)+20
-    @ui = ["Spaceship hit!: #{lives} lives remain.", 10, 10, Layer::UI, 1.0, 1.0, 0xff0000ff]
-  end
-  
-  def draw_ui
-    window.font.draw *@ui if @ui
   end
   
 end

@@ -54,6 +54,7 @@ class GameWindow < Gosu::Window
     setup_steps
     setup_scheduling
     setup_font
+    setup_uis
     
     setup_containers
     
@@ -235,6 +236,9 @@ class GameWindow < Gosu::Window
   def setup_font
     @font = Gosu::Font.new self, self.font_name, self.font_size
   end
+  def setup_uis
+    @uis = []
+  end
   def setup_environment
     @environment = Environment.new
     class << @environment
@@ -288,6 +292,7 @@ class GameWindow < Gosu::Window
     @current_loop = lambda do
       proceed if proceed_condition && instance_eval(&proceed_condition)
       advance_step
+      handle_input
       # TODO stopped
     end
     after_stopping
@@ -354,8 +359,18 @@ class GameWindow < Gosu::Window
   #       end
   #
   def unregister thing
+    # explicitly call unregister_ui thing if you want it
     remove thing.shape
   end
+  # Register a user interfaceable object.
+  #
+  def register_ui thing
+    @uis << thing
+  end
+  def unregister_ui thing
+    @uis.delete thing
+  end
+  
   # Remove this shape the next turn.
   #
   # Note: Internal use. Use unregister to properly remove a moveable.
@@ -444,7 +459,7 @@ class GameWindow < Gosu::Window
   # @font.draw "P1 Score: ", 10, 10, ZOrder::UI, 1.0, 1.0, 0xffff0000
   #
   def draw_ui
-    
+    @uis.each(&:draw_ui)
   end
   #
   #

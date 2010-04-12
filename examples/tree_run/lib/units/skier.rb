@@ -3,6 +3,7 @@ class Skier < Thing
   image 'skier/red.png'
   
   it_is Controllable
+  it_has UserInterface
            
   it_has Lives
   lives 1

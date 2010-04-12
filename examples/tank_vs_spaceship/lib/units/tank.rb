@@ -4,6 +4,9 @@ class Tank < Thing
   
   it_is_a Generator
   it_is Targetable
+  it_has UserInterface
+  
+  ui 900, 10, 0xffff0000 do "Tank: #{lives} lives" end
   
   # Thing
   #
@@ -86,9 +89,9 @@ class Tank < Thing
     end
   end
   
-  def killed!
-    @ui = ["Tank hit!: #{lives} lives remain.", window.width-220, 10, Layer::UI, 1.0, 1.0, 0xffff0000]
-  end
+  # def killed!
+  #   @ui = ["Tank hit!: #{lives} lives remain.", window.width-220, 10, Layer::UI, 1.0, 1.0, 0xffff0000]
+  # end
   
   def draw_ui
     window.font.draw *@ui if @ui
