@@ -5,17 +5,18 @@
 
 Gem::Specification.new do |s|
   s.name = %q{gosu_extensions}
-  s.version = "0.2.2"
+  s.version = "0.2.3"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Florian Hanke"]
-  s.date = %q{2010-04-11}
+  s.date = %q{2010-04-12}
   s.description = %q{}
   s.email = %q{florian.hanke@gmail.com}
   s.files = [
     "Rakefile",
      "VERSION",
      "generator/gogogosu.rb",
+     "lib/core/collision.rb",
      "lib/core/control.rb",
      "lib/core/controls.rb",
      "lib/core/environment.rb",
@@ -60,7 +61,8 @@ Gem::Specification.new do |s|
   s.rubygems_version = %q{1.3.6}
   s.summary = %q{Default extensions built onto the popular Gosu Framework. Uses Chipmunk for game physics. That's it for now. I'm working on them. Anyway, GAME ON!}
   s.test_files = [
-    "spec/lib/core/control_spec.rb",
+    "spec/lib/core/collision_spec.rb",
+     "spec/lib/core/control_spec.rb",
      "spec/lib/core/controls_spec.rb",
      "spec/lib/core/initializer_hooks_spec.rb",
      "spec/lib/core/it_is_a_spec.rb",
