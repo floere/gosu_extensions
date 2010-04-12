@@ -18,11 +18,12 @@ class Collision
     @definition = definition && package(definition)
   end
   
-  #
+  # TODO Extend the definition to incorporate this
+  #      method. Or at least #complex, #simple.
   #
   def package definition
     if definition.arity == 2
-      complicated_package definition
+      complex_package definition
     else
       simple_package definition
     end
@@ -44,7 +45,7 @@ class Collision
   
   #
   #
-  def complicated_package definition
+  def complex_package definition
     lambda do |this_shape, that_shape|
       this_that = Array.new(2)
       # TODO break if found
