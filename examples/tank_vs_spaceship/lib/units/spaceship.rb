@@ -2,43 +2,31 @@
 #
 class Spaceship < Thing
   
-  it_is_a Turnable, Shooter, Controllable, Generator
+  it_is_a Generator
   it_is Targetable
-  it_has Lives, Hitpoints, UserInterface
   
+  it_has UserInterface
   ui 10, 10, 0xff0000ff do "Spaceship: #{lives} lives" end
   
   generates Smoke, :every => 10, :until => 100
   
-  # Thing
-  #
   image 'spaceship/image.png'
   
-  # Lives, Hitpoints
-  #
+  it_has Lives
   lives 5
-  hitpoints 1_000
+  # it_has Hitpoints
+  # hitpoints 1_000
   
-  #
-  #
   shape :circle, 10.0
   friction 100.0       # TODO Remove these
   rotation -Math::PI/2 # TODO Remove these
   
-  # TODO
-  #
-  # acceleration
-  # top_speed
-  #
-  
-  # Turnable
-  #
-  turn_speed 1 # turns per second
-  
   collision_type :player
   
-  # Shooter
-  #
+  it_is Turnable
+  turn_speed 1 # turns per second
+  
+  it_is_a Shooter
   range 10
   frequency 1
   shoots Missile # or: Bullet
@@ -46,8 +34,6 @@ class Spaceship < Thing
   muzzle_velocity { |*| self.rotation_vector*10 }
   # muzzle_rotation { |*| self.rotation }
   
-  # Pod
-  #
   # Example: You can attach a Tank if you want.
   #
   # it_is_a Pod
@@ -56,8 +42,7 @@ class Spaceship < Thing
   # attach Tank, 0, -25
   # attach Tank, 0, -50
   
-  # Controllable
-  #
+  it_is_a Controllable
   controls Gosu::Button::KbA => Turnable::Left,
            Gosu::Button::KbD => Turnable::Right,
            Gosu::Button::KbW => Moveable::Accelerate,
@@ -69,8 +54,8 @@ class Spaceship < Thing
   def move
     obey_gravity
     on_hitting_y { kill! }
-    bounce_off_border_y # a helper method that makes the player bounce off the walls 100% elastically
-    wrap_around_border_x # a helper method that makes the player wrap around the border
+    bounce_off_border_y
+    wrap_around_border_x
   end
   
   # Smoke on accelerating.
