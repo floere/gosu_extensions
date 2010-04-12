@@ -6,7 +6,7 @@ begin
     gemspec.email = "florian.hanke@gmail.com"
     gemspec.homepage = "http://www.github.com/floere/gosu_extensions"
     gemspec.description = ""
-    gemspec.authors = ["Florian Hanke"]
+    gemspec.authors = ["Florian Hanke"] # TODO Add severin after some more work :)
     gemspec.rdoc_options = ["--inline-source", "--charset=UTF-8"]
     gemspec.files = FileList["[A-Z]*", "{generator,lib}/**/*"]
     gemspec.test_files = FileList["spec/**/*_spec.rb"]
