@@ -24,8 +24,6 @@ class Scheduling
   # 1. Move one step in time.
   # 2. Execute all blocks with time 0.
   #
-  # TODO Rewrite to be faster.
-  #
   # FIXME - threads added while threads are handled!
   #
   def step
