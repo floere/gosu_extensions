@@ -29,7 +29,7 @@ class TreeRun < GameWindow
   # full_screen
   
   caption "Tree Run - A Suicidal Freeski Undertaking"
-  background 'background.png'
+  background 'background.png' # TODO Gosu::Color::WHITE
   
   damping 0.5
   gravity 0.0

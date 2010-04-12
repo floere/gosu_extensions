@@ -89,12 +89,8 @@ class Spaceship < Thing
     explosion.warp position + random_vector(rand(20))
     window.register explosion
     5.times do
-      # TODO replace by start_generating Debris
-      #
-      debris = Debris.new window
-      debris.warp position
-      debris.speed = random_vector 10.0
-      window.register debris
+      debris = generate Debris
+      debris.speed = random_vector 10
     end
   end
   
@@ -105,8 +101,8 @@ class Spaceship < Thing
   def killed!
     start_generating
     # For fun:
-    #
-    # attach Tank.new(window), 0, rand(100)+20
+    # Needs it_is_a Pod though
+    #attach Tank.new(window), 0, rand(100)+20
   end
   
 end

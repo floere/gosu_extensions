@@ -39,14 +39,20 @@ end
   
   module InstanceMethods
     
+    #
+    #
     def destroyed!
       stop_generating!
     end
     
+    #
+    #
     def stop_generating!
       @stop_generating = true
     end
     
+    #
+    #
     def generation klass, every_rate, til
       return lambda {} if @stop_generating
       lambda do
@@ -56,10 +62,13 @@ end
       end
     end
     
+    # Returns the generated thing.
+    #
     def generate klass
       generated = klass.new self.window
       generated.warp self.position
       self.window.register generated
+      generated
     end
     
   end
