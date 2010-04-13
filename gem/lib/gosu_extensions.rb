@@ -30,6 +30,7 @@ require 'trait'
 require 'traits'
 require 'it_is_a'
 
+require 'background'
 require 'moveables'
 require 'remove_shapes'
 require 'wave'

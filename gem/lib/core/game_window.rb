@@ -31,8 +31,7 @@ class GameWindow < Gosu::Window
               :font,
               :scheduling,
               :collisions
-  attr_accessor :background_path,
-                :background_hard_borders,
+  attr_accessor :background_options,
                 :stop_condition,
                 :proceed_condition
   
@@ -150,10 +149,9 @@ class GameWindow < Gosu::Window
         self.font_size = size
       end
     end
-    def background path, options = {}
+    def background path_or_color
       InitializerHooks.register self do
-        self.background_path = path
-        self.background_hard_borders = options[:hard_borders] || false
+        self.background_options = path_or_color
       end
     end
     def full_screen
@@ -206,9 +204,7 @@ class GameWindow < Gosu::Window
     self.caption = self.class.caption || ""
   end
   def setup_background
-    if self.background_path
-      @background_image = Gosu::Image.new self, File.join(Resources.root, self.background_path), self.background_hard_borders
-    end
+    @background = Background.new self
   end
   def setup_moveables
     @moveables = Moveables.new
@@ -442,7 +438,11 @@ class GameWindow < Gosu::Window
   # Draws a background image.
   #
   def draw_background
-    @background_image.draw 0, 0, Layer::Background, 1.0, 1.0 if @background_image
+    # draw_quad(0, 0, Gosu::Color::WHITE,
+    #           width, 0, Gosu::Color::WHITE,
+    #           width, height, Gosu::Color::WHITE,
+    #           0, height, Gosu::Color::WHITE, 0, :default)
+    @background.draw #_image.draw 0, 0, Layer::Background, 1.0, 1.0 if @background_image
   end
   # Draw ambient objects, like asteroids or the like that do not influence the player.
   #
@@ -459,16 +459,6 @@ class GameWindow < Gosu::Window
   #
   def draw_ui
     @uis.each(&:draw_ui)
-  end
-  #
-  #
-  # Example:
-  #   imprint do
-  #     circle x, y, radius, :fill => true, :color => :black
-  #   end
-  #
-  def imprint &block
-    @background_image.paint &block
   end
   
   # Input handling.
