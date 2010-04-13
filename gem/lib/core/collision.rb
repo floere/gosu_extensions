@@ -48,15 +48,16 @@ class Collision
   #
   def complex_package definition
     lambda do |this_shape, that_shape|
-      this_that = Array.new(2)
+      this_that = Array.new 2
       window.moveables.each do |moveable|
         if moveable.shape == this_shape
           this_that[0] = moveable
+          break if this_that.all?
         end
         if moveable.shape == that_shape
           this_that[1] = moveable
+          break if this_that.all?
         end
-        break if this_that.all?
       end
       definition.call *this_that
     end
