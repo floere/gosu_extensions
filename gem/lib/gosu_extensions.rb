@@ -17,11 +17,13 @@ end
 $:.unshift File.join(File.dirname(__FILE__), '/extensions')
 require 'module'
 require 'numeric'
+require 'math'
 
 $:.unshift File.join(File.dirname(__FILE__), '/core')
 require 'resources'
 
 require 'vector_utilities'
+require 'rotation'
 require 'initializer_hooks'
 
 require 'trait'

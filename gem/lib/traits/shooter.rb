@@ -1,5 +1,31 @@
 module Shooter extend Trait
   
+  module Position
+    def self.front x, y = nil
+      y || (y = x and x = 0)
+      relative x, y
+    end
+    def self.relative x, y
+      relative_position = CP::Vec2.new x, y
+      relative_length   = relative_position.length
+      relative_rotation = relative_position.to_angle
+      lambda { self.position + (self.rotation + relative_rotation).radians_to_vec2*relative_length }
+    end
+  end
+  module Velocity
+    def self.front initial_speed
+      lambda { |_| self.rotation_vector*initial_speed }
+    end
+    Front     = lambda { |_| self.rotation_vector }
+  end
+  module Rotation
+    Frontal   = lambda { |_| self.rotation }
+    Right     = lambda { |_| self.rotation + Rotation::Half }
+    Backwards = lambda { |_| -self.rotation }
+    Left      = lambda { |_| self.rotation - Rotation::Half }
+    Default   = Frontal
+  end
+  
   Shoot = :shoot
   
   manual <<-MANUAL
@@ -51,17 +77,20 @@ module Shooter extend Trait
         self.shot_type = type
       end
     end
-    def muzzle_position &block
+    def muzzle_position lam = nil, &block
+      block ||= lam
       InitializerHooks.register self do
         muzzle_position_func &block
       end
     end
-    def muzzle_velocity &block
+    def muzzle_velocity lam = nil, &block
+      block ||= lam
       InitializerHooks.register self do
         muzzle_velocity_func &block
       end
     end
-    def muzzle_rotation &block
+    def muzzle_rotation lam = nil, &block
+      block ||= lam
       InitializerHooks.register self do
         muzzle_rotation_func &block
       end
