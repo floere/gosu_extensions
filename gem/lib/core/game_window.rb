@@ -25,14 +25,14 @@ class GameWindow < Gosu::Window
               :caption,
               :screen_width,
               :screen_height,
-              :gravity_vector
+              :gravity_vector,
+              :background_options
   attr_reader :environment,
               :moveables,
               :font,
               :scheduling,
               :collisions
-  attr_accessor :background_options,
-                :stop_condition,
+  attr_accessor :stop_condition,
                 :proceed_condition
   
   def initialize
@@ -116,6 +116,9 @@ class GameWindow < Gosu::Window
   def gravity_vector
     @gravity_vector || @gravity_vector = CP::Vec2.new(0, 0.98/SUBSTEPS)
   end
+  def background_options
+    Gosu::Color::WHITE
+  end
   
   class << self
     def gravity amount = 0.98
@@ -150,6 +153,7 @@ class GameWindow < Gosu::Window
       end
     end
     def background path_or_color = Gosu::Color::WHITE
+      attr_reader :background_options
       InitializerHooks.register self do
         self.background_options = path_or_color
       end

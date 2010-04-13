@@ -26,10 +26,8 @@ class TreeRun < GameWindow
   
   width  1000
   height 600
-  # full_screen
   
   caption "Tree Run - A Suicidal Freeski Undertaking"
-  background Gosu::Color::WHITE
   
   damping 0.5
   gravity 0.0
