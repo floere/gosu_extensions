@@ -149,7 +149,7 @@ class GameWindow < Gosu::Window
         self.font_size = size
       end
     end
-    def background path_or_color
+    def background path_or_color = Gosu::Color::WHITE
       InitializerHooks.register self do
         self.background_options = path_or_color
       end
@@ -438,11 +438,7 @@ class GameWindow < Gosu::Window
   # Draws a background image.
   #
   def draw_background
-    # draw_quad(0, 0, Gosu::Color::WHITE,
-    #           width, 0, Gosu::Color::WHITE,
-    #           width, height, Gosu::Color::WHITE,
-    #           0, height, Gosu::Color::WHITE, 0, :default)
-    @background.draw #_image.draw 0, 0, Layer::Background, 1.0, 1.0 if @background_image
+    @background.draw
   end
   # Draw ambient objects, like asteroids or the like that do not influence the player.
   #
