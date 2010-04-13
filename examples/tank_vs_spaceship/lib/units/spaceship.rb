@@ -18,8 +18,8 @@ class Spaceship < Thing
   # hitpoints 1_000
   
   shape :circle, 10.0
-  friction 100.0       # TODO Remove these
-  rotation -Math::PI/2 # TODO Remove these
+  friction 100.0           # TODO Remove these
+  rotation -Rotation::Half # TODO Remove these
   
   collision_type :player
   
@@ -29,9 +29,9 @@ class Spaceship < Thing
   it_is_a Shooter
   range 10
   frequency 1
-  shoots Missile # or: Bullet
-  muzzle_position { self.position + self.rotation_vector*self.radius*2 }
-  muzzle_velocity { |*| self.rotation_vector*10 }
+  shoots Missile # or: Bullet, for example
+  muzzle_position Shooter::Position.front(20) # { self.position + self.rotation_vector*self.radius*2 }
+  muzzle_velocity Shooter::Velocity.front(10)
   # muzzle_rotation { |*| self.rotation }
   
   # Example: You can attach a Tank if you want.

@@ -28,7 +28,7 @@ class Sprite
   # Default rotation is upwards.
   #
   def rotation
-    @rotation || -Math::PI/2
+    @rotation || -Rotation::Half
   end
   
   class << self
@@ -44,11 +44,9 @@ class Sprite
     #
     #
     def rotation amount = nil, &block
-      # Override default.
-      #
-      to_execute = block || lambda { amount }
+      block ||= lambda { amount }
       InitializerHooks.append self do
-        self.rotation = to_execute[]
+        self.rotation = block[]
       end
     end
     def random_rotation
@@ -148,7 +146,7 @@ class Sprite
     self.rotation.radians_to_vec2
   end
   def current_speed
-    speed.length
+    speed.length # Hm, speed should already be the absolute value.
   end
   
   # Movement and Position.

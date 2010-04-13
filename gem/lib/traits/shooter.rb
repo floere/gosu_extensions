@@ -2,23 +2,24 @@ module Shooter extend Trait
   
   module Position
     def self.front x, y = nil
-      y || (y = x and x = 0)
+      # y || (y, x = x, 0)
+      y ||= 0
       relative x, y
     end
     def self.relative x, y
       relative_position = CP::Vec2.new x, y
       relative_length   = relative_position.length
       relative_rotation = relative_position.to_angle
-      lambda { self.position + (self.rotation + relative_rotation).radians_to_vec2*relative_length }
+      lambda { self.position + (self.rotation - relative_rotation).radians_to_vec2*relative_length }
     end
   end
   module Velocity
     def self.front initial_speed
       lambda { |_| self.rotation_vector*initial_speed }
     end
-    Front     = lambda { |_| self.rotation_vector }
   end
   module Rotation
+    def self.custom rotation; lambda { |_| rotation } end
     Frontal   = lambda { |_| self.rotation }
     Right     = lambda { |_| self.rotation + Rotation::Half }
     Backwards = lambda { |_| -self.rotation }
