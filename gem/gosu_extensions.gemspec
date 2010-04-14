@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{gosu_extensions}
-  s.version = "0.2.9"
+  s.version = "0.3.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Florian Hanke", "Severin Schoepke (various improvements)"]
-  s.date = %q{2010-04-13}
+  s.date = %q{2010-04-15}
   s.description = %q{}
   s.email = %q{florian.hanke@gmail.com}
   s.files = [
@@ -25,11 +25,12 @@ Gem::Specification.new do |s|
      "lib/core/initializer_hooks.rb",
      "lib/core/it_is_a.rb",
      "lib/core/layer.rb",
-     "lib/core/moveables.rb",
-     "lib/core/remove_shapes.rb",
+     "lib/core/objects.rb",
      "lib/core/resources.rb",
      "lib/core/rotation.rb",
      "lib/core/scheduling.rb",
+     "lib/core/sprites.rb",
+     "lib/core/things.rb",
      "lib/core/trait.rb",
      "lib/core/traits.rb",
      "lib/core/vector_utilities.rb",
@@ -72,8 +73,6 @@ Gem::Specification.new do |s|
      "spec/lib/core/initializer_hooks_spec.rb",
      "spec/lib/core/it_is_a_spec.rb",
      "spec/lib/core/layer_spec.rb",
-     "spec/lib/core/moveables_spec.rb",
-     "spec/lib/core/remove_shapes_spec.rb",
      "spec/lib/core/trait_spec.rb",
      "spec/lib/core/traits_spec.rb",
      "spec/lib/extensions/module_spec.rb",
