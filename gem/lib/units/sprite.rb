@@ -10,14 +10,23 @@ class Sprite
   include ItIsA
   it_is   Moveable
   
-  attr_reader :window
+  attr_reader :window, :objects
   
   # Every thing knows the window it is attached to.
   #
+  # Also, it knows who it is managed by.
+  #
   def initialize window
-    @window = window
+    @window  = window
+    @objects = Thing === self ? window.things : window.sprites
     self.destroyed = false
     after_initialize
+  end
+  
+  # Makes the object visible.
+  #
+  def show
+    objects.register self
   end
   
   # Default layer is Layer::Players.
@@ -121,8 +130,9 @@ class Sprite
   def destroy!
     return if self.destroyed?
     self.destroyed! # invoke callback
-    self.window.unregister self # TODO self.owner.unregister self
     self.destroyed = true
+    self.objects.remove self
+    # self.window.unregister self # TODO self.owner.unregister self
   end
   
   # Draws its image.

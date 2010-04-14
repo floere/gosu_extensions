@@ -40,6 +40,8 @@ class GameWindow < Gosu::Window
   def initialize
     setup_window
     
+    setup_environment # TODO Problem: Damping not yet assigned
+    
     setup_sprites
     setup_things
     setup_objects
@@ -61,8 +63,6 @@ class GameWindow < Gosu::Window
     setup_uis
     
     setup_containers
-    
-    setup_environment
     
     setup_enemies
     setup_players
@@ -148,7 +148,8 @@ class GameWindow < Gosu::Window
     end
     def damping amount = 0.0
       InitializerHooks.register self do
-        self.damping = amount
+        self.damping = amount # TODO
+        self.environment.damping = -amount + 1
       end
     end
     def font name = Gosu::default_font_name, size = 20
@@ -219,7 +220,7 @@ class GameWindow < Gosu::Window
     @sprites = Sprites.new
   end
   def setup_things
-    @things = Things.new
+    @things = Things.new @environment
   end
   def setup_objects
     @objects = Objects.new things, sprites
@@ -345,26 +346,26 @@ class GameWindow < Gosu::Window
   
   # Things register themselves here.
   #
-  def register thing
-    @objects.register thing
-    thing.add_to @environment if Thing === thing # TODO Move
-  end
-  # Things unregister themselves here.
-  #
-  # Note: Use as follows in a Thing.
-  #       
-  #       def destroy
-  #         threaded do
-  #           5.times { sleep 0.1; animate_explosion }
-  #           @window.unregister self
-  #         end
-  #       end
-  #
-  def unregister object
-    # Note: Explicitly call unregister_ui thing if you want it
-    #
-    @objects.remove object
-  end
+  # def register thing
+  #   @objects.register thing
+  #   thing.add_to @environment if Thing === thing # TODO Move
+  # end
+  # # Things unregister themselves here.
+  # #
+  # # Note: Use as follows in a Thing.
+  # #       
+  # #       def destroy
+  # #         threaded do
+  # #           5.times { sleep 0.1; animate_explosion }
+  # #           @window.unregister self
+  # #         end
+  # #       end
+  # #
+  # def unregister object
+  #   # Note: Explicitly call unregister_ui thing if you want it
+  #   #
+  #   @objects.remove object
+  # end
   # Register a user interfaceable object.
   #
   def register_ui thing
@@ -419,7 +420,7 @@ class GameWindow < Gosu::Window
     thing = type.new self
     position = x && y && [x, y] || random_function && random_function[]
     thing.warp_to *position
-    register thing
+    thing.show
     thing
   end
   def randomly_add type

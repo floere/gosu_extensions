@@ -22,7 +22,7 @@ class Missile < Thing
   def destroyed!
     explosion = SmallExplosion.new window
     explosion.warp position + random_vector(rand(10))
-    window.register explosion
+    explosion.show
   end
   
   def deviate

@@ -1,7 +1,7 @@
 #
 class Smoke < Sprite
 
-  layer Layer::UI
+  layer Layer::Ambient
   
   sequenced_image 'smoke.png', 10, 10, 1
   

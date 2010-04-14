@@ -2,6 +2,20 @@
 #
 class Things < Sprites
   
+  attr_reader :environment
+  
+  def initialize environment, elements = []
+    @environment = environment
+    super elements
+  end
+  
+  def register element
+    # TODO Rewrite
+    # 
+    element.add_to self.environment
+    super element
+  end
+  
   def move
     @elements.each &:move
   end

@@ -9,7 +9,7 @@ module Shot extend Trait
   def shoot_from shooter
     self.position = shooter.muzzle_position
     self.originator = shooter
-    self.window.register self
+    self.show
     self
   end
   

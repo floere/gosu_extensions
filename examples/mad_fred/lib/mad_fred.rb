@@ -57,15 +57,11 @@ class MadFred < GameWindow
   end
   
   def create_enemy
-    enemy = Enemy.new self
-    enemy.warp_to window.width, rand(window.height-40) + 20
-    window.register enemy
+    add Enemy, width, rand(height-40)+20
   end
   
   def create_rock
-    rock = Rock.new self
-    rock.warp_to window.width, window.height
-    window.register rock
+    add Rock, width, height
   end
   
 end

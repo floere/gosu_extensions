@@ -10,7 +10,7 @@ module Shooter extend Trait
       relative_position = CP::Vec2.new x, y
       relative_length   = relative_position.length
       relative_rotation = relative_position.to_angle
-      lambda { self.position + (self.rotation - relative_rotation).radians_to_vec2*relative_length }
+      lambda { self.position + (self.rotation - relative_rotation).radians_to_vec2 * relative_length }
     end
   end
   module Velocity

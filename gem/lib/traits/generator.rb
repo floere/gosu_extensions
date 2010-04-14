@@ -71,7 +71,7 @@ end
   def generate klass
     generated = klass.new self.window
     generated.warp self.position
-    self.window.register generated
+    generated.show
     generated
   end
   
