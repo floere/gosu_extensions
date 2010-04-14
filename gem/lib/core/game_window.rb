@@ -32,10 +32,10 @@ class GameWindow < Gosu::Window
               :things,
               :objects,
               :font,
-              :scheduling,
-              :collisions
+              :scheduling
   attr_accessor :stop_condition,
-                :proceed_condition
+                :proceed_condition,
+                :collisions
   
   def initialize
     setup_window
@@ -196,7 +196,6 @@ class GameWindow < Gosu::Window
       end
     end
     
-    attr_accessor :collisions
     def no_collision this, that = this
       # The next line doesn't work, as &nil == nil
       # collision this, that, &Collision::None

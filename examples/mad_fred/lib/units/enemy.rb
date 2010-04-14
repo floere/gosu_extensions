@@ -16,8 +16,9 @@ class Enemy < Thing
   # attach Machinegun, 7, 25
   
   def move
-    self.speed += random_vector
+    self.speed += random_vector(0.5)
     self.position.x -= window.current_speed/4
+    bounce_off_border_y
     on_hitting_x { destroy!; return }
   end
   

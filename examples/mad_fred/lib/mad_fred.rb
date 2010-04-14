@@ -19,6 +19,8 @@ class MadFred < GameWindow
     player.draw_ui
   end
   
+  #
+  #
   def current_speed
     ((self.width - @jeep.position.x) / self.width) + 0.3
   end

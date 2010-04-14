@@ -64,12 +64,16 @@ module Pod extend Trait
     # Detach an instance from this.
     #
     def detach attachment
-      self.attachments.delete attachment if self.attachments
+      if self.attachments
+        detached = self.attachments.delete attachment
+        detached.detached if detached # callback
+      end
     end
     
     
     def materialize attachment
       attachment.extend Attachable # This is where Ruby shines.
+      attachment.pod = self
       attachment.show
     end
     
@@ -83,7 +87,7 @@ module Pod extend Trait
     #
     def move_attachments
       self.attachments.each do |attachment|
-        attachment.move_relative self
+        attachment.move_relative
       end
     end
     

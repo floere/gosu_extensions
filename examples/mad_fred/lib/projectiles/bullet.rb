@@ -20,8 +20,7 @@ class Bullet < Thing
   
   def move
     obey_gravity
-    on_hitting_x { destroy!; return }
-    on_hitting_y { destroy!; return }
+    on_hitting_border { destroy! }
   end
   
 end

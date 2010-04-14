@@ -10,7 +10,10 @@ class Sprite
   include ItIsA
   it_is   Moveable
   
-  attr_reader :window, :objects
+  attr_reader :window,
+              :objects
+  attr_accessor :position,
+                :speed
   
   # Every thing knows the window it is attached to.
   #
@@ -25,6 +28,7 @@ class Sprite
   # Makes the object visible.
   #
   def show
+    self.speed     = CP::Vec2.new(0,0)
     self.destroyed = false
     objects.register self
   end
@@ -173,7 +177,7 @@ class Sprite
   # These are just a few simple rules.
   #
   def move
-    self.position += self.speed/SUBSTEPS if self.speed
+    self.position += self.speed/SUBSTEPS
     moved
   end
   
@@ -183,7 +187,6 @@ class Sprite
   
   #
   #
-  attr_accessor :position, :speed
   def rotation= rotation
     @rotation = rotation % (2*Math::PI)
   end
@@ -232,6 +235,10 @@ class Sprite
   end
   def on_hitting_y
     yield if block_given? && position.y > window.screen_height || position.y < 0
+  end
+  def on_hitting_border &block
+    on_hitting_x &block
+    on_hitting_y &block
   end
   def rotate_towards_velocity
     self.rotation = self.speed.to_angle

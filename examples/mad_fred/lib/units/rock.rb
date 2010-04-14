@@ -8,7 +8,7 @@ class Rock < Thing
   mass 10_000
   moment 0.1
   friction 0.1
-  rotation { rand*-Math::PI/2 }
+  random_rotation
   
   collision_type :hurtful
   
