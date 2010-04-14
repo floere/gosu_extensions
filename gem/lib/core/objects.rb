@@ -10,22 +10,23 @@ class Objects
     @things, @sprites = things, sprites
   end
   
-  # TODO Not used?
-  #
-  def registered? thing_or_sprite
-    @things.registered?(thing_or_sprite) || @sprites.registered?(thing_or_sprite)
-  end
-  
-  #
-  #
-  def register thing_or_sprite
-    Thing === thing_or_sprite ? @things.register(thing_or_sprite) : @sprites.register(thing_or_sprite)
-  end
+  # # TODO Not used?
+  # #
+  # def registered? thing_or_sprite
+  #   @things.registered?(thing_or_sprite) || @sprites.registered?(thing_or_sprite)
+  # end
+  # 
+  # #
+  # #
+  # def register thing_or_sprite
+  #   Thing === thing_or_sprite ? @things.register(thing_or_sprite) : @sprites.register(thing_or_sprite)
+  # end
   
   #
   #
   def move
     @things.move
+    @sprites.move
   end
   
   #

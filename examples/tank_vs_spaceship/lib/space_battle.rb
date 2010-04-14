@@ -18,9 +18,7 @@ class SpaceBattle < GameWindow
     Have fun!
   MANUAL
   
-  it_is Controllable
-  controls Gosu::Button::KbEscape => :close,
-           Gosu::Button::KbP      => :show_menu
+  default_controls
   
   width  1022
   height  595
@@ -34,8 +32,6 @@ class SpaceBattle < GameWindow
   damping 0.1
   gravity 0.2
   
-  no_collision :ambient
-  no_collision :ambient, :player
   no_collision :projectile
   no_collision :projectile, :ambient
   collision :player, :projectile do |player, projectile|
@@ -60,7 +56,7 @@ class SpaceBattle < GameWindow
     
     # Generates 20 Tanks, at the top border, at time 100, inside the game field by 100px
     #
-    # @waves.add 150, Tank, 5, &Wave.top_border(-100)
+    @waves.add 150, Tank, 5, &Wave.top_border(-100)
   end
   
 end

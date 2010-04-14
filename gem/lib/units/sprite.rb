@@ -19,13 +19,13 @@ class Sprite
   def initialize window
     @window  = window
     @objects = Thing === self ? window.things : window.sprites
-    self.destroyed = false
     after_initialize
   end
   
   # Makes the object visible.
   #
   def show
+    self.destroyed = false
     objects.register self
   end
   
@@ -71,12 +71,6 @@ class Sprite
         sound.play options[:volume] || 1.0
       end
     end
-    
-  end
-  
-  # Override this.
-  #
-  def move
     
   end
   
@@ -175,12 +169,72 @@ class Sprite
   
   # Movement and Position.
   #
+  # Sprite Movement is not thought of as very realistic (no damping for example).
+  # These are just a few simple rules.
+  #
+  def move
+    self.position += self.speed/SUBSTEPS if self.speed
+    moved
+  end
+  
+  # Callback where you can make it obey rules.
+  #
+  def moved; end
   
   #
   #
   attr_accessor :position, :speed
   def rotation= rotation
     @rotation = rotation % (2*Math::PI)
+  end
+  
+  # Movement rules
+  #
+  # Note: Use these in method move.
+  #
+  def bounce_off_border_x elasticity = 1.0
+    if position.x > window.screen_width || position.x < 0
+      self.speed.x = -self.speed.x.to_f*elasticity
+    end
+  end
+  def bounce_off_border_y elasticity = 1.0
+    if position.y > window.screen_height || position.y < 0
+      self.speed.y = -self.speed.y.to_f*elasticity
+    end
+  end
+  def bounce_off_border elasticity = 1.0
+    bounce_off_border_x elasticity
+    bounce_off_border_y elasticity
+  end
+  def wrap_around_border_x
+    if position.x > window.screen_width
+      position.x -= window.screen_width
+    elsif position.x < 0
+      position.x += window.screen_width
+    end
+  end
+  def wrap_around_border_y
+    if position.y > window.screen_height
+      position.y -= window.screen_height
+    elsif position.y < 0
+      position.y += window.screen_height
+    end
+  end
+  def wrap_around_border
+    wrap_around_border_x
+    wrap_around_border_y
+  end
+  def obey_gravity
+    self.speed += window.gravity_vector
+  end
+  def on_hitting_x
+    yield if block_given? && position.x > window.screen_width || position.x < 0
+  end
+  def on_hitting_y
+    yield if block_given? && position.y > window.screen_height || position.y < 0
+  end
+  def rotate_towards_velocity
+    self.rotation = self.speed.to_angle
   end
   
 end

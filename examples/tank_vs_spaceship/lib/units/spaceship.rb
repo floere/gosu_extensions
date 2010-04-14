@@ -13,7 +13,7 @@ class Spaceship < Thing
   image 'spaceship/image.png'
   
   it_has Lives
-  lives 5
+  lives 1
   # it_has Hitpoints
   # hitpoints 1_000
   

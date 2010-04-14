@@ -5,7 +5,7 @@ class Crash < Sprite
   image 'boom.png'
   
   it_is ShortLived
-  lifetime 60
+  lifetime 10
   
   rotation -Rotation::Quarter
   

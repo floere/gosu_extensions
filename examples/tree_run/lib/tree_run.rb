@@ -22,7 +22,7 @@ class TreeRun < GameWindow
   
   it_is Controllable
   controls Gosu::Button::KbEscape => :close,
-           Gosu::Button::KbSpace  => :show_menu
+           Gosu::Button::KbSpace  => :revive
   
   width  1000
   height 600
@@ -36,7 +36,10 @@ class TreeRun < GameWindow
   no_collision :ambient # no collisions between ambients
   no_collision :ambient, :obstacle
   no_collision :ambient, :player
-  collision(:player, :obstacle) { slam! } # slam!s the player
+  collision :player, :obstacle do |player, obstacle|
+    obstacle.destroy!
+    player.slam!
+  end
   collision :player # players do collide - you can also omit this, it will work
   # collision :player, :player do |player1, player2| # they will collide
   #   # do something with player 1
@@ -48,32 +51,29 @@ class TreeRun < GameWindow
   # Callbacks
   #
   def setup_players
-    @players = []
-    
     # Player 1
     #
-    @player1 = Skier.new self
-    @player1.name = "Player 1"
-    @player1.controls(Gosu::Button::KbA => Moveable.left(2),
+    player1 = Skier.new self
+    player1.name = "Player 1"
+    player1.controls(Gosu::Button::KbA => Moveable.left(2),
                       Gosu::Button::KbD => Moveable.right(2),
                       Gosu::Button::KbS => Moveable::Down,
                       Gosu::Button::KbW => Moveable::Up)
-    @player1.warp_to width/3, height/3
-    @player1.ui 20, 10, Gosu::Color::BLACK do "#{points.to_i} points" end
-    @players << @player1
+    player1.warp_to width/3, height/3
+    player1.ui 20, 10, Gosu::Color::BLACK do "#{points.to_i} points" end
     
     # Player 2
     #
-    @player2 = Skier.new(self)
-    @player2.name = "Player 2"
-    @player2.controls(Gosu::Button::KbJ => Moveable.left(2),
+    player2 = Skier.new self
+    player2.name = "Player 2"
+    player2.controls(Gosu::Button::KbJ => Moveable.left(2),
                       Gosu::Button::KbL => Moveable.right(2),
                       Gosu::Button::KbK => Moveable::Down,
                       Gosu::Button::KbI => Moveable::Up)
-    @player2.warp_to width-width/3, height/3
-    @player2.ui width-120, 10, Gosu::Color::BLACK do "#{points.to_i} points" end
-    @players << @player2
+    player2.warp_to width-width/3, height/3
+    player2.ui width-120, 10, Gosu::Color::BLACK do "#{points.to_i} points" end
     
+    @players = [player1, player2]
     @players.each &:show
   end
   def after_setup
@@ -97,10 +97,15 @@ class TreeRun < GameWindow
     display_end_message
   end
   
+  def revive
+    @players.each &:revive
+    proceed
+  end
+  
   # Tree Run methods.
   #
   def game_over?
-    @players.any?(&:destroyed?)
+    @players.any? &:destroyed?
   end
   def winner
     @players.sort_by(&:points).last
@@ -108,7 +113,7 @@ class TreeRun < GameWindow
   def display_end_message
     self.font.draw "Game Over - #{winner.name} won!", window.width/2-120, 10, Layer::UI, 1.0, 1.0, 0xff000000
     
-    after(300) { close }
+    # after(300) { close }
   end
   def create_trees
     return unless rand > 1 - tree_density

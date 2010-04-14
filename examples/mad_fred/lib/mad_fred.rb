@@ -1,10 +1,8 @@
 class MadFred < GameWindow
   
-  it_is Controllable
-  controls Gosu::Button::KbEscape => :close
+  default_controls
   
-  width  1022
-  height  595
+  size 1022, 595
   
   caption "Mad Fred"
   
@@ -21,33 +19,12 @@ class MadFred < GameWindow
     player.draw_ui
   end
   
-  collisions do
-    add_collision_func :player, :player, &nil
-    add_collision_func :player, :ambient, &nil
-    add_collision_func :enemy, :ambient, &nil
-    add_collision_func :player, :player_projectile, &nil
-    add_collision_func :player_projectile, :player_projectile, &nil
-    add_collision_func :player, :enemy do |player_shape, enemy_shape|
-      window.moveables.each do |moveable|
-        if moveable.shape == enemy_shape
-          moveable.destroy!
-        end
-        if moveable.shape == player_shape
-          moveable.kill!
-          moveable.draw_ui
-        end
-      end
-    end
-  end
-  
   def current_speed
     ((self.width - @jeep.position.x) / self.width) + 0.3
   end
   
   def setup_players
-    @jeep = Jeep.new self
-    @jeep.warp_to 250, window.height - 20
-    register @jeep
+    @jeep = add Jeep, 250, height - 20
   end
   
   def next_step

@@ -126,10 +126,38 @@ class GameWindow < Gosu::Window
   end
   
   class << self
+    
+    # Sets the Esc button to close the window.
+    #
+    def default_controls
+      it_is Controllable
+      controls Gosu::Button::KbEscape => :close
+    end
+    
+    # Gravity acting.
+    #
+    # If you want to set the gravity_vector on the window,
+    # use its writer: window.gravity_vector = CP::Vec2.new(1, 2)
+    #
     def gravity amount = 0.98
       InitializerHooks.register self do
         self.gravity_vector = CP::Vec2.new(0, amount.to_f/SUBSTEPS)
       end
+    end
+    # How much is movement damped?
+    #
+    def damping amount = 0.0
+      InitializerHooks.register self do
+        self.damping = amount # TODO
+        self.environment.damping = -amount + 1
+      end
+    end
+    
+    # Size of the window. Use either width, height, or just size.
+    #
+    def size w = DEFAULT_SCREEN_WIDTH, h = DEFAULT_SCREEN_HEIGHT
+      width w
+      height h
     end
     def width value = DEFAULT_SCREEN_WIDTH
       InitializerHooks.register self do
@@ -141,17 +169,15 @@ class GameWindow < Gosu::Window
         self.screen_height = value
       end
     end
+    
+    # Window caption.
+    #
     def caption text = ""
       InitializerHooks.register self do
         self.caption = text
       end
     end
-    def damping amount = 0.0
-      InitializerHooks.register self do
-        self.damping = amount # TODO
-        self.environment.damping = -amount + 1
-      end
-    end
+    
     def font name = Gosu::default_font_name, size = 20
       InitializerHooks.register self do
         self.font_name = name
@@ -350,14 +376,6 @@ class GameWindow < Gosu::Window
   end
   def unregister_ui thing
     @uis.delete thing
-  end
-  
-  # Is the thing registered?
-  #
-  # TODO Move
-  #
-  def registered? thing
-    @objects.registered? thing
   end
   
   # Scheduling

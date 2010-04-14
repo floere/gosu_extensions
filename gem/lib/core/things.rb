@@ -14,9 +14,6 @@ class Things < Sprites
     super element
   end
   
-  def move
-    @elements.each &:move
-  end
   def targeting # TODO
     @elements.select { |m| m.respond_to? :target }.each do |gun|
       gun.target *@elements.select { |m| m.kind_of? Enemy }

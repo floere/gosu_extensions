@@ -1,5 +1,7 @@
 #
 #
+# TODO This is almost a generator.
+#
 class Wave
   
   attr_reader :generated_type, :execution_amount, :positioning_function
@@ -38,7 +40,7 @@ class Wave
     lambda do
       self.execution_amount.times do
         instance = self.generated_type.new window
-        window.register instance
+        instance.show
         self.positioning_function.call(window, instance)
       end
     end

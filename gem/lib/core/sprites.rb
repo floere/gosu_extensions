@@ -14,6 +14,10 @@ class Sprites
     @elements.include? element
   end
   
+  def move
+    @elements.each &:move
+  end
+  
   def draw
     @elements.each &:draw
   end
