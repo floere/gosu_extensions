@@ -3,7 +3,7 @@ require File.join(File.dirname(__FILE__), '/../../spec_helper')
 describe Damaging do
   
   before(:each) do
-    @window = stub :window
+    @window = stub :window, :things => []
   end
   
   context 'damage given as block' do

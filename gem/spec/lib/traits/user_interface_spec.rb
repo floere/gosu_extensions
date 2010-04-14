@@ -3,7 +3,7 @@ require File.join(File.dirname(__FILE__), '/../../spec_helper')
 describe UserInterface do
   
   before(:each) do
-    @window = stub :window
+    @window = stub :window, :things => []
     @user_interface = test_class_with(UserInterface).new @window
   end
   

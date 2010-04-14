@@ -3,7 +3,7 @@ require File.join(File.dirname(__FILE__), '/../../spec_helper')
 describe Imageable do
   
   before(:each) do
-    @window = stub :window
+    @window = stub :window, :things => []
     Resources.stub! :root => 'some/root'
   end
   

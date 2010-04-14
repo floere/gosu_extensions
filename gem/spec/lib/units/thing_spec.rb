@@ -3,7 +3,8 @@ require File.join(File.dirname(__FILE__), '/../../spec_helper')
 describe Thing do
   
   before(:each) do
-    @window = stub :window
+    @things = stub :things
+    @window = stub :window, :things => @things
     @thing = Thing.new @window
   end
   
@@ -82,10 +83,10 @@ describe Thing do
     end
     context 'not yet destroyed' do
       before(:each) do
-        @window.stub! :unregister => nil
+        @things.stub! :remove => nil
       end
-      it "should unregister" do
-        @window.should_receive(:unregister).once.with @thing
+      it "should remove" do
+        @things.should_receive(:remove).once.with @thing
         
         @thing.destroy!
       end
@@ -98,8 +99,8 @@ describe Thing do
   end
   
   describe "destroyed?" do
-    it "should be false after creating the object" do
-      @thing.destroyed?.should == false
+    it "should be nil after creating the object" do
+      @thing.destroyed?.should == nil
     end
   end
   describe "destroyed=" do
@@ -121,7 +122,7 @@ describe Thing do
         end
       end
       it "should be on the non default layer" do
-        Thong.new(:some_window).layer.should == :non_default_layer
+        Thong.new(@window).layer.should == :non_default_layer
       end
     end
   end

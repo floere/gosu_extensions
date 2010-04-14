@@ -3,24 +3,25 @@ require File.join(File.dirname(__FILE__), '/../../spec_helper')
 describe Attachable do
   
   before(:each) do
-    @attachable = test_class_with(Attachable).new stub(:window)
+    @window = stub :window, :things => []
+    @pod = stub :pod, :relative_position => :relative_position, :rotation => :some_rotation
+    @attachable = test_class_with(Attachable).new @window
+    @attachable.pod = @pod
   end
   
   describe "move_relative" do
     before(:each) do
       @attachable.stub! :position= => nil, :rotation= => nil
-      
-      @pod = stub :pod, :relative_position => :relative_position, :rotation => :some_rotation
     end
     it "should set the position to the pod's position plus the relative position" do
       @attachable.should_receive(:position=).once.with :relative_position
       
-      @attachable.move_relative @pod
+      @attachable.move_relative
     end
     it "should set the rotation to the pod's rotation" do
       @attachable.should_receive(:rotation=).once.with :some_rotation
       
-      @attachable.move_relative @pod
+      @attachable.move_relative
     end
   end
   

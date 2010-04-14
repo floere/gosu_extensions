@@ -3,7 +3,7 @@ require File.join(File.dirname(__FILE__), '/../../spec_helper')
 describe Shooter do
   
   before(:each) do
-    @window = stub :window
+    @window = stub :window, :things => []
     
     @shooter = test_class_with(Shooter).new @window
   end
@@ -98,7 +98,7 @@ describe Shooter do
         end
       end
       it 'should set the shooting_range' do
-        @shooter_class.new(:some_window).muzzle_rotation.should == :some_rotation_calculation_result
+        @shooter_class.new(@window).muzzle_rotation.should == :some_rotation_calculation_result
       end
     end
   end
@@ -118,7 +118,7 @@ describe Shooter do
         end
       end
       it 'should set the shooting_range' do
-        @shooter_class.new(:some_window).muzzle_velocity.should == :some_velocity_calculation_result
+        @shooter_class.new(@window).muzzle_velocity.should == :some_velocity_calculation_result
       end
     end
   end
@@ -138,7 +138,7 @@ describe Shooter do
         end
       end
       it 'should set the shooting_range' do
-        @shooter_class.new(:some_window).muzzle_position.should == :some_position_calculation_result
+        @shooter_class.new(@window).muzzle_position.should == :some_position_calculation_result
       end
     end
   end
@@ -150,7 +150,7 @@ describe Shooter do
       end
     end
     it 'should set the shooting_range' do
-      @shooter_class.new(:some_window).shot_type.should == :some_type
+      @shooter_class.new(@window).shot_type.should == :some_type
     end
   end
   
@@ -161,7 +161,7 @@ describe Shooter do
       end
     end
     it 'should set the shooting_rate' do
-      @shooter_class.new(:some_window).shooting_rate.should be_close(16, 0.1)
+      @shooter_class.new(@window).shooting_rate.should be_close(16, 0.1)
     end
   end
   
@@ -172,7 +172,7 @@ describe Shooter do
       end
     end
     it 'should set the shooting_range' do
-      @shooter_class.new(:some_window).shooting_range.should == :some_range
+      @shooter_class.new(@window).shooting_range.should == :some_range
     end
   end
   

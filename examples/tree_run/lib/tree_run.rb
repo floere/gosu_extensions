@@ -1,6 +1,9 @@
 class TreeRun < GameWindow
   
   puts <<-MANUAL
+    Both Players:
+      Space - Revive the players and continue
+    
     Player 1:
       A - turn left
       D - turn right
