@@ -40,7 +40,7 @@ class GameWindow < Gosu::Window
   def initialize
     setup_window
     
-    setup_environment # TODO Problem: Damping not yet assigned
+    setup_environment
     
     setup_sprites
     setup_things
@@ -69,6 +69,8 @@ class GameWindow < Gosu::Window
     setup_waves
     
     setup_collisions
+    
+    setup_apply_damping
     
     install_main_loop
     
@@ -107,7 +109,7 @@ class GameWindow < Gosu::Window
     @font_size || 20
   end
   def damping
-    @damping || 0.001
+    @damping || 0.5
   end
   def caption
     @caption || ""
@@ -148,8 +150,7 @@ class GameWindow < Gosu::Window
     #
     def damping amount = 0.0
       InitializerHooks.register self do
-        self.damping = amount # TODO
-        self.environment.damping = -amount + 1
+        self.damping = amount
       end
     end
     
@@ -278,7 +279,11 @@ class GameWindow < Gosu::Window
       attr_accessor :window
     end
     @environment.window = self
-    @environment.damping = -self.damping + 1 # recalculate the damping such that 0.0 has no damping.
+  end
+  def setup_apply_damping
+    # recalculate the damping such that 0.0 has no damping.
+    #
+    @environment.damping = -self.damping + 1
   end
   # Callbacks.
   #
