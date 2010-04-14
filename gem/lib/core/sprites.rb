@@ -2,12 +2,9 @@
 #
 class Sprites
   
-  # TODO Remove delete.
-  #
-  delegate :each, :delete, :to => :@elements
-  
   def initialize elements = []
     @elements = elements
+    @to_remove = []
   end
   
   def register element
@@ -17,20 +14,21 @@ class Sprites
     @elements.include? element
   end
   
-  def remove element
-    @elements.delete element
-  end
-  
   def draw
     @elements.each &:draw
   end
   
+  def remove object
+    @to_remove << object
+  end
+  
   #
   #
-  def remove_from environment, things
-    things.each do |thing|
-      remove thing # TODO Should the environment be the owner of the things? Probably, yes.
+  def remove_marked
+    @to_remove.each do |object|
+      @elements.delete object
     end
+    @to_remove.clear
   end
   
 end

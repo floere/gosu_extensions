@@ -8,9 +8,9 @@ class SmallExplosion < Thing
   mass 100
   moment 100
   collision_type :projectile
+  
   friction 0.0001
-  layer Layer::Background
-  rotation { rand * 2 * Math::PI }
+  random_rotation
   
   # plays 'media/sounds/cannon_shot.mp3',
   #       'media/sounds/bomb-02.wav',

@@ -6,7 +6,7 @@ class Tree < Thing
   mass 1000
   moment 0.01
   friction 1000
-  rotation -Math::PI/2
+  rotation -Rotation::Quarter
   
   collision_type :obstacle
   

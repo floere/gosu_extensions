@@ -82,10 +82,10 @@ class GameWindow < Gosu::Window
       # Smoother, but slower: GC.start if rand > 0.98
       next_step
       SUBSTEPS.times do
-        remove_objects
         move
         targeting
         handle_input
+        remove_marked
         step_physics
       end
     end
@@ -337,35 +337,12 @@ class GameWindow < Gosu::Window
   end
   # Remove the shapes that are marked for removal.
   #
-  def remove_objects
-    @objects.remove_from @environment
+  def remove_marked
+    @objects.remove_marked
   end
   
   # Adding things.
   #
-  
-  # Things register themselves here.
-  #
-  # def register thing
-  #   @objects.register thing
-  #   thing.add_to @environment if Thing === thing # TODO Move
-  # end
-  # # Things unregister themselves here.
-  # #
-  # # Note: Use as follows in a Thing.
-  # #       
-  # #       def destroy
-  # #         threaded do
-  # #           5.times { sleep 0.1; animate_explosion }
-  # #           @window.unregister self
-  # #         end
-  # #       end
-  # #
-  # def unregister object
-  #   # Note: Explicitly call unregister_ui thing if you want it
-  #   #
-  #   @objects.remove object
-  # end
   # Register a user interfaceable object.
   #
   def register_ui thing
@@ -376,6 +353,8 @@ class GameWindow < Gosu::Window
   end
   
   # Is the thing registered?
+  #
+  # TODO Move
   #
   def registered? thing
     @objects.registered? thing
@@ -425,11 +404,6 @@ class GameWindow < Gosu::Window
   end
   def randomly_add type
     add type, *uniform_random_position
-  end
-  # Revives the player if not already in.
-  #
-  def revive player
-    register player unless registered?(player) # player.registered?
   end
   
   # Drawing methods

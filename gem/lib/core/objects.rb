@@ -2,13 +2,12 @@
 #
 class Objects
   
-  attr_reader :things, :sprites, :remove_things, :remove_sprites
+  attr_reader :things, :sprites
   
   #
   #
   def initialize things, sprites
     @things, @sprites = things, sprites
-    @remove_things, @remove_sprites = [], []
   end
   
   # TODO Not used?
@@ -36,17 +35,11 @@ class Objects
     @sprites.draw
   end
   
-  def remove object
-    Thing === object ? remove_things << object : remove_sprites << object
-  end
-  
   #
   #
-  def remove_from environment
-    @things.remove_from environment, remove_things # TODO Too much work being done
-    @sprites.remove_from environment, remove_sprites
-    remove_things.clear
-    remove_sprites.clear
+  def remove_marked
+    @things.remove_marked
+    @sprites.remove_marked
   end
   
 end

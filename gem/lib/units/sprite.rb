@@ -32,7 +32,7 @@ class Sprite
   # Default layer is Layer::Players.
   #
   def layer
-    Layer::Players
+    Layer::Ambient
   end
   # Default rotation is upwards.
   #
@@ -59,7 +59,7 @@ class Sprite
       end
     end
     def random_rotation
-      rotation { 2*Math::PI*rand }
+      rotation { Rotation::Full*rand }
     end
     
     # Plays a random sound of the given sounds.
@@ -135,10 +135,18 @@ class Sprite
     # self.window.unregister self # TODO self.owner.unregister self
   end
   
+  # Revives this thing.
+  #
+  # TODO Override in Lives.
+  #
+  def revive
+    show unless objects.registered?(self)
+  end
+  
   # Draws its image.
   #
   def draw
-    p [self.class, self.layer, self.drawing_rotation, 0.5, 0.5, *self.current_size] unless self.position
+    # p [self.class, self.layer, self.drawing_rotation, 0.5, 0.5, *self.current_size] unless self.position
     self.image.draw_rot self.position.x, self.position.y, self.layer, self.drawing_rotation, 0.5, 0.5, *self.current_size
   end
   def current_size

@@ -1,7 +1,8 @@
 module Rotation
   
-  Full    = Math::PI
-  Half    = Math::HalfPI
-  Quarter = Math::QuarterPI
+  Full    = 2*Math::PI
+  Half    =   Math::PI
+  Quarter =   Math::HalfPI
+  Eight   =   Math::QuarterPI
   
 end

@@ -4,37 +4,36 @@ class Tank < Thing
   
   it_is_a Generator
   it_is Targetable
-  it_has UserInterface
   
-  ui 900, 10, 0xffff0000 do "Tank: #{lives} lives" end
+  it_has UserInterface
+    ui 900, 10, 0xffff0000 do "Tank: #{lives} lives" end
   
   # Thing
   #
   image 'tank/image.png'
   
-  it_is_a Shooter do
+  it_is_a Shooter
     range 10
     frequency 1
     shoots Bullet
-    muzzle_position { self.position + self.rotation_vector*self.radius*2 }
-    muzzle_velocity { |*| self.rotation_vector*5 }
+    muzzle_position Shooter::Position.front(22)
+    muzzle_velocity Shooter::Velocity.front(5)
     # muzzle_rotation { |*| self.rotation }
-  end
   
   it_is Controllable
-  it_has Lives
+    controls Gosu::Button::KbLeft => Moveable::Left,
+             Gosu::Button::KbRight => Moveable::Right,
+             Gosu::Button::KbUp => Shooter::Shoot,
+             Gosu::Button::KbDown => :righten
   
-  controls Gosu::Button::KbLeft => Moveable::Left,
-           Gosu::Button::KbRight => Moveable::Right,
-           Gosu::Button::KbUp => Shooter::Shoot,
-           Gosu::Button::KbDown => :righten
-  lives 3
+  it_has Lives
+    lives 3
   
   #
   #
   shape :circle, 11.0
-  friction 100.0       # TODO Remove these
-  rotation -Math::PI/2 # TODO Remove these
+  friction 100.0 # TODO Remove this
+  rotation -::Rotation::Quarter
   
   collision_type :player
   

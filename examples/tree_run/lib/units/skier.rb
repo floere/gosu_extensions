@@ -3,6 +3,7 @@ class Skier < Thing
   image 'skier/red.png'
   
   it_is Controllable
+  it_is_a Generator
   it_has UserInterface
            
   it_has Lives
@@ -12,13 +13,13 @@ class Skier < Thing
   mass 0.1
   moment 0.01
   friction 0
-  rotation -Math::PI/2
+  rotation -Rotation::Quarter
   
   collision_type :player
   
   attr_accessor :name, :points
   
-  def initialize(*args)
+  def initialize *args
     @points = 0
     super
   end
@@ -33,9 +34,7 @@ class Skier < Thing
   end
   
   def slam!
-    crash = Crash.new(window)
-    crash.warp position
-    window.register crash
+    generate Crash
     
     @points = 0
     
@@ -43,8 +42,7 @@ class Skier < Thing
   end
   
   def add_points
-    factor = position.y/window.height
-    @points += factor
+    @points += position.y / window.height
   end
   
 end

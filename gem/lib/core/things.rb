@@ -2,7 +2,7 @@
 #
 class Things < Sprites
   
-  attr_reader :environment
+  delegate :each, :to => :@elements
   
   def initialize environment, elements = []
     @environment = environment
@@ -10,9 +10,7 @@ class Things < Sprites
   end
   
   def register element
-    # TODO Rewrite
-    # 
-    element.add_to self.environment
+    element.add_to @environment
     super element
   end
   
@@ -27,11 +25,12 @@ class Things < Sprites
   
   #
   #
-  def remove_from environment, things
-    things.each do |thing|
-      environment.remove thing.shape
-      remove thing # TODO Should the environment be the owner of the things? Probably, yes.
+  def remove_marked
+    @to_remove.each do |thing|
+      @environment.remove thing
+      @elements.delete thing # TODO Should the environment be the owner of the things? Probably, yes.
     end
+    @to_remove.clear
   end
   
 end

@@ -29,7 +29,7 @@ class SpaceBattle < GameWindow
   
   # font Gosu::default_font_name, 20
   
-  background # 'space.png'
+  background 'space.png'
   
   damping 0.1
   gravity 0.2

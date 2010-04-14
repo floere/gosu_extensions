@@ -28,6 +28,7 @@ class TreeRun < GameWindow
   height 600
   
   caption "Tree Run - A Suicidal Freeski Undertaking"
+  background Gosu::Color::WHITE
   
   damping 0.5
   gravity 0.0
@@ -47,9 +48,11 @@ class TreeRun < GameWindow
   # Callbacks
   #
   def setup_players
+    @players = []
+    
     # Player 1
     #
-    @player1 = Skier.new(self)
+    @player1 = Skier.new self
     @player1.name = "Player 1"
     @player1.controls(Gosu::Button::KbA => Moveable.left(2),
                       Gosu::Button::KbD => Moveable.right(2),
@@ -71,7 +74,7 @@ class TreeRun < GameWindow
     @player2.ui width-120, 10, Gosu::Color::BLACK do "#{points.to_i} points" end
     @players << @player2
     
-    @players.each {|p| register p}
+    @players.each &:show
   end
   def after_setup
     self.steepness    = 0.3
@@ -82,7 +85,7 @@ class TreeRun < GameWindow
     self.steepness    = 0.3  + 2*factor
     self.tree_density = 0.01 + 0.1*factor
     
-    @players.each(&:add_points)
+    @players.each &:add_points
     create_trees
   end
   # Stopping condition

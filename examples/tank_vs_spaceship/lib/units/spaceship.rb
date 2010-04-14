@@ -18,8 +18,8 @@ class Spaceship < Thing
   # hitpoints 1_000
   
   shape :circle, 10.0
-  friction 100.0           # TODO Remove these
-  rotation -Rotation::Half # TODO Remove these
+  friction 100.0              # TODO Remove these
+  rotation -Rotation::Quarter # TODO Remove these
   
   collision_type :player
   
@@ -72,7 +72,7 @@ class Spaceship < Thing
   def destroyed!
     explosion = SmallExplosion.new window
     explosion.warp position + random_vector(rand(20))
-    window.register explosion
+    explosion.show
     5.times do
       generate(Debris).speed = random_vector 10
     end
@@ -82,12 +82,11 @@ class Spaceship < Thing
   #   start_generating # smokes
   # end
   
-  it_is_a Pod
   def killed!
     start_generating
     # For fun:
     # Needs it_is_a Pod though
-    attach Smoke.new(window), 0, rand(100)+20
+    # attach Smoke.new(window), 0, rand(100)+20
   end
   
 end

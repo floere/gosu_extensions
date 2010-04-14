@@ -14,6 +14,10 @@ class Thing < Sprite
     100.0
   end
   
+  def layer
+    Layer::Players
+  end
+  
   class << self
     @@form_shape_class_mapping = {
       :circle  => CP::Shape::Circle, # :circle, radius
