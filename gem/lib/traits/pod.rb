@@ -70,7 +70,7 @@ module Pod extend Trait
     
     def materialize attachment
       attachment.extend Attachable # This is where Ruby shines.
-      window.register attachment
+      attachment.show
     end
     
     #
