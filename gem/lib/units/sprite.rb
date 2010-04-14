@@ -75,9 +75,12 @@ class Sprite
   #
   # Default is: Instantly, in the next step.
   #
+  # Note: Can also be called with after.
+  #
   def threaded time = 1, &code
     self.window.threaded time, &code
   end
+  alias after threaded
   
   # Some things you can only do every x time units.
   # 
@@ -99,11 +102,15 @@ class Sprite
     result
   end
   
+  # A sprite is not added to the physical environment.
   #
+  # Override if you want it to.
   #
-  def add_to environment
-    # A sprite is not added to the physical environment.
-  end
+  def add_to environment; end
+  
+  # Override this method to do stuff after it is destroyed.
+  #
+  def destroyed!; end
   
   # Destroy this thing.
   #
@@ -111,18 +118,17 @@ class Sprite
   def destroyed?
     @destroyed
   end
-  def destroyed!
-    # Override
-  end
   def destroy!
     return if self.destroyed?
-    self.destroyed!
+    self.destroyed! # invoke callback
+    self.window.unregister self # TODO self.owner.unregister self
     self.destroyed = true
   end
   
   # Draws its image.
   #
   def draw
+    p [self.class, self.layer, self.drawing_rotation, 0.5, 0.5, *self.current_size] unless self.position
     self.image.draw_rot self.position.x, self.position.y, self.layer, self.drawing_rotation, 0.5, 0.5, *self.current_size
   end
   def current_size

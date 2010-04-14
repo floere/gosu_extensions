@@ -1,7 +1,6 @@
 class Debris < Thing
   
-  it_is_a Generator
-    generates Smoke, :starting_at => 10, :every => 10
+  it_is_a Generator; generates Smoke, :starting_at => 10, :every => 10
   
   # it_is ShortLived
   #   lifetime { 200 + rand(50) }

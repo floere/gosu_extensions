@@ -2,10 +2,11 @@
 #
 class RemoveShapes
   
-  attr_reader :shapes
+  attr_reader :things, :shapes
   delegate :clear, :empty?, :to => :@shapes
   
-  def initialize
+  def initialize things
+    @things = things
     @shapes = []
   end
   
@@ -17,7 +18,7 @@ class RemoveShapes
   
   #
   #
-  def remove_from environment, moveables
+  def remove_from environment
     # This iterator makes an assumption of one Shape per Star making it safe to remove
     # each Shape's Body as it comes up
     # If our Stars had multiple Shapes, as would be required if we were to meticulously
@@ -29,7 +30,7 @@ class RemoveShapes
     return if empty?
     shapes.each do |shape|
       environment.remove shape
-      moveables.remove shape # TODO Should the environment be the owner of the moveables? Probably, yes.
+      things.remove shape # TODO Should the environment be the owner of the things? Probably, yes.
     end
     clear
   end

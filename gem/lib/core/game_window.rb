@@ -28,7 +28,9 @@ class GameWindow < Gosu::Window
               :gravity_vector,
               :background_options
   attr_reader :environment,
-              :moveables,
+              :sprites,
+              :things,
+              :objects,
               :font,
               :scheduling,
               :collisions
@@ -37,8 +39,11 @@ class GameWindow < Gosu::Window
   
   def initialize
     setup_window
-    setup_moveables
-    setup_remove_shapes
+    
+    setup_sprites
+    setup_things
+    setup_objects
+    
     setup_controls
     setup_window_control # e.g. ESC => exits
     
@@ -77,7 +82,7 @@ class GameWindow < Gosu::Window
       # Smoother, but slower: GC.start if rand > 0.98
       next_step
       SUBSTEPS.times do
-        remove_shapes
+        remove_objects
         move
         targeting
         handle_input
@@ -117,7 +122,7 @@ class GameWindow < Gosu::Window
     @gravity_vector || @gravity_vector = CP::Vec2.new(0, 0.98/SUBSTEPS)
   end
   def background_options
-    Gosu::Color::WHITE
+    # default is no background
   end
   
   class << self
@@ -169,13 +174,13 @@ class GameWindow < Gosu::Window
       # The next line doesn't work, as &nil == nil
       # collision this, that, &Collision::None
       InitializerHooks.register self do
-        self.collisions << Collision.new(self, this, that)
+        self.collisions << Collision.new(things, this, that)
       end
     end
     def collision this, that = this, &definition
       definition ||= Collision::Simple
       InitializerHooks.register self do
-        self.collisions << Collision.new(self, this, that, &definition)
+        self.collisions << Collision.new(things, this, that, &definition)
       end
     end
     
@@ -210,11 +215,14 @@ class GameWindow < Gosu::Window
   def setup_background
     @background = Background.new self
   end
-  def setup_moveables
-    @moveables = Moveables.new
+  def setup_sprites
+    @sprites = Sprites.new
   end
-  def setup_remove_shapes
-    @remove_shapes = RemoveShapes.new
+  def setup_things
+    @things = Things.new
+  end
+  def setup_objects
+    @objects = Objects.new things, sprites
   end
   def setup_controls
     @controls = Controls.new
@@ -223,8 +231,7 @@ class GameWindow < Gosu::Window
     add_controls_for self
   end
   def setup_containers
-    @players = []
-    @waves   = Waves.new self, @scheduling
+    @waves = Waves.new self, @scheduling
   end
   def setup_steps
     @step = 0
@@ -258,10 +265,6 @@ class GameWindow < Gosu::Window
   def step; end # The most important callback
   
   #
-  #
-  # Example:
-  #   collisions do
-  #     add_collision_func ...
   #
   def setup_collisions
     self.collisions.each { |collision| collision.install_on(environment) }
@@ -324,27 +327,27 @@ class GameWindow < Gosu::Window
   # Moves each moveable.
   #
   def move
-    @moveables.move
+    @objects.move
   end
   # Handles the targeting process.
   #
   def targeting
-    @moveables.targeting
+    @things.targeting
   end
   # Remove the shapes that are marked for removal.
   #
-  def remove_shapes
-    @remove_shapes.remove_from @environment, @moveables
+  def remove_objects
+    @objects.remove_from @environment
   end
   
   # Adding things.
   #
   
-  # Moveables register themselves here.
+  # Things register themselves here.
   #
-  def register moveable
-    @moveables.register moveable
-    moveable.add_to @environment
+  def register thing
+    @objects.register thing
+    thing.add_to @environment if Thing === thing # TODO Move
   end
   # Things unregister themselves here.
   #
@@ -357,9 +360,10 @@ class GameWindow < Gosu::Window
   #         end
   #       end
   #
-  def unregister thing
-    # explicitly call unregister_ui thing if you want it
-    remove thing.shape
+  def unregister object
+    # Note: Explicitly call unregister_ui thing if you want it
+    #
+    @objects.remove object
   end
   # Register a user interfaceable object.
   #
@@ -370,17 +374,10 @@ class GameWindow < Gosu::Window
     @uis.delete thing
   end
   
-  # Remove this shape the next turn.
-  #
-  # Note: Internal use. Use unregister to properly remove a moveable.
-  #
-  def remove shape
-    @remove_shapes.add shape
-  end
   # Is the thing registered?
   #
   def registered? thing
-    @moveables.registered? thing
+    @objects.registered? thing
   end
   
   # Scheduling
@@ -396,6 +393,8 @@ class GameWindow < Gosu::Window
   #     destroy!
   #   end
   #
+  # Note: You can also use after instead of threaded.
+  #
   def threaded time = 1, &code
     @scheduling.add time, &code
   end
@@ -407,17 +406,21 @@ class GameWindow < Gosu::Window
   
   # Example:
   # * x, y = uniform_random_position
+  # * warp_to *uniform_random_position
   #
   def uniform_random_position
     [rand(self.width), rand(self.height)]
   end
   # Randomly adds a Thing to a uniform random position.
   #
+  # Returns the new thing
+  #
   def add type, x = nil, y = nil, &random_function
     thing = type.new self
     position = x && y && [x, y] || random_function && random_function[]
     thing.warp_to *position
     register thing
+    thing
   end
   def randomly_add type
     add type, *uniform_random_position
@@ -436,7 +439,7 @@ class GameWindow < Gosu::Window
   def draw
     draw_background
     draw_ambient
-    draw_moveables
+    draw_objects
     draw_ui
   end
   # Draws a background image.
@@ -449,13 +452,12 @@ class GameWindow < Gosu::Window
   def draw_ambient
     
   end
-  # Draw the moveables.
+  # Draw the things.
   #
-  def draw_moveables
-    @moveables.draw
+  def draw_objects
+    @objects.draw
   end
-  # Override for example with
-  # @font.draw "P1 Score: ", 10, 10, ZOrder::UI, 1.0, 1.0, 0xffff0000
+  #
   #
   def draw_ui
     @uis.each(&:draw_ui)

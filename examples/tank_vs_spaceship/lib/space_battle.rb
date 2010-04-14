@@ -29,7 +29,7 @@ class SpaceBattle < GameWindow
   
   # font Gosu::default_font_name, 20
   
-  background 'space.png'
+  background # 'space.png'
   
   damping 0.1
   gravity 0.2
@@ -47,15 +47,8 @@ class SpaceBattle < GameWindow
   # Overridden, called in the setup.
   #
   def setup_players
-    @spaceship = Spaceship.new self
-    @spaceship.warp_to 400, 320
-    @players << @spaceship
-    register @spaceship
-    
-    @tank = Tank.new self
-    @tank.warp_to self.screen_width/2, self.screen_height
-    @players << @tank
-    register @tank
+    add Spaceship, 400, 320
+    add Tank, width/2, height
   end
   
   # As an example.

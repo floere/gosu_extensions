@@ -14,6 +14,7 @@ class Background
   end
   
   def functionify path_or_color
+    return lambda {} unless path_or_color
     Gosu::Color === path_or_color ? color_draw_function(path_or_color) : image_draw_function(path_or_color)
   end
   

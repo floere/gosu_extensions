@@ -40,12 +40,12 @@ describe RemoveShapes do
       end
       it "should remove the shapes from the environment and the moveables" do
         environment = stub :environment
-        moveables   = stub :moveables
+        things      = stub :things
         
         environment.should_receive(:remove).once.with @shape
-        moveables.should_receive(:remove).once.with @shape
+        things.should_receive(:remove).once.with @shape
         
-        @remove_shapes.remove_from environment, moveables
+        @remove_shapes.remove_from environment
       end
     end
   end

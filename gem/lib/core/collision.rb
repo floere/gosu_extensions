@@ -9,12 +9,12 @@ class Collision
   
   #
   #
-  attr_reader :window, :this, :that, :definition
+  attr_reader :things, :this, :that, :definition
   
+  # Things can collide.
   #
-  #
-  def initialize window, this, that = this, &definition
-    @window     = window # TODO Remove.
+  def initialize things, this, that = this, &definition
+    @things     = things
     @this       = this
     @that       = that
     @definition = definition && package(definition)
@@ -35,9 +35,9 @@ class Collision
   #
   def simple_package definition
     lambda do |this_shape, _|
-      window.moveables.each do |moveable|
-        if moveable.shape == this_shape
-          moveable.instance_eval &definition
+      things.each do |thing|
+        if thing.shape == this_shape
+          thing.instance_eval &definition
           break
         end
       end
@@ -49,13 +49,13 @@ class Collision
   def complex_package definition
     lambda do |this_shape, that_shape|
       this_that = Array.new 2
-      window.moveables.each do |moveable|
-        if moveable.shape == this_shape
-          this_that[0] = moveable
+      things.each do |thing|
+        if thing.shape == this_shape
+          this_that[0] = thing
           break if this_that.all?
         end
-        if moveable.shape == that_shape
-          this_that[1] = moveable
+        if thing.shape == that_shape
+          this_that[1] = thing
           break if this_that.all?
         end
       end
