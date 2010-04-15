@@ -27,9 +27,6 @@ class Thing < Sprite
     }
     def shape form, *args
       form_shape_class_mapping = @@form_shape_class_mapping
-      define_method :radius do
-        args.first # TODO fix!
-      end
       InitializerHooks.prepend self do
         shape_class = form_shape_class_mapping[form]
         raise "Shape #{form} does not exist." unless shape_class
