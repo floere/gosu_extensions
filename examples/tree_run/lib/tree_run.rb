@@ -1,6 +1,6 @@
 class TreeRun < GameWindow
   
-  # debug
+  # debug # uncomment for debugging the shapes
   
   puts <<-MANUAL
     Both Players:
