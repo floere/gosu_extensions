@@ -18,7 +18,7 @@ require 'lib/units/missile_launcher'
 
 Resources.root = File.join File.dirname(__FILE__), 'media'
 
-require 'lib/space_battle'
+require 'lib/tank_vs_spaceship'
 
-battle = SpaceBattle.new
+battle = TankVsSpaceship.new
 battle.show # TODO show a splash screen first

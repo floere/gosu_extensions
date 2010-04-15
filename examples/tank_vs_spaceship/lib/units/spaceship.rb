@@ -13,12 +13,13 @@ class Spaceship < Thing
   image 'spaceship/image.png'
   
   it_has Lives
-  lives 1
+  lives 4
   # it_has Hitpoints
   # hitpoints 1_000
   
   shape :circle, 10.0
-  friction 100.0              # TODO Remove these
+  moment 1
+  friction 100                # TODO Remove these
   rotation -Rotation::Quarter # TODO Remove these
   
   collision_type :player
@@ -62,9 +63,7 @@ class Spaceship < Thing
   #
   def accelerate *args
     super *args
-    sometimes :accelerating, 20 do
-      generate Smoke
-    end
+    sometimes(:accelerating, 10) { generate Smoke } if current_speed < 20
   end
   
   # Generates a number of explosions and debris when destroyed!
