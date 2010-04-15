@@ -75,6 +75,9 @@ class Spaceship < Thing
       explosion.position += random_vector(rand(7))
       explosion.speed += random_vector(rand(20))
     end
+    3.times do
+      generate(Debris).speed = self.speed
+    end
     5.times do
       generate(Debris).speed = random_vector 10
     end
