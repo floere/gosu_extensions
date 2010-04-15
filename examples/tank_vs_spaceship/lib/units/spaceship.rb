@@ -30,7 +30,7 @@ class Spaceship < Thing
   range 10
   frequency 1
   shoots Missile # or: Bullet, for example
-  muzzle_position Shooter::Position.front(20) # { self.position + self.rotation_vector*self.radius*2 }
+  muzzle_position Shooter::Position.front(20)
   muzzle_velocity Shooter::Velocity.front(10)
   # muzzle_rotation { |*| self.rotation }
   
