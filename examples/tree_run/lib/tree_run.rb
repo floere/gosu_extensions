@@ -34,28 +34,18 @@ class TreeRun < GameWindow
   background Gosu::Color::WHITE
   
   damping 0.5
-  gravity 0.0
+  gravity 0
   
-  no_collision :ambient # no collisions between ambients
-  no_collision :ambient, :obstacle
-  no_collision :ambient, :player
   collision :player, :obstacle do |player, obstacle|
     obstacle.destroy!
     player.slam!
   end
-  collision :player # players do collide - you can also omit this, it will work
-  # collision :player, :player do |player1, player2| # they will collide
-  #   # do something with player 1
-  #   # do something with player 2
-  # end
   
   attr_accessor :steepness, :tree_density
   
   # Callbacks
   #
   def setup_players
-    # Player 1
-    #
     player1 = Skier.new self
     player1.name = "Player 1"
     player1.controls(Gosu::Button::KbA => Moveable.left(2),
@@ -65,8 +55,6 @@ class TreeRun < GameWindow
     player1.warp_to width/3, height/3
     player1.ui 20, 10, Gosu::Color::BLACK do "#{points.to_i} points" end
     
-    # Player 2
-    #
     player2 = Skier.new self
     player2.name = "Player 2"
     player2.controls(Gosu::Button::KbJ => Moveable.left(2),
@@ -85,7 +73,7 @@ class TreeRun < GameWindow
   end
   def step
     factor = @players.map { |p| p.position.y }.max / height
-    self.steepness    = 0.3  + 2*factor
+    self.steepness    = 0.3  +   2*factor
     self.tree_density = 0.01 + 0.1*factor
     
     @players.each &:add_points
@@ -100,6 +88,8 @@ class TreeRun < GameWindow
     display_end_message
   end
   
+  # Revive both players, then proceed.
+  #
   def revive
     @players.each &:revive
     proceed
@@ -115,8 +105,6 @@ class TreeRun < GameWindow
   end
   def display_end_message
     self.font.draw "Game Over - #{winner.name} won!", window.width/2-120, 10, Layer::UI, 1.0, 1.0, 0xff000000
-    
-    # after(300) { close }
   end
   def create_trees
     return unless rand > 1 - tree_density
