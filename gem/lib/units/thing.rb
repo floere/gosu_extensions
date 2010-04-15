@@ -3,6 +3,7 @@
 class Thing < Sprite
   
   attr_reader :shape
+  delegate :collision_type, :to => :shape
   
   def mass
     0.1

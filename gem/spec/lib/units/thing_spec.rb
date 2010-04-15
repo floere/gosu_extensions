@@ -8,6 +8,18 @@ describe Thing do
     @thing = Thing.new @window
   end
   
+  describe 'collision_type=' do
+    before(:each) do
+      @shape = stub :shape
+      @thing.stub! :shape => @shape
+    end
+    it 'should delegate to the shape' do
+      @shape.should_receive(:collision_type).once.with :some_collision_type
+
+      @thing.collision_type :some_collision_type
+    end
+  end
+
   describe "current_size" do
     it "should return [1.0, 1.0] by default" do
       @thing.current_size.should == [1.0, 1.0]
