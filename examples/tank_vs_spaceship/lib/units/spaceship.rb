@@ -17,7 +17,8 @@ class Spaceship < Thing
   # it_has Hitpoints
   # hitpoints 1_000
   
-  shape :circle, 10.0
+  # shape :poly, [CP::Vec2.new(0, 10), CP::Vec2.new(-6, -3), CP::Vec2.new(6, -3)]
+  shape :circle, 12
   moment 1
   friction 100                # TODO Remove these
   rotation -Rotation::Quarter # TODO Remove these

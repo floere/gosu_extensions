@@ -2,9 +2,9 @@ class SmallExplosion < Thing
   
   it_is ShortLived
   
-  lifetime 20
+  lifetime { 15 + rand(10) }
   sequenced_image 'small_explosion.png', 16, 16, 10
-  shape :circle, 2.0
+  shape :circle, 3.0
   mass 100
   moment 100
   collision_type :projectile
