@@ -1,5 +1,7 @@
 class SmallExplosion < Thing
   
+  layer Layer::Ambient
+  
   it_is_a Generator
   generates Smoke, :starting_at => 10, :every => 5, :until => 25
   
@@ -17,7 +19,7 @@ class SmallExplosion < Thing
   
   def current_size
     @size_multiplicator ||= 2.0
-    @size_multiplicator *= 0.95
+    @size_multiplicator *= (95.0 + rand(5))/100
     [@size_multiplicator, @size_multiplicator]
   end
   

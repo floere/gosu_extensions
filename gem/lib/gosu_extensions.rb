@@ -72,4 +72,4 @@ require 'thing'
 
 DEFAULT_SCREEN_WIDTH  = 1200 unless defined?(DEFAULT_SCREEN_WIDTH)
 DEFAULT_SCREEN_HEIGHT =  700 unless defined?(DEFAULT_SCREEN_HEIGHT)
-SUBSTEPS              =   20 unless defined?(SUBSTEPS)
+SUBSTEPS              =   10 unless defined?(SUBSTEPS)

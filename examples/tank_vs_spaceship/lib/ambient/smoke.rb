@@ -12,7 +12,7 @@ class Smoke < Sprite
   #
   def current_size
     @multiplier ||= 2.0
-    @multiplier *= 0.97
+    @multiplier *= (95.0 + rand(5))/100
     [@multiplier, @multiplier]
   end
   
