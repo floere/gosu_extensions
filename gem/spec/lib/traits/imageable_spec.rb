@@ -12,7 +12,12 @@ describe Imageable do
       @imageable = test_class_with(Imageable).new @window
     end
     it 'should set the image' do
-      lambda { @imageable.image = :bla }.should_not raise_error
+      lambda { @imageable.image = :some_image }.should_not raise_error
+    end
+    it 'should return that image' do
+      @imageable.image = :some_image
+      
+      @imageable.image.should == :some_image
     end
   end
 
