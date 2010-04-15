@@ -1,5 +1,7 @@
 class TankVsSpaceship < GameWindow
   
+  # debug
+  
   puts <<-MANUAL
     Spaceship:
       A - turn left

@@ -9,6 +9,8 @@
 #
 class BlamBlamBoom < GameWindow
   
+  # debug
+  
   default_controls
   
   size 1024, 768
@@ -26,25 +28,25 @@ class BlamBlamBoom < GameWindow
   end
   
   def setup_players
-    player1 = Player.new self
-    player1.controls Gosu::Button::KbW => :jump,
-                     Gosu::Button::KbA => Moveable::Left,
-                     Gosu::Button::KbD => Moveable::Right,
+    thinboy = Player.new self
+    thinboy.controls Gosu::Button::KbW => [:jump, 45],
+                     Gosu::Button::KbA => Moveable.left(1.5),
+                     Gosu::Button::KbD => Moveable.right(1.5),
                      Gosu::Button::KbQ => Shooter::Shoot
                      # reload on down?
-    player2 = Player.new self
-    player2.controls Gosu::Button::KbY     => :jump,
-                     Gosu::Button::KbG     => Moveable::Left,
-                     Gosu::Button::KbJ     => Moveable::Right,
-                     Gosu::Button::KbSpace => Shooter::Shoot
+    fatty = Player.new self
+    fatty.controls Gosu::Button::KbY     => [:jump, 30],
+                   Gosu::Button::KbG     => Moveable.left(1.0),
+                   Gosu::Button::KbJ     => Moveable.right(1.0),
+                   Gosu::Button::KbSpace => Shooter::Shoot
     
-    player3 = Player.new self
-    player3.controls Gosu::Button::KbUp    => :jump,
-                     Gosu::Button::KbLeft  => Moveable::Left,
-                     Gosu::Button::KbRight => Moveable::Right,
-                     Gosu::Button::KbI     => Shooter::Shoot
+    otto = Player.new self
+    otto.controls Gosu::Button::KbUp    => [:jump, 37.5],
+                  Gosu::Button::KbLeft  => Moveable.left(1.25),
+                  Gosu::Button::KbRight => Moveable.right(1.25),
+                  Gosu::Button::KbI     => Shooter::Shoot
     
-    @players = [player1, player2, player3]
+    @players = [thinboy, fatty, otto]
     @players.each { |player| player.warp_to *uniform_random_position; player.show }
   end
   

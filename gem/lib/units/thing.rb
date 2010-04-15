@@ -91,6 +91,10 @@ class Thing < Sprite
   #
   def move;end
   
+  def draw
+    window.debug? ? shape.debug(window, self) : super
+  end
+  
   #
   #
   def speed= v

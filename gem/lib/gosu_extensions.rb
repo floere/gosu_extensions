@@ -18,6 +18,8 @@ $:.unshift File.join(File.dirname(__FILE__), '/extensions')
 require 'module'
 require 'numeric'
 require 'math'
+require 'circle'
+require 'poly'
 
 $:.unshift File.join(File.dirname(__FILE__), '/core')
 require 'resources'

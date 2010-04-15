@@ -126,9 +126,9 @@ describe Shooter do
   describe 'muzzle_position' do
     context 'default' do
       it 'should use the default calculation' do
-        @shooter.stub! :position => "position + ", :rotation_vector => "rotation", :radius => 3
+        @shooter.stub! :position => "position + ", :rotation_vector => "rotation"
         
-        @shooter.muzzle_position.should == "position + rotationrotationrotation"
+        @shooter.muzzle_position.should == "position + rotationrotationrotationrotationrotationrotationrotationrotationrotationrotation"
       end
     end
     context 'non-default' do

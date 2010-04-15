@@ -102,8 +102,8 @@ module Shooter extend Trait
     self.shot_type.new @window
   end
   
-  def muzzle_position
-    instance_eval &(@muzzle_position || @muzzle_position = lambda { |*| self.position + self.rotation_vector*self.radius })
+  def muzzle_position distance = 10
+    instance_eval &(@muzzle_position || @muzzle_position = lambda { |*| self.position + self.rotation_vector * distance })
   end
   def muzzle_velocity target = nil
     instance_eval &(@muzzle_velocity || @muzzle_velocity = lambda { |*| self.rotation_vector })

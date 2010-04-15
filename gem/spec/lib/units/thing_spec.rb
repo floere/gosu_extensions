@@ -35,10 +35,18 @@ describe Thing do
                    :drawing_rotation => :some_drawing_rotation,
                    :current_size     => [:size_x, :size_y]
     end
-    it "should delegate to the image" do
-      @image.should_receive(:draw_rot).once.with :some_x, :some_y, :some_layer, :some_drawing_rotation, 0.5, 0.5, :size_x, :size_y
+    context 'debug on' do
       
-      @thing.draw
+    end
+    context 'debug off' do
+      before(:each) do
+        @window.stub! :debug? => false
+      end
+      it "should delegate to the image" do
+        @image.should_receive(:draw_rot).once.with :some_x, :some_y, :some_layer, :some_drawing_rotation, 0.5, 0.5, :size_x, :size_y
+        
+        @thing.draw
+      end
     end
   end
   

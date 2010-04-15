@@ -13,4 +13,7 @@ describe Layer do
   it "should be the right layer" do
     Layer::UI.should == 3
   end
+  it "should be the right layer" do
+    Layer::Debug.should == 4
+  end
 end

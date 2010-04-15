@@ -37,6 +37,15 @@ class GameWindow < Gosu::Window
                 :proceed_condition,
                 :collisions
   
+  # TODO Move to Debug Module
+  #
+  def draw_circle x, y, r, color
+    0.step(360, 10) { |a1|
+      a2 = a1 + 10
+      draw_line x + Gosu.offset_x(a1, r), y + Gosu.offset_y(a1, r), color, x + Gosu.offset_x(a2, r), y + Gosu.offset_y(a2, r), color, 0
+    }
+  end
+  
   def initialize
     setup_window
     
@@ -127,7 +136,17 @@ class GameWindow < Gosu::Window
     # default is no background
   end
   
+  def debug?
+    @debug
+  end
+  
   class << self
+    
+    def debug
+      InitializerHooks.register self do
+        @debug = true
+      end
+    end
     
     # Sets the Esc button to close the window.
     #

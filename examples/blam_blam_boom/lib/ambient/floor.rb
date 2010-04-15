@@ -10,7 +10,6 @@ class Floor < Thing
   mass 1_000_000
   moment 100_000_000
   friction 1.0
-  rotation -Rotation::Quarter
   
   collision_type :ambient
   

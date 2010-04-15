@@ -1,6 +1,4 @@
 class Skier < Thing
-
-  image 'skier/red.png'
   
   it_is Controllable
   it_is_a Generator
@@ -9,10 +7,10 @@ class Skier < Thing
   it_has Lives
   lives 1
   
-  shape :circle, 12
-  mass 0.1
-  moment 0.01
-  friction 0
+  shape :poly, [CP::Vec2.new(-14,-8), CP::Vec2.new(-14,8), CP::Vec2.new(14,8), CP::Vec2.new(14,-8)]
+  mass 85
+  moment 100_000_000
+  friction 100
   rotation -Rotation::Quarter
   
   collision_type :player
@@ -28,7 +26,7 @@ class Skier < Thing
     bounce_off_border_x
     bounce_off_border_y
     
-    if position.y < radius*2
+    if position.y < 24
       kill!
     end
   end

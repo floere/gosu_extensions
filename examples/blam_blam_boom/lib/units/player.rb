@@ -31,9 +31,9 @@ class Player < Thing
       shape.body.v.y = 0
     end
   end
-  def jump
+  def jump force = 30
     sometimes :jump, 50 do
-      self.speed += CP::Vec2.new(0, -30)
+      self.speed += CP::Vec2.new(0, -force)
     end
   end
   

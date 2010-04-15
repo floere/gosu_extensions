@@ -1,5 +1,7 @@
 class TreeRun < GameWindow
   
+  # debug
+  
   puts <<-MANUAL
     Both Players:
       Space - Revive the players and continue
@@ -36,6 +38,7 @@ class TreeRun < GameWindow
   damping 0.5
   gravity 0
   
+  collision :player
   collision :player, :obstacle do |player, obstacle|
     obstacle.destroy!
     player.slam!
@@ -53,7 +56,8 @@ class TreeRun < GameWindow
                       Gosu::Button::KbS => Moveable::Down,
                       Gosu::Button::KbW => Moveable::Up)
     player1.warp_to width/3, height/3
-    player1.ui 20, 10, Gosu::Color::BLACK do "#{points.to_i} points" end
+    player1.image_from 'skier/red.png'
+    player1.ui 20, 10, Gosu::Color::RED do "#{points.to_i} points" end
     
     player2 = Skier.new self
     player2.name = "Player 2"
@@ -62,7 +66,8 @@ class TreeRun < GameWindow
                       Gosu::Button::KbK => Moveable::Down,
                       Gosu::Button::KbI => Moveable::Up)
     player2.warp_to width-width/3, height/3
-    player2.ui width-120, 10, Gosu::Color::BLACK do "#{points.to_i} points" end
+    player2.image_from 'skier/violet.png'
+    player2.ui width-120, 10, Gosu::Color.new(238,130,238) do "#{points.to_i} points" end
     
     @players = [player1, player2]
     @players.each &:show

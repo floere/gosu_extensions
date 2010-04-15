@@ -144,7 +144,6 @@ class Sprite
   # Draws its image.
   #
   def draw
-    # p [self.class, self.layer, self.drawing_rotation, 0.5, 0.5, *self.current_size] unless self.position
     self.image.draw_rot self.position.x, self.position.y, self.layer, self.drawing_rotation, 0.5, 0.5, *self.current_size
   end
   def current_size
