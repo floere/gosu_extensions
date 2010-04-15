@@ -41,8 +41,8 @@ module Shooter extend Trait
     Example:
       frequency 20
       shoots Bullet
-      muzzle_position { self.position + self.rotation_vector.normalize*self.radius }
-      muzzle_velocity { |_| self.rotation_vector.normalize }
+      muzzle_position { self.position + self.rotation_vector.normalize*20 } # Or: Shooter::Position.front(20)
+      muzzle_velocity { |_| self.rotation_vector.normalize } # Or: Shooter::Velocity.front(1)
       muzzle_rotation { |_| self.rotation }
   MANUAL
   
