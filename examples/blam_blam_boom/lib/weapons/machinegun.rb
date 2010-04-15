@@ -1,16 +1,20 @@
-class Machinegun < Sprite
+class Machinegun < Thing
   
   it_is Turnable
   turn_speed 0.5
   
+  layer Layer::UI
+  
   image 'machinegun.png'
   
-  rotation -Rotation::Eight
+  shape :circle, 4.0
+  mass 85
+  moment 0.1
+  friction 1.0
   
-  it_is Controllable
-    controls Gosu::Button::KbA => Turnable::Left,
-             Gosu::Button::KbS => Turnable::Right,
-             Gosu::Button::KbQ => Shooter::Shoot
+  rotation -Rotation::Quarter
+  
+  collision_type :weapon
   
   it_is_a Shooter
     frequency 5

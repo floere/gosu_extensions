@@ -32,6 +32,7 @@ require 'trait'
 require 'traits'
 require 'it_is_a'
 
+require 'threading'
 require 'background'
 require 'sprites'
 require 'things'
@@ -71,4 +72,4 @@ require 'thing'
 
 DEFAULT_SCREEN_WIDTH  = 1200 unless defined?(DEFAULT_SCREEN_WIDTH)
 DEFAULT_SCREEN_HEIGHT =  700 unless defined?(DEFAULT_SCREEN_HEIGHT)
-SUBSTEPS              =   10 unless defined?(SUBSTEPS)
+SUBSTEPS              =   20 unless defined?(SUBSTEPS)

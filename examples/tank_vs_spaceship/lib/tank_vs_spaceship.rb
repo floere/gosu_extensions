@@ -20,7 +20,11 @@ class TankVsSpaceship < GameWindow
     Have fun!
   MANUAL
   
-  default_controls
+  it_is Controllable
+    controls Gosu::Button::KbEscape => :close,
+             Gosu::Button::Kb6      => :revive,
+             Gosu::Button::Kb9      => :slower,
+             Gosu::Button::Kb0      => :faster
   
   width  1022
   height  595
@@ -45,8 +49,12 @@ class TankVsSpaceship < GameWindow
   # Overridden, called in the setup.
   #
   def setup_players
-    add Spaceship, 400, 320
-    add Tank, width/2, height
+    @players = []
+    @players << add(Spaceship, 400, 320)
+    @players << add(Tank, width/2, height-100)
+  end
+  def revive
+    @players.each &:revive
   end
   
   # As an example.

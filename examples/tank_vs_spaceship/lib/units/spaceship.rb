@@ -13,7 +13,7 @@ class Spaceship < Thing
   image 'spaceship/image.png'
   
   it_has Lives
-  lives 4
+  lives 1
   # it_has Hitpoints
   # hitpoints 1_000
   
@@ -75,11 +75,10 @@ class Spaceship < Thing
       explosion.position += random_vector(rand(7))
       explosion.speed += random_vector(rand(20))
     end
-    5.times do
-      generate(Debris).speed = self.speed
-    end
-    3.times do
-      generate(Debris).speed = random_vector 10
+    8.times do
+      debris = generate(Debris)
+      debris.speed  = self.speed*rand + random_vector(rand(15))
+      debris.torque = rand(5)
     end
   end
   

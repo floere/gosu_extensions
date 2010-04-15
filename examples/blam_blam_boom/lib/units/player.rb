@@ -11,7 +11,7 @@ class Player < Thing
   
   layer Layer::Players
   
-  sequenced_image 'jeep.png', 65, 43
+  image 'red.png'
   
   shape :circle, 8.0
   mass 85
@@ -20,6 +20,10 @@ class Player < Thing
   rotation -Rotation::Quarter
   
   collision_type :player
+  
+  def shoot
+    
+  end
   
   def move
     obey_gravity

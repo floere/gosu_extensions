@@ -6,6 +6,7 @@
 class GameWindow < Gosu::Window
   
   include InitializerHooks
+  include Threading
   
   # TODO handle more elegantly
   #
@@ -400,26 +401,6 @@ class GameWindow < Gosu::Window
   def unregister_ui thing
     @uis.delete thing
   end
-  
-  # Scheduling
-  #
-  
-  # Run some code at relative time <time>.
-  #
-  # Example:
-  #   # Will destroy the object that calls this method
-  #   # in 20 steps.
-  #   #
-  #   window.threaded 20 do
-  #     destroy!
-  #   end
-  #
-  # Note: You can also use after instead of threaded.
-  #
-  def threaded time = 1, &code
-    @scheduling.add time, &code
-  end
-  alias after threaded
   
   
   # Utility Methods

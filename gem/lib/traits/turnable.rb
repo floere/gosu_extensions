@@ -17,7 +17,7 @@ module Turnable extend Trait
   #
   module ClassMethods
     def turn_speed amount
-      amount = amount.to_f / 2
+      amount = (amount.to_f*SUBSTEPS) / 10
       define_method :turn_speed do
         amount
       end

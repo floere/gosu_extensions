@@ -9,10 +9,10 @@ $:.unshift File.dirname(__FILE__)
 # require 'lib/ambient/smoke'
 require 'lib/ambient/floor'
 
-# require 'lib/projectiles/bullet'
+require 'lib/projectiles/bullet'
 # require 'lib/projectiles/missile'
 
-# require 'lib/weapons/machinegun'
+require 'lib/weapons/machinegun'
 # require 'lib/weapons/missile_launcher'
 
 require 'lib/units/player'
