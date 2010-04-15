@@ -67,9 +67,10 @@ class Tank < Thing
   # Generates a number of explosions when destroyed!
   #
   def destroyed!
-    20.times do
+    30.times do
       explosion = generate SmallExplosion
-      explosion.position += random_vector(rand(50))
+      explosion.position += random_vector(rand(40))
+      explosion.speed += random_vector(rand(20))
     end
   end
   

@@ -1,8 +1,11 @@
 class SmallExplosion < Thing
   
-  it_is ShortLived
+  it_is_a Generator
+  generates Smoke, :starting_at => 10, :every => 5, :until => 25
   
-  lifetime { 15 + rand(10) }
+  it_is ShortLived
+  lifetime { 15 + rand(15) }
+  
   sequenced_image 'small_explosion.png', 16, 16, 10
   shape :circle, 3.0
   mass 100
@@ -11,6 +14,12 @@ class SmallExplosion < Thing
   
   friction 0.0001
   random_rotation
+  
+  def current_size
+    @size_multiplicator ||= 2.0
+    @size_multiplicator *= 0.95
+    [@size_multiplicator, @size_multiplicator]
+  end
   
   # plays 'media/sounds/cannon_shot.mp3',
   #       'media/sounds/bomb-02.wav',

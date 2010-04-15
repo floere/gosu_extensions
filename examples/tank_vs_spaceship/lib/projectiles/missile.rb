@@ -21,7 +21,7 @@ class Missile < Thing
   #
   def destroyed!
     explosion = SmallExplosion.new window
-    explosion.warp position + random_vector(rand(10))
+    explosion.warp position + random_vector(rand(5))
     explosion.show
   end
   
