@@ -40,22 +40,32 @@ module Imageable extend Trait
   def image
     @image || raise(ImageMissingError.new)
   end
+  # Set this thing's image using a path.
+  #
+  def image_from path, *args
+    self.image = Gosu::Image.new self.window, File.join(Resources.root, path), *args
+  end
+  # Set this thing's image in the form of a sequenced image.
+  #
+  def sequenced_image_from path, width, height, frequency = 10, &block
+    @image_sequence_started = Time.now
+    self.image = Gosu::Image::load_tiles self.window, File.join(Resources.root, path), width, height, false
+  end
   
   module ClassMethods
     
     def image path, *args
       InitializerHooks.register self do
-        self.image = Gosu::Image.new self.window, File.join(Resources.root, path), *args
+        image_from path, *args
       end
     end
     
     def sequenced_image path, width, height, frequency = 10, &block
       InitializerHooks.register self do
-        @image_sequence_started = Time.now
-        self.image = Gosu::Image::load_tiles self.window, File.join(Resources.root, path), width, height, false
+        sequenced_image_from path, width, height, frequency, &block
       end
       # divider = 1000 / frequency
-
+      
       # Override image.
       #
       define_method :image do
