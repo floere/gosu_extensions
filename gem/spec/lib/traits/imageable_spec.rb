@@ -7,6 +7,15 @@ describe Imageable do
     Resources.stub! :root => 'some/root'
   end
   
+  describe 'image=' do
+    before(:each) do
+      @imageable = test_class_with(Imageable).new @window
+    end
+    it 'should set the image' do
+      lambda { @imageable.image = :bla }.should_not raise_error
+    end
+  end
+
   context 'image defined on class' do
     before(:each) do
       @imageable_class = test_class_with(Imageable) do
@@ -25,7 +34,7 @@ describe Imageable do
         sequenced_image 'some/path', :some_width, :some_height, 10.0
       end
     end
-    it "should define a method damage which returns the set value" do
+    it "should define a method image" do
       image = stub :image
       sequenced_image = stub :image, :size => 10, :[] => image
       
@@ -36,15 +45,13 @@ describe Imageable do
   end
   context 'no image given – what now?' do
     before(:each) do
-      @imageable_class = Class.new do
-        include Imageable
-      end
+      @imageable_class = test_class_with Imageable
     end
     it "should raise a ImageMissingError" do
-      lambda { @imageable_class.new(@window) }.should raise_error(Imageable::ImageMissingError)
+      lambda { @imageable_class.new(@window).image }.should raise_error(Imageable::ImageMissingError)
     end
     it "should raise with the right message" do
-      lambda { @imageable_class.new(@window) }.should raise_error(Imageable::ImageMissingError, <<-MESSAGE
+      lambda { @imageable_class.new(@window).image }.should raise_error(Imageable::ImageMissingError, <<-MESSAGE
         
         In an Imageable, you either need to define method
           image path, *args
@@ -52,6 +59,9 @@ describe Imageable do
         or
           sequenced_image path, width, height, frequency = 10, &block
         for a sprite sequence.
+        Or override
+          method image
+        or set an image dynamically.
         
       MESSAGE
       )
