@@ -23,9 +23,8 @@ class BlamBlamBoom < GameWindow
   
   no_collision :player, :weapon
   collision :player, :projectile do |player, projectile|
-    player.damage! projectile.damage
+    player.hit! projectile.damage
     projectile.destroy!
-    player.draw_ui # TODO update_ui?
   end
   
   def setup_players
@@ -34,18 +33,21 @@ class BlamBlamBoom < GameWindow
                      Gosu::Button::KbA => Moveable.left(1.5),
                      Gosu::Button::KbD => Moveable.right(1.5),
                      Gosu::Button::KbQ => :shoot
-                     # reload on down?
+    thinboy.ui 20, 10, Gosu::Color::BLACK do "Thinboy: #{lives}/#{hitpoints}" end
+    
     fatty = Player.new self
     fatty.controls Gosu::Button::KbY     => [:jump, 30],
                    Gosu::Button::KbG     => Moveable.left(1.0),
                    Gosu::Button::KbJ     => Moveable.right(1.0),
                    Gosu::Button::KbSpace => :shoot
-    
+    fatty.ui 180, 10, Gosu::Color::BLACK do "Fatty: #{lives}/#{hitpoints}" end
+      
     otto = Player.new self
     otto.controls Gosu::Button::KbUp    => [:jump, 37.5],
                   Gosu::Button::KbLeft  => Moveable.left(1.25),
                   Gosu::Button::KbRight => Moveable.right(1.25),
                   Gosu::Button::KbRightShift => :shoot
+    otto.ui 340, 10, Gosu::Color::BLACK do "Otto: #{lives}/#{hitpoints}" end
     
     mg = add Machinegun, 0, 0
     otto.attach mg, 0, 0

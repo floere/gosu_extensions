@@ -17,9 +17,10 @@ class Machinegun < Thing
   collision_type :weapon
   
   it_is_a Shooter
-    frequency 5
+    frequency 20
     shoots Bullet
     muzzle_position Shooter::Position.front(10)
     muzzle_velocity Shooter::Velocity.front(5)
+    muzzle_rotation { ::Rotation::Quarter }
   
 end

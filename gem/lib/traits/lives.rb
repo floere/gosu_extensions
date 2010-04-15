@@ -34,9 +34,9 @@ module Lives extend Trait
   
   attr_accessor :lives
   
-  # Override to handle killed!
+  # Override to handle kill!
   #
-  def killed!; end
+  def killed; end
   
   # Does three things:
   # * Deduct 1 live.
@@ -45,7 +45,7 @@ module Lives extend Trait
   #
   def kill!
     self.lives -= 1
-    killed! if self.lives > 0
+    killed   if self.lives > 0
     destroy! if self.lives == 0
   end
   

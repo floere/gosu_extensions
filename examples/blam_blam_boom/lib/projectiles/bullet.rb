@@ -6,6 +6,12 @@ class Bullet < Thing
   
   layer Layer::Players
   
+  it_is ShortLived
+  lifetime { 30 + rand(10) }
+  
+  it_is Damaging
+  damage { 10 + rand(20) }
+  
   it_is_a Shot
   
   shape :circle, 1.0
@@ -14,7 +20,7 @@ class Bullet < Thing
   friction 0.01
   velocity { 20 + rand }
   
-  collision_type :player_projectile
+  collision_type :projectile
   
   # plays 'bullet.wav', 'bullet.mp3'
   

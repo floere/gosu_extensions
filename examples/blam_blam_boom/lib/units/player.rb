@@ -1,5 +1,6 @@
 class Player < Thing
   
+  it_has UserInterface
   it_is Controllable # to steer
   it_is_a Pod        # to attach weapons
   
@@ -22,7 +23,7 @@ class Player < Thing
   collision_type :player
   
   def shoot
-    
+    self.attachments.first.shoot
   end
   
   def move
@@ -39,14 +40,6 @@ class Player < Thing
     sometimes :jump, 50 do
       self.speed += CP::Vec2.new(0, -force)
     end
-  end
-  
-  def hit!
-    
-  end
-  
-  def kill!
-    
   end
   
 end

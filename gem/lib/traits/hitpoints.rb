@@ -11,8 +11,8 @@ module Hitpoints extend Trait
     Example:
       hitpoints 10_000
     
-    Call hit(damage = 1) to remove hitpoints. This will call
-    * hit! if hitpoints are still higher than 0.
+    Call hit!(damage = 1) to remove hitpoints. This will call
+    * callback hit if hitpoints are still higher than 0.
     * kill!, and if not available, destroy! if hitpoints are lower than 0.
   MANUAL
   
@@ -39,9 +39,9 @@ module Hitpoints extend Trait
     
     attr_accessor :hitpoints
     
-    # Override to handle hit!
+    # Override to handle hit.
     #
-    def hit!
+    def hit
       
     end
     
@@ -51,10 +51,19 @@ module Hitpoints extend Trait
     # kill!-s if lower, or destroy!-s if kill!
     # is not available.
     #
-    def hit damage = 1
+    def hit! damage = 1
       self.hitpoints -= damage
-      hit! if hitpoints > 0
-      respond_to?(:kill!) ? kill! : destroy! if hitpoints == 0
+      hit if hitpoints > 0
+      respond_to?(:kill!) ? kill! : destroy! if hitpoints < 0
+    end
+    
+    # kill! must reset hitpoints
+    #
+    # TODO Do irrespective of kill! call order
+    #
+    def kill!
+      super
+      self.hitpoints = self.class.prototype_hitpoints
     end
     
   end

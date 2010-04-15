@@ -35,7 +35,7 @@ class Thing < Sprite
         params = []
         params << CP::Body.new(self.mass, self.moment)
         params += args
-        params << CP::Vec2.new(0.0, 0.0)
+        params << CP::Vec2.new(0.0, 0.0) unless CP::Vec2 === args.first
         
         @shape = shape_class.new *params
       end
