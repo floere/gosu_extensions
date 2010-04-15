@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{gosu_extensions}
-  s.version = "0.3.1"
+  s.version = "0.3.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Florian Hanke", "Severin Schoepke (various improvements)"]
@@ -38,9 +38,11 @@ Gem::Specification.new do |s|
      "lib/core/vector_utilities.rb",
      "lib/core/wave.rb",
      "lib/core/waves.rb",
+     "lib/extensions/circle.rb",
      "lib/extensions/math.rb",
      "lib/extensions/module.rb",
      "lib/extensions/numeric.rb",
+     "lib/extensions/poly.rb",
      "lib/gosu_extensions.rb",
      "lib/traits/attachable.rb",
      "lib/traits/controllable.rb",
