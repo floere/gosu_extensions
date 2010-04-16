@@ -18,10 +18,14 @@ class BlamBlamBoom < GameWindow
   caption "Blam BLam Boom - shoot each other to bits"
   background # Gosu::Color.new(0xff336699)
   
-  damping 0.3
+  damping 0.1
   gravity 0.98
   
   no_collision :player, :weapon
+  no_collision :elevator, :projectile
+  collision :player, :elevator do |player, _|
+    player.speed += CP::Vec2.new(0, -0.2)
+  end
   collision :player, :projectile do |player, projectile|
     player.hit! projectile.damage
     projectile.destroy!
@@ -53,11 +57,16 @@ class BlamBlamBoom < GameWindow
     otto.attach mg, 0, 0
     
     @players = [thinboy, fatty, otto]
-    @players.each { |player| player.warp_to *uniform_random_position; player.show }
+    @players.each { |player| player.show; player.reset }
   end
   
   def after_setup
+    create_elevator
     create_floor
+  end
+  
+  def create_elevator
+    add OpenElevator, width/2, 400
   end
   
   def create_floor

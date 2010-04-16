@@ -129,7 +129,7 @@ module Shooter extend Trait
     sometimes :loading, self.shooting_rate do
       projectile = self.shot.shoot_from self
       projectile.rotation = self.muzzle_rotation
-      # projectile.velocity = self.muzzle_rotation.normalize
+      # projectile.velocity = self.muzzle_rotation.radians_to_vec2.normalize
       projectile.speed = self.muzzle_velocity * projectile.velocity + self.speed
     end
   end

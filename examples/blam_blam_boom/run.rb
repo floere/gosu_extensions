@@ -5,9 +5,10 @@ require 'gosu_extensions'
 $:.unshift File.dirname(__FILE__)
 
 # require 'lib/ambient/teleport'
-# require 'lib/ambient/warp'
+require 'lib/ambient/warp'
 # require 'lib/ambient/smoke'
 require 'lib/ambient/floor'
+require 'lib/ambient/open_elevator'
 
 require 'lib/projectiles/bullet'
 # require 'lib/projectiles/missile'

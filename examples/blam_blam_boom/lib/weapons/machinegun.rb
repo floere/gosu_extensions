@@ -12,7 +12,7 @@ class Machinegun < Thing
   moment 0.1
   friction 1.0
   
-  rotation -Rotation::Quarter
+  # rotation -Rotation::Quarter
   
   collision_type :weapon
   

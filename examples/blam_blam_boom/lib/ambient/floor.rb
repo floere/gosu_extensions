@@ -10,7 +10,7 @@ class Floor < Thing
   #               CP::Vec2.new( 20, -5)]
   mass 1_000_000
   moment 100_000_000
-  friction 1.0
+  friction 100.0
   
   collision_type :ambient
   
