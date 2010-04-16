@@ -70,10 +70,14 @@ describe Thing do
   end
   
   describe "threaded" do
+    before(:each) do
+      @scheduling = stub :scheduling
+      @window.stub! :scheduling => @scheduling
+    end
     it "should delegate to the window" do
       some_block = Proc.new {}
       
-      @window.should_receive(:threaded).once.with :some_time, &some_block
+      @scheduling.should_receive(:add).once.with :some_time, &some_block
       
       @thing.threaded :some_time, &some_block
     end

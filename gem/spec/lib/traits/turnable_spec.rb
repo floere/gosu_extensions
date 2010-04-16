@@ -41,21 +41,21 @@ describe Turnable do
       it "should have a defined turn_speed method" do
         lambda { @turnable.turn_speed }.should_not raise_error
       end
-      it "should return the class defined turn_speed divided by 2" do
-        @turnable.turn_speed.should == 0.65
+      it "should return the class defined turn_speed" do
+        @turnable.turn_speed.should == 1.3
       end
     end
   
     describe "turn_left" do
       it "should subtract an amount from the rotation" do
-        @turnable.should_receive(:rotation=).once.with 0.9935
+        @turnable.should_receive(:rotation=).once.with 0.987
         
         @turnable.turn_left
       end
     end
     describe "turn_right" do
       it "should add an amount to the rotation" do
-        @turnable.should_receive(:rotation=).once.with 1.0065
+        @turnable.should_receive(:rotation=).once.with 1.013
         
         @turnable.turn_right
       end

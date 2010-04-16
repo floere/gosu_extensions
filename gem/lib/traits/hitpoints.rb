@@ -41,9 +41,7 @@ module Hitpoints extend Trait
     
     # Override to handle hit.
     #
-    def hit
-      
-    end
+    def hit; end
     
     # Hit the thing with that much damage.
     #
