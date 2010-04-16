@@ -11,6 +11,7 @@ require 'lib/ambient/floor'
 require 'lib/ambient/open_elevator'
 
 require 'lib/projectiles/bullet'
+require 'lib/projectiles/shell'
 # require 'lib/projectiles/missile'
 
 require 'lib/weapons/machinegun'

@@ -14,9 +14,9 @@ class Player < Thing
   
   image 'red.png'
   
-  shape :circle, 8.0
-  mass 85
-  moment 0.1
+  shape :poly, [CP::Vec2.new(-14,-8), CP::Vec2.new(-14,8), CP::Vec2.new(14,8), CP::Vec2.new(14,-8)]
+  mass 100
+  moment 100_000
   friction 0
   rotation -Rotation::Quarter
   

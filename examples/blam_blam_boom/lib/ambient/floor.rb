@@ -2,12 +2,7 @@ class Floor < Thing
   
   image 'floor.png'
   
-  # segment?
-  shape :segment, CP::Vec2.new(-20, -5), CP::Vec2.new(20, -5), 10
-  # shape :poly, [CP::Vec2.new(-20, -5),
-  #               CP::Vec2.new(-20,  5),
-  #               CP::Vec2.new( 20,  5),
-  #               CP::Vec2.new( 20, -5)]
+  shape :segment, CP::Vec2.new(-20, 0), CP::Vec2.new(20, 0), 8
   mass 1_000_000
   moment 100_000_000
   friction 100.0

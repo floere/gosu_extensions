@@ -4,7 +4,7 @@ module Attachable extend Trait
   
   Detach = :detach
   
-  attr_accessor :relative_position, :pod
+  attr_accessor :relative_position, :relative_rotation, :pod
   
   def detach
     pod.detach self
@@ -13,12 +13,18 @@ module Attachable extend Trait
   # Callback after detachment.
   #
   def detached; end
+  #
+  # after attachment
+  #
+  def attached
+    self.relative_rotation = pod.rotation + self.rotation
+  end
   
   # Move relative to the pod.
   #
   def move_relative
     self.position = pod.relative_position self
-    self.rotation = pod.rotation unless self.kind_of? Turnable
+    self.rotation = pod.relative_rotation self unless self.kind_of? Turnable
   end
   
 end

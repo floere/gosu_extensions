@@ -14,8 +14,12 @@ module Shooter extend Trait
     end
   end
   module Velocity
-    def self.front initial_speed
-      lambda { |_| self.rotation_vector*initial_speed }
+    def self.front initial_speed, random = nil
+      if random
+        lambda { |_| (self.rotation_vector + CP::Vec2.new(rand*random, rand*random))*initial_speed }
+      else
+        lambda { |_| self.rotation_vector*initial_speed }
+      end
     end
   end
   module Rotation
