@@ -24,7 +24,7 @@ module Threading
   #   end
   #
   def sometimes variable, units = 1, &block
-    name = :"@#{variable}"
+    name = :"@__sometimes_#{variable}"
     return if instance_variable_get(name)
     instance_variable_set name, true
     result = block.call
