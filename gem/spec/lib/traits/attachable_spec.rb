@@ -4,7 +4,7 @@ describe Attachable do
   
   before(:each) do
     @window = stub :window, :things => []
-    @pod = stub :pod, :relative_position => :relative_position, :rotation => :some_rotation
+    @pod = stub :pod, :relative_position => :relative_position, :relative_rotation => :relative_rotation, :rotation => :some_rotation
     @attachable = test_class_with(Attachable).new @window
     @attachable.pod = @pod
   end
@@ -19,7 +19,7 @@ describe Attachable do
       @attachable.move_relative
     end
     it "should set the rotation to the pod's rotation" do
-      @attachable.should_receive(:rotation=).once.with :some_rotation
+      @attachable.should_receive(:rotation=).once.with :relative_rotation
       
       @attachable.move_relative
     end
