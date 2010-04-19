@@ -11,6 +11,8 @@ class BlamBlamBoom < GameWindow
   
   # debug
   
+  # full_screen
+  
   default_controls
   
   size 1024, 768
@@ -21,6 +23,7 @@ class BlamBlamBoom < GameWindow
   damping 0.1
   gravity 0.98
   
+  no_collision :weapon
   no_collision :player, :weapon
   no_collision :elevator, :projectile
   collision :player, :elevator do |player, _|
@@ -32,21 +35,21 @@ class BlamBlamBoom < GameWindow
   end
   
   def setup_players
-    thinboy = Player.new self
+    thinboy = NakedMan.new self
     thinboy.controls Gosu::Button::KbW => [:jump, 45],
                      Gosu::Button::KbA => Moveable.left(1.5),
                      Gosu::Button::KbD => Moveable.right(1.5),
                      Gosu::Button::KbQ => :shoot
     thinboy.ui 20, 10, Gosu::Color::BLACK do "Thinboy: #{lives}/#{hitpoints}" end
     
-    fatty = Player.new self
+    fatty = NakedMan.new self
     fatty.controls Gosu::Button::KbY     => [:jump, 30],
                    Gosu::Button::KbG     => Moveable.left(1.0),
                    Gosu::Button::KbJ     => Moveable.right(1.0),
                    Gosu::Button::KbSpace => :shoot
     fatty.ui 180, 10, Gosu::Color::BLACK do "Fatty: #{lives}/#{hitpoints}" end
       
-    otto = Player.new self
+    otto = NakedMan.new self
     otto.controls Gosu::Button::KbUp    => [:jump, 37.5],
                   Gosu::Button::KbLeft  => Moveable.left(1.25),
                   Gosu::Button::KbRight => Moveable.right(1.25),

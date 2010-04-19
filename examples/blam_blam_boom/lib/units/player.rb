@@ -12,11 +12,9 @@ class Player < Thing
   
   layer Layer::Players
   
-  image 'red.png'
-  
-  shape :poly, [CP::Vec2.new(-14,-8), CP::Vec2.new(-14,8), CP::Vec2.new(14,8), CP::Vec2.new(14,-8)]
+  shape :poly, [CP::Vec2.new(-16,-9), CP::Vec2.new(-16,9), CP::Vec2.new(16,9), CP::Vec2.new(16,-9)]
   mass 100
-  moment 100_000
+  moment 100
   friction 0
   rotation -Rotation::Quarter
   

@@ -18,6 +18,7 @@ require 'lib/weapons/machinegun'
 # require 'lib/weapons/missile_launcher'
 
 require 'lib/units/player'
+require 'lib/units/naked_man'
 
 Resources.root = File.join File.dirname(__FILE__), 'media'
 

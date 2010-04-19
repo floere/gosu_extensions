@@ -25,7 +25,7 @@ class Bullet < Thing
   # plays 'bullet.wav', 'bullet.mp3'
   
   def move
-    obey_gravity
+    # obey_gravity
     on_hitting_border { destroy! }
   end
   

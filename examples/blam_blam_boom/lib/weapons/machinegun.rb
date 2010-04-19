@@ -25,8 +25,8 @@ class Machinegun < Thing
   def shoot
     if super
       shell = generate Shell
-      shell.speed = CP::Vec2.new rand-0.5, -20
-      shell.torque = rand*0.5
+      shell.speed = self.rotation_vector.rotate(CP::Vec2.new(0,-20+2*rand))
+      shell.torque = rand*0.1
     end
   end
   
