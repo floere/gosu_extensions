@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{gosu_extensions}
-  s.version = "0.3.3"
+  s.version = "0.3.5"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Florian Hanke", "Severin Schoepke (various improvements)"]
-  s.date = %q{2010-04-16}
+  s.date = %q{2010-04-21}
   s.description = %q{}
   s.email = %q{florian.hanke@gmail.com}
   s.files = [
@@ -85,6 +85,7 @@ Gem::Specification.new do |s|
      "spec/lib/traits/controllable_spec.rb",
      "spec/lib/traits/damaging_spec.rb",
      "spec/lib/traits/imageable_spec.rb",
+     "spec/lib/traits/pod_spec.rb",
      "spec/lib/traits/shooter_spec.rb",
      "spec/lib/traits/short_lived_spec.rb",
      "spec/lib/traits/shot_spec.rb",
@@ -92,6 +93,7 @@ Gem::Specification.new do |s|
      "spec/lib/traits/targeting_spec.rb",
      "spec/lib/traits/turnable_spec.rb",
      "spec/lib/traits/user_interface_spec.rb",
+     "spec/lib/units/sprite_spec.rb",
      "spec/lib/units/thing_spec.rb"
   ]
 
