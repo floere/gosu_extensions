@@ -26,7 +26,7 @@ class Spaceship < Thing
   collision_type :player
   
   it_is Turnable
-  turn_speed 1 # turns per second
+  turn_speed 0.5 # turns per second
   
   it_is_a Shooter
   range 10
