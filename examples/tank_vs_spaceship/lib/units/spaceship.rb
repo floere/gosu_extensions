@@ -20,8 +20,8 @@ class Spaceship < Thing
   # shape :poly, [CP::Vec2.new(0, 10), CP::Vec2.new(-6, -3), CP::Vec2.new(6, -3)]
   shape :circle, 12
   moment 1
-  friction 100                # TODO Remove these
-  rotation -Rotation::Quarter # TODO Remove these
+  friction 100 # TODO Remove this
+  random_rotation
   
   collision_type :player
   

@@ -10,7 +10,7 @@ class Bullet < Thing
   lifetime { 30 + rand(10) }
   
   it_is Damaging
-  damage { 10 + rand(20) }
+  damage { rand(current_speed.round) + 10 }
   
   it_is_a Shot
   

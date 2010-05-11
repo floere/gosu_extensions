@@ -34,7 +34,6 @@ class Tank < Thing
   shape :circle, 11.0
   moment 1
   friction 100
-  rotation -::Rotation::Quarter
   
   collision_type :player
   

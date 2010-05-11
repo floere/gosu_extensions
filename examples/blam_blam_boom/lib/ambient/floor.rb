@@ -6,6 +6,7 @@ class Floor < Thing
   mass 1_000_000
   moment 100_000_000
   friction 100.0
+  rotation 0
   
   collision_type :ambient
   

@@ -16,7 +16,6 @@ class Player < Thing
   mass 100
   moment 100
   friction 0
-  rotation -Rotation::Quarter
   
   collision_type :player
   
