@@ -42,7 +42,12 @@ class Sprite
   # Default rotation is upwards.
   #
   def rotation
-    @rotation || -Rotation::Half
+    @rotation || -Rotation::Quarter
+  end
+  #
+  #
+  def rotation= rotation
+    @rotation = rotation % (2*Math::PI)
   end
   
   class << self
@@ -60,7 +65,7 @@ class Sprite
     def rotation amount = nil, &block
       block ||= lambda { amount }
       InitializerHooks.append self do
-        self.rotation = block[]
+        self.rotation = block.call
       end
     end
     def random_rotation
@@ -153,12 +158,6 @@ class Sprite
   # Callback where you can make it obey rules.
   #
   def moved; end
-  
-  #
-  #
-  def rotation= rotation
-    @rotation = rotation % (2*Math::PI)
-  end
   
   # Movement rules
   #

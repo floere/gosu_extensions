@@ -20,6 +20,7 @@ class Thing < Sprite
   end
   
   class << self
+    
     @@form_shape_class_mapping = {
       :circle  => CP::Shape::Circle, # :circle, radius
       :poly    => CP::Shape::Poly,   # :poly, CP::Vec2.new(-22, -18), CP::Vec2.new(-22, -10), etc.
@@ -38,6 +39,8 @@ class Thing < Sprite
         params << CP::Vec2.new(0.0, 0.0) unless CP::Vec2 === args.first
         
         @shape = shape_class.new *params
+        @shape.body.a = -Rotation::Quarter # default rotation
+        @shape
       end
     end
     def mass amount
