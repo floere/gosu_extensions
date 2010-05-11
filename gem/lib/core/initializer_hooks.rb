@@ -7,10 +7,18 @@ module InitializerHooks
   mattr_accessor :hooks # { class => [blocks] }
   self.hooks = {}
   
-  # Calls the hooks in order of registration.
+  # Runs the hooks for this instance for
+  # each class and superclass up to Sprite.
   #
   def after_initialize
-    hooks = InitializerHooks.hooks[self.class]
+    self.class.ancestors.each do |klass|
+      run_hooks_for klass
+      break if klass == Sprite
+    end
+  end
+  
+  def run_hooks_for klass
+    hooks = InitializerHooks.hooks[klass]
     hooks && hooks.each do |hook|
       self.instance_eval &hook
     end

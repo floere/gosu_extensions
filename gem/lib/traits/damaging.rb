@@ -46,18 +46,16 @@ module Damaging extend Trait
     klass.extend ClassMethods
   end
   
-  def initialize window
+  def initialize *args
     raise DamageMissingError.new unless respond_to?(:damage)
-    super window
+    super *args
   end
   
   module ClassMethods
-    
     def damage damage = nil, &block
-      block = lambda { damage } unless block_given?
+      block ||= lambda { damage }
       define_method :damage, &block
     end
-    
   end
   
 end

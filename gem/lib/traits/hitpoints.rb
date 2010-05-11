@@ -6,14 +6,16 @@ module Hitpoints extend Trait
   #
   manual <<-MANUAL
     Defines:
-      hitpoints <some trait>
-    
+      hitpoints <some number>
+      hitpoints { <some dynamically generated number> }
+      
     Example:
       hitpoints 10_000
+      hitpoints { rand(100) + 50 }
     
     Call hit!(damage = 1) to remove hitpoints. This will call
     * callback hit if hitpoints are still higher than 0.
-    * kill!, and if not available, destroy! if hitpoints are lower than 0.
+    * kill!, and if not available, destroy! if hitpoints are equal or lower than 0.
   MANUAL
   
   def self.included target_class
@@ -24,13 +26,15 @@ module Hitpoints extend Trait
     
     # Define the amount of hitpoints of the thing.
     #
-    def hitpoints amount
+    def hitpoints amount = nil, &block
       include InstanceMethods
       class_inheritable_accessor :prototype_hitpoints
       self.prototype_hitpoints = amount
       
-      hook = lambda { self.hitpoints = self.class.prototype_hitpoints }
-      InitializerHooks.register self, &hook
+      InitializerHooks.register self do
+        self.hitpoints = amount || block.call
+      end
+      
     end
     
   end
