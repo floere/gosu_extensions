@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{gosu_extensions}
-  s.version = "0.3.7"
+  s.version = "0.3.8"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Florian Hanke", "Severin Schoepke (various improvements)"]
-  s.date = %q{2010-05-11}
+  s.date = %q{2010-05-16}
   s.description = %q{}
   s.email = %q{florian.hanke@gmail.com}
   s.files = [
@@ -73,12 +73,18 @@ Gem::Specification.new do |s|
      "spec/lib/core/collision_spec.rb",
      "spec/lib/core/control_spec.rb",
      "spec/lib/core/controls_spec.rb",
+     "spec/lib/core/environment_spec.rb",
      "spec/lib/core/initializer_hooks_spec.rb",
      "spec/lib/core/it_is_a_spec.rb",
      "spec/lib/core/layer_spec.rb",
+     "spec/lib/core/objects_spec.rb",
+     "spec/lib/core/resources_spec.rb",
      "spec/lib/core/threading_spec.rb",
      "spec/lib/core/trait_spec.rb",
      "spec/lib/core/traits_spec.rb",
+     "spec/lib/core/vector_utilities_spec.rb",
+     "spec/lib/core/wave_spec.rb",
+     "spec/lib/core/waves_spec.rb",
      "spec/lib/extensions/module_spec.rb",
      "spec/lib/extensions/numeric_spec.rb",
      "spec/lib/traits/attachable_spec.rb",
