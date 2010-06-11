@@ -6,7 +6,7 @@ class Player < Thing
   
   # shape :poly, [CP::Vec2.new(-16,-16), CP::Vec2.new(-16,16), CP::Vec2.new(16,16), CP::Vec2.new(16,-16)]
   shape :circle, 16
-  mass 85
+  mass 80
   moment 0.1
   friction 10.0
   

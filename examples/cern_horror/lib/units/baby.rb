@@ -13,7 +13,7 @@ class Baby < Thing
   
   def move
     self.rotation += rand / 1000
-    self.speed += window.gravity_vector_for(self) / 500
+    self.speed += window.gravity_vector_for(self) / 400
   end
   
 end

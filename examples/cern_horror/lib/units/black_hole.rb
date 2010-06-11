@@ -4,6 +4,8 @@ class BlackHole < Thing
   
   it_has UserInterface
   
+  layer Layer::Ambient
+  
   image 'black_hole.png'
   
   shape :circle, 30.0
@@ -16,7 +18,7 @@ class BlackHole < Thing
   def initialize *args
     super
     self.souls_needed = 10
-    self.torque = 1
+    self.torque = 0.5
   end
   
   def baby_consumed
@@ -25,6 +27,12 @@ class BlackHole < Thing
   
   def finished?
     self.souls_needed.zero?
+  end
+  
+  # TODO Maybe enlarge to fill full screen?
+  #
+  def current_size
+    @cached_size ||= [5.0, 5.0]
   end
   
 end

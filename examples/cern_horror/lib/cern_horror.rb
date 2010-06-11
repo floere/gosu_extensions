@@ -32,38 +32,47 @@ class CernHorror < GameWindow
   end
   
   def setup_players
-    @player1 = add Player, 0, rand(height)
-    @player1.controls(Gosu::Button::KbA => Moveable.left(0.2),
-                      Gosu::Button::KbD => Moveable.right(0.2),
-                      Gosu::Button::KbS => Moveable.down(0.2),
-                      Gosu::Button::KbW => Moveable.up(0.2))
+    @black_hole = add BlackHole, width/2, height/2
+    @black_hole.ui width/2, height-50, Gosu::Color.new(0,0,0) do souls_needed end
+    
+    steering_strength = 0.3
+    
+    @player1 = add Player, 10, rand(height)
+    @player1.controls(Gosu::Button::KbA => Moveable.left(steering_strength),
+                      Gosu::Button::KbD => Moveable.right(steering_strength),
+                      Gosu::Button::KbS => Moveable.down(steering_strength),
+                      Gosu::Button::KbW => Moveable.up(steering_strength))
     @player1.image_from 'player1.png'
     @player1.ui 10, height-30, Gosu::Color.new(0,0,0) do
       destroyed? ? "DEAD" : "P1: #{souls_saved}"
     end
       
-    @player2 = add Player, width, rand(height)
-    @player2.controls(Gosu::Button::KbLeft  => Moveable.left(0.2),
-                      Gosu::Button::KbRight => Moveable.right(0.2),
-                      Gosu::Button::KbUp    => Moveable.down(0.2),
-                      Gosu::Button::KbDown  => Moveable.up(0.2))
+    @player2 = add Player, width-10, rand(height)
+    @player2.controls(Gosu::Button::KbLeft  => Moveable.left(steering_strength),
+                      Gosu::Button::KbRight => Moveable.right(steering_strength),
+                      Gosu::Button::KbUp    => Moveable.down(steering_strength),
+                      Gosu::Button::KbDown  => Moveable.up(steering_strength))
     @player2.image_from 'player2.png'
     @player2.ui width-60, height-30, Gosu::Color.new(0,0,0) do
       destroyed? ? "DEAD" : "P2: #{souls_saved}"
     end
     
-    @player3 = add Player, rand(width), 0
-    @player3.controls(Gosu::Button::KbJ => Moveable.left(0.2),
-                      Gosu::Button::KbL => Moveable.right(0.2),
-                      Gosu::Button::KbI => Moveable.down(0.2),
-                      Gosu::Button::KbK => Moveable.up(0.2))
+    @player3 = add Player, rand(width), 10
+    @player3.controls(Gosu::Button::KbJ => Moveable.left(steering_strength),
+                      Gosu::Button::KbL => Moveable.right(steering_strength),
+                      Gosu::Button::KbI => Moveable.down(steering_strength),
+                      Gosu::Button::KbK => Moveable.up(steering_strength))
     @player3.image_from 'player3.png'
     @player3.ui width/2-20, 10, Gosu::Color.new(0,0,0) do
       destroyed? ? "DEAD" : "P3: #{souls_saved}"
     end
     
-    @black_hole = add BlackHole, width/2, height/2
-    @black_hole.ui width/2, height-50, Gosu::Color.new(0,0,0) do souls_needed end
+    # Make the players rotate in the beginning. Opposite all the debris.
+    #
+    @players = [@player1, @player2, @player3]
+    @players.each do |player|
+      player.speed = gravity_vector_for(player).rotate((Math::PI/2).radians_to_vec2)/5
+    end
   end
   
   def gravity_vector_for thing
