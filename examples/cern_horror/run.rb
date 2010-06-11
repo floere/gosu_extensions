@@ -4,6 +4,7 @@ require 'gosu_extensions'
 
 $:.unshift File.dirname(__FILE__)
 
+require 'lib/units/helper'
 require 'lib/units/player'
 require 'lib/units/black_hole'
 require 'lib/units/baby'
