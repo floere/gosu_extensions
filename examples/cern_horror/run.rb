@@ -10,6 +10,7 @@ require 'lib/units/baby'
 
 require 'lib/debris/debris'
 require 'lib/debris/sofa'
+require 'lib/debris/chicken'
 
 Resources.root = File.join File.dirname(__FILE__), 'media'
 

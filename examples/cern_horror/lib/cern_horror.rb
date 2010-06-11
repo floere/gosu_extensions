@@ -5,7 +5,7 @@ class CernHorror < GameWindow
   size 876, 516
   
   caption "CERN HORROR"
-  background 'background.png'
+  background #'background.png'
   
   damping 0.01
   gravity 1
@@ -87,9 +87,14 @@ class CernHorror < GameWindow
   def create_debris
     event_number = rand
     if event_number > 0.98
-      # debris = randomly_add Sofa
-      debris = add Sofa, rand(width), 0
-      debris.speed = gravity_vector_for(debris).rotate(-(Math::PI/2).radians_to_vec2)
+      # TODO improve
+      if event_number > 0.99
+        debris = add Chicken, rand(width), 0
+        debris.speed = gravity_vector_for(debris).rotate(-(Math::PI/2).radians_to_vec2)
+      else
+        debris = add Sofa, rand(width), 0
+        debris.speed = gravity_vector_for(debris).rotate(-(Math::PI/2).radians_to_vec2)
+      end
     end
     if event_number < 0.01
       # baby = randomly_add Baby
