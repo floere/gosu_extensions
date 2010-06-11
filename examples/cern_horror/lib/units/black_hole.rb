@@ -15,7 +15,7 @@ class BlackHole < Thing
   
   def initialize *args
     super
-    self.souls_needed = 20
+    self.souls_needed = 10
     self.torque = 1
   end
   

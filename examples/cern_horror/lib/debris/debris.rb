@@ -2,7 +2,7 @@ class Debris < Thing
   
   mass 120
   moment 0.1
-  friction 10.0
+  friction 100.0
   
   collision_type :debris
   

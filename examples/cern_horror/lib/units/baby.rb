@@ -5,7 +5,7 @@ class Baby < Thing
   shape :circle, 12
   mass 30
   moment 0.1
-  friction 10.0
+  friction 1.0
   
   collision_type :baby
   
