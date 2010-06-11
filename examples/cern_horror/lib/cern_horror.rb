@@ -5,7 +5,7 @@ class CernHorror < GameWindow
   size 876, 516
   
   caption "CERN HORROR"
-  background #'background.png'
+  background 'background.png'
   
   damping 0.01
   gravity 1
@@ -13,6 +13,11 @@ class CernHorror < GameWindow
   collision :player
   collision :player, :debris
   collision :baby, :debris
+  
+  collision :player, :baby do |player, baby|
+    baby.destroy!
+    player.save_soul
+  end
   
   collision :player, :black_hole do |player, _|
     player.destroy!
@@ -67,12 +72,15 @@ class CernHorror < GameWindow
   end
   
   def step
-    end_game if @black_hole.finished?
+    end_game if end_game?
     create_debris
   end
   
+  def end_game?
+    @black_hole.finished? || @player1.destroyed? && @player2.destroyed? && @player3.destroyed?
+  end
   def end_game
-    p "YOU FAILED"
+    p "YOU FAILED, THE BLACK HOLE HAS WON!"
     exit
   end
   

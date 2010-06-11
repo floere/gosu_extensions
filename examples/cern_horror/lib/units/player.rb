@@ -20,6 +20,10 @@ class Player < Thing
     self.souls_saved = 0
   end
   
+  def save_soul
+    self.souls_saved += 1
+  end
+  
   def move
     self.rotation += rand / 1000
     self.speed += window.gravity_vector_for(self) / 1000
