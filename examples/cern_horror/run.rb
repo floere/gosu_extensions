@@ -6,6 +6,10 @@ $:.unshift File.dirname(__FILE__)
 
 require 'lib/units/player'
 require 'lib/units/black_hole'
+require 'lib/units/baby'
+
+require 'lib/debris/debris'
+require 'lib/debris/sofa'
 
 Resources.root = File.join File.dirname(__FILE__), 'media'
 

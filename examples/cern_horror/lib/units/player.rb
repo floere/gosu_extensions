@@ -3,8 +3,9 @@ class Player < Thing
   it_is Controllable
   it_has UserInterface
   
-  shape :circle, 12.0
-  mass 100
+  # shape :poly, [CP::Vec2.new(-16,-16), CP::Vec2.new(-16,16), CP::Vec2.new(16,16), CP::Vec2.new(16,-16)]
+  shape :circle, 16
+  mass 85
   moment 0.1
   friction 10.0
   

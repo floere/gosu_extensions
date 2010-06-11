@@ -1,10 +1,12 @@
 class BlackHole < Thing
   
+  attr_accessor :souls_needed
+  
   it_has UserInterface
   
   image 'black_hole.png'
   
-  shape :circle, 15.0
+  shape :circle, 30.0
   mass 100_000_000_000
   moment 100
   friction 10.0
@@ -13,7 +15,16 @@ class BlackHole < Thing
   
   def initialize *args
     super
+    self.souls_needed = 20
     self.torque = 1
+  end
+  
+  def baby_consumed
+    self.souls_needed -= 1
+  end
+  
+  def finished?
+    self.souls_needed.zero?
   end
   
 end
