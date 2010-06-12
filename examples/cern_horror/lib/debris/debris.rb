@@ -9,7 +9,6 @@ class Debris < Thing
   random_rotation
   
   def move
-    self.rotation += rand / 1000
     self.speed += window.gravity_vector_for(self) / 200
   end
   
