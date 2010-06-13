@@ -3,3 +3,14 @@ h1. GOSU Extensions
 GOSU is a great Ruby game framework.
 
 This gem sets out to already provide basic objects and capabilities for use with gosu.
+
+h2. Quick examples
+
+Take a look at
+
+@ruby examples/tree_run/run.rb@
+@ruby examples/tank_vs_spaceship/run.rb@
+@ruby examples/cern_horror_/run.rb@
+
+to get a feel what you can do.
+(And then at the code for how easy it is ;) )
