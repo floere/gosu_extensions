@@ -43,27 +43,27 @@ class CernHorror < GameWindow
                       Gosu::Button::KbS => Moveable.down(steering_strength),
                       Gosu::Button::KbW => Moveable.up(steering_strength))
     @player1.image_from 'player1.png'
-    @player1.ui 10, height-30, Gosu::Color.new(0,0,0) do
+    @player1.ui 10, height-30, Gosu::Color.new(255,0,0) do
       destroyed? ? "DEAD" : "P1: #{souls_saved}"
     end
       
     @player2 = add Player, width-10, rand(height)
     @player2.controls(Gosu::Button::KbLeft  => Moveable.left(steering_strength),
                       Gosu::Button::KbRight => Moveable.right(steering_strength),
-                      Gosu::Button::KbUp    => Moveable.down(steering_strength),
-                      Gosu::Button::KbDown  => Moveable.up(steering_strength))
+                      Gosu::Button::KbDown  => Moveable.down(steering_strength),
+                      Gosu::Button::KbUp    => Moveable.up(steering_strength))
     @player2.image_from 'player2.png'
-    @player2.ui width-60, height-30, Gosu::Color.new(0,0,0) do
+    @player2.ui width-60, height-30, Gosu::Color.new(0,255,0) do
       destroyed? ? "DEAD" : "P2: #{souls_saved}"
     end
     
     @player3 = add Player, rand(width), 10
     @player3.controls(Gosu::Button::KbJ => Moveable.left(steering_strength),
                       Gosu::Button::KbL => Moveable.right(steering_strength),
-                      Gosu::Button::KbI => Moveable.down(steering_strength),
-                      Gosu::Button::KbK => Moveable.up(steering_strength))
+                      Gosu::Button::KbK => Moveable.down(steering_strength),
+                      Gosu::Button::KbI => Moveable.up(steering_strength))
     @player3.image_from 'player3.png'
-    @player3.ui width/2-20, 10, Gosu::Color.new(0,0,0) do
+    @player3.ui width/2-20, 10, Gosu::Color.new(0,0,255) do
       destroyed? ? "DEAD" : "P3: #{souls_saved}"
     end
     
