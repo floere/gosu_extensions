@@ -16,4 +16,9 @@ class Baby < Thing
     self.speed += window.gravity_vector_for(self) / 300
   end
   
+  def current_size
+    size = window.gravity_vector_for(self).length/30
+    [size, size]
+  end
+  
 end
