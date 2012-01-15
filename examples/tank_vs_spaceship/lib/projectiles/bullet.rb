@@ -17,7 +17,7 @@ class Bullet < Thing
   friction 0
   velocity { 20 + rand }
   layer Layer::Players
-  plays 'bullet.wav', 'bullet.mp3'
+  plays ['bullet.wav', 'bullet.mp3']
   
   def move
     obey_gravity

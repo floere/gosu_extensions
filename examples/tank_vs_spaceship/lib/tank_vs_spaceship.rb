@@ -14,8 +14,12 @@ class TankVsSpaceship < GameWindow
       Up Arrow - shoot
       Right Arrow - right
       Down Arrow - let engineers righten the tank (important after hit!)
-      
-    ESC - exit game
+    
+    General:  
+      ESC - exit game
+      6   - restart
+      9   - slower
+      0   - faster
     
     Have fun!
   MANUAL
