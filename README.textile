@@ -8,9 +8,9 @@ h2. Quick examples
 
 Take a look at
 
-@ruby examples/tree_run/run.rb@
-@ruby examples/tank_vs_spaceship/run.rb@
-@ruby examples/cern_horror_/run.rb@
+@bundle exec ruby examples/tree_run/run.rb@
+@bundle exec ruby examples/tank_vs_spaceship/run.rb@
+@bundle exec ruby examples/cern_horror/run.rb@
 
 to get a feel what you can do.
 (And then at the code for how easy it is ;) )
