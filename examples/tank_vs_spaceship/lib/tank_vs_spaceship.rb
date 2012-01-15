@@ -18,17 +18,15 @@ class TankVsSpaceship < GameWindow
     General:  
       ESC - exit game
       6   - restart
-      9   - slower
-      0   - faster
     
     Have fun!
   MANUAL
   
   it_is Controllable
     controls Gosu::Button::KbEscape => :close,
-             Gosu::Button::Kb6      => :revive,
-             Gosu::Button::Kb9      => :slower,
-             Gosu::Button::Kb0      => :faster
+             Gosu::Button::Kb6      => :revive
+             # Gosu::Button::Kb9      => :slower,
+             # Gosu::Button::Kb0      => :faster
   
   width  1022
   height  595

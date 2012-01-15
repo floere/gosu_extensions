@@ -27,7 +27,7 @@ class Tank < Thing
              Gosu::Button::KbDown => :righten
   
   it_has Lives
-    lives 1
+    lives 3
   
   #
   #

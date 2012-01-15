@@ -13,7 +13,7 @@ class Spaceship < Thing
   image 'spaceship/image.png'
   
   it_has Lives
-  lives 1
+  lives 5
   # it_has Hitpoints
   # hitpoints 1_000
   
@@ -58,6 +58,11 @@ class Spaceship < Thing
     on_hitting_y { kill! }
     bounce_off_border_y
     wrap_around_border_x
+  end
+  
+  def revive
+    self.position = CP::Vec2.new(500.0, 100.0)
+    super
   end
   
   # Smoke on accelerating.
