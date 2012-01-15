@@ -3,7 +3,7 @@ class Collision
   # Default collision functions
   #
   None   = nil       # do not collide
-  Simple = lambda {} # just collide
+  Simple = lambda { |arbiter| } # just collide
   # Kill   = lambda { kill! }
   # Damage = lambda { damage! }
   
@@ -34,7 +34,7 @@ class Collision
   #
   #
   def simple_package definition
-    lambda do |this_shape, _|
+    lambda do |this_shape, _, arbiter|
       things.each do |thing|
         if thing.shape == this_shape
           thing.instance_eval &definition
@@ -47,7 +47,7 @@ class Collision
   #
   #
   def complex_package definition
-    lambda do |this_shape, that_shape|
+    lambda do |this_shape, that_shape, arbiter|
       this_that = Array.new 2
       things.each do |thing|
         if thing.shape == this_shape

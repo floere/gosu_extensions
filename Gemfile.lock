@@ -1,0 +1,14 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    activesupport (2.3.14)
+    chipmunk (5.3.4.5)
+    gosu (0.7.41)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  activesupport (~> 2.3.14)
+  chipmunk
+  gosu

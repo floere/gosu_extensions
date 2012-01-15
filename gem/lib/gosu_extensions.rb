@@ -1,4 +1,5 @@
-require 'rubygems'
+require 'thread'
+Mutex
 require 'active_support'
 # require 'texplay'
 begin

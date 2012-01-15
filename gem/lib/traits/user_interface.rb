@@ -21,7 +21,7 @@ module UserInterface extend Trait
   # Call this to dynamically add itself to the ui displaying.
   #
   def ui x = 20, y = 10, color = Gosu::Color::BLACK, &display
-    metaclass.instance_eval do
+    singleton_class.instance_eval do
       define_method :draw_ui do
         window.font.draw instance_eval(&display), x, y, Layer::UI, 1.0, 1.0, color
       end

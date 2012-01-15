@@ -1,7 +1,7 @@
 class Module
   
   def manual text
-    metaclass.send :define_method, :manual! do
+    singleton_class.send :define_method, :manual! do
       puts <<-MANUAL
     MANUAL FOR #{self}
       #{text}

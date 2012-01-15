@@ -27,7 +27,7 @@ module Pod extend Trait
     def holds_attachments
       class_inheritable_accessor :prototype_attachments
       self.prototype_attachments ||= []
-      hook = lambda do
+      hook = lambda do |thing|
         self.class.prototype_attachments.each do |type, x, y|
           attach type.new(self.window), x, y
         end

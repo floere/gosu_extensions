@@ -19,7 +19,7 @@ class Player < Thing
   attr_accessor :souls_saved
   
   def initialize *args
-    super
+    super *args
     self.souls_saved = 0
   end
   
